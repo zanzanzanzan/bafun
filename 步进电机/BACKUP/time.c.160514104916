@@ -1,0 +1,22 @@
+
+#include <iom16v.h>
+#include <macros.h>
+
+
+//TIMER0 initialize - prescale:64
+// WGM: Normal
+// desired value: 1KHz
+// actual value:  1.008KHz (0.8%)
+void timer0_init(void)
+{
+ TCCR0 = 0x00; //stop
+ TCNT0 = 0xC2; //set count
+ OCR0  = 0x3E;  //set compare
+ TCCR0 = 0x03; //start timer
+}
+
+#pragma interrupt_handler timer0_ovf_isr:iv_TIM0_OVF
+void timer0_ovf_isr(void)
+{
+ TCNT0 = 0xC2; //reload counter value
+}

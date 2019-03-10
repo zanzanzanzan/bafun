@@ -1,0 +1,100 @@
+                        .module time.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile time.c
+ 0000                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\time.c
+ 0000                   .dbfunc e timer0_init _timer0_init fV
+                        .even
+ 0000           _timer0_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 11
+ 0000           ; 
+ 0000           ; #include <iom16v.h>
+ 0000           ; #include <macros.h>
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //TIMER0 initialize - prescale:64
+ 0000           ; // WGM: Normal
+ 0000           ; // desired value: 1KHz
+ 0000           ; // actual value:  1.008KHz (0.8%)
+ 0000           ; void timer0_init(void)
+ 0000           ; {
+ 0000                   .dbline 12
+ 0000           ;  TCCR0 = 0x00; //stop
+ 0000 2224              clr R2
+ 0002 23BE              out 0x33,R2
+ 0004                   .dbline 13
+ 0004           ;  TCNT0 = 0xC2; //set count
+ 0004 82EC              ldi R24,194
+ 0006 82BF              out 0x32,R24
+ 0008                   .dbline 14
+ 0008           ;  OCR0  = 0xff;  //set compare
+ 0008 8FEF              ldi R24,255
+ 000A 8CBF              out 0x3c,R24
+ 000C                   .dbline 15
+ 000C           ;  TCCR0 = 0x05; //start timer
+ 000C 85E0              ldi R24,5
+ 000E 83BF              out 0x33,R24
+ 0010                   .dbline -2
+ 0010           L1:
+ 0010                   .dbline 0 ; func end
+ 0010 0895              ret
+ 0012                   .dbend
+                        .area vector(rom, abs)
+                        .org 36
+ 0024 0C940900          jmp _timer0_ovf_isr
+                        .area text(rom, con, rel)
+ 0012                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\time.c
+ 0012                   .dbfunc e timer0_ovf_isr _timer0_ovf_isr fV
+                        .even
+ 0012           _timer0_ovf_isr::
+ 0012 8A93              st -y,R24
+ 0014 9A93              st -y,R25
+ 0016 8FB7              IN R24,63
+ 0018 8A93              st -y,R24
+ 001A                   .dbline -1
+ 001A                   .dbline 38
+ 001A           ; }
+ 001A           ; extern unsigned int count;
+ 001A           ; extern unsigned int P_bao;
+ 001A           ; extern unsigned int Bao_sum;
+ 001A           ; extern unsigned int Bao_time;
+ 001A           ; 
+ 001A           ; 
+ 001A           ; /*
+ 001A           ; 最小定时精度是10MS毫秒 
+ 001A           ; 讲数据进行切分 
+ 001A           ; 当PC检测到低电平的时候对数据进行分析；
+ 001A           ; 数据<200毫秒的时候,不进行数据的累加  
+ 001A           ; 之后到PC0为高电平的时候才将数据进行累加
+ 001A           ; 设置时间 包括最小时间间隔的设置 控制精度是最小时间进行设置
+ 001A           ; 将数据2S进行一次数据的跟新；
+ 001A           ; 
+ 001A           ; 
+ 001A           ; */
+ 001A           ; 
+ 001A           ; 
+ 001A           ; #pragma interrupt_handler timer0_ovf_isr:iv_TIM0_OVF
+ 001A           ; void timer0_ovf_isr(void)
+ 001A           ; {
+ 001A                   .dbline 39
+ 001A           ;  TCNT0 = 99; //reload counter value
+ 001A 83E6              ldi R24,99
+ 001C 82BF              out 0x32,R24
+ 001E                   .dbline 41
+ 001E           ;  
+ 001E           ;  count++;
+ 001E 80910000          lds R24,_count
+ 0022 90910100          lds R25,_count+1
+ 0026 0196              adiw R24,1
+ 0028 90930100          sts _count+1,R25
+ 002C 80930000          sts _count,R24
+ 0030                   .dbline -2
+ 0030           L2:
+ 0030                   .dbline 0 ; func end
+ 0030 8991              ld R24,y+
+ 0032 8FBF              OUT 63,R24
+ 0034 9991              ld R25,y+
+ 0036 8991              ld R24,y+
+ 0038 1895              reti
+ 003A                   .dbend
+ 003A           ; }

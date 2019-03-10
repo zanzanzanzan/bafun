@@ -1,0 +1,83 @@
+//ICC-AVR application builder : 2016/5/14 10:46:21
+// Target : M16
+// Crystal: 4.0000Mhz
+
+#include <iom16v.h>
+#include <macros.h>
+
+void port_init(void)
+{
+ PORTA = 0x00;
+ DDRA  = 0x00;
+ PORTB = 0x00;
+ DDRB  = 0x00;
+ 
+ PORTC = 0x03; //m103 output only
+ DDRC  = 0x00;
+ PORTD = 0x00;
+ DDRD  = 0x00;
+}
+
+
+
+unsigned int P_bao=100;
+unsigned int Bao_sum=0;
+unsigned int Bao_time=0;
+//call this routine to initialize all peripherals
+void init_devices(void)
+{
+ //stop errant interrupts until set up
+ CLI(); //disable all interrupts
+ port_init();
+ timer0_init();
+ uart0_init();
+
+ MCUCR = 0x00;
+ GICR  = 0x00;
+ TIMSK = 0x01; //timer interrupt sources
+ SEI(); //re-enable interrupts
+ //all peripherals are now initialized
+}
+unsigned int count=0;
+void main(void)
+{
+
+ init_devices();
+ while(1)
+ {
+ 
+ if((count>=100))
+  {
+   count=0;
+   USART_send(0xB5);        
+   USART_send(0xB1); 
+   
+   USART_send(0xC7); 
+   USART_send(0xB0);
+    
+   USART_send(0xB0); 
+   USART_send(0xFC); 
+   
+   USART_send(0xCA); 
+   USART_send(0xFD); 
+   
+   USART_send(0xA3); 
+   USART_send(0xBA); 
+   
+   
+   USART_send(Bao_sum/10000%10+0x30); 
+   USART_send(Bao_sum/1000%10+0x30); 
+   
+   USART_send(Bao_sum/100%10+0x30); 
+   USART_send(Bao_sum/10%10+0x30); 
+   
+   USART_send(Bao_sum%10+0x30); 
+   
+   USART_send(0x0d); 
+   USART_send(0x0a); 
+    
+  }
+ 
+
+}
+}

@@ -1,0 +1,17 @@
+#include<delay.h>
+
+void delay(int j)
+{
+unsigned char i;
+for(;j>1;j--)
+   for(i=100;i>1;i--);
+
+}
+
+void delayms(int j)
+{
+unsigned char i;
+for(;j>1;j--)
+   for(i=2;i>1;i--);
+
+}

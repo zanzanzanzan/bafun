@@ -1,0 +1,49 @@
+//ICC-AVR application builder : 2016/5/14 10:46:21
+// Target : M16
+// Crystal: 4.0000Mhz
+
+#include <iom16v.h>
+#include <macros.h>
+
+void port_init(void)
+{
+ PORTA = 0x00;
+ DDRA  = 0x00;
+ PORTB = 0x00;
+ DDRB  = 0x00;
+ PORTC = 0x00; //m103 output only
+ DDRC  = 0x00;
+ PORTD = 0x00;
+ DDRD  = 0x00;
+}
+
+
+
+
+//call this routine to initialize all peripherals
+void init_devices(void)
+{
+ //stop errant interrupts until set up
+ CLI(); //disable all interrupts
+ port_init();
+ timer0_init();
+ uart0_init();
+
+ MCUCR = 0x00;
+ GICR  = 0x00;
+ TIMSK = 0x01; //timer interrupt sources
+ SEI(); //re-enable interrupts
+ //all peripherals are now initialized
+}
+
+void main(void)
+{
+
+ init_devices();
+ while(1)
+ {
+USART_send(0x55);
+ delay(10000);
+
+}
+}

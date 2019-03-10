@@ -1,0 +1,452 @@
+                        .module uart.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile uart.c
+ 0000                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\uart.c
+ 0000                   .dbfunc e uart0_init _uart0_init fV
+                        .even
+ 0000           _uart0_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 23
+ 0000           ; 
+ 0000           ; #include <iom16v.h>
+ 0000           ; #include <macros.h>
+ 0000           ; 
+ 0000           ; extern unsigned int P_bao;
+ 0000           ; extern unsigned int Bao_sum;
+ 0000           ; //UART0 initialize
+ 0000           ; // desired baud rate: 9600
+ 0000           ; // actual: baud rate:9615 (0.2%)
+ 0000           ; /*
+ 0000           ; UCSR0A=0x00;
+ 0000           ; UCSR0B=0x98;
+ 0000           ; UCSR0C=0x06;
+ 0000           ; UBRR0H=0x00;
+ 0000           ; UBRR0L=0x33;
+ 0000           ; }
+ 0000           ; 
+ 0000           ; */
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void uart0_init(void)
+ 0000           ; {
+ 0000                   .dbline 24
+ 0000           ;  UCSRB = 0x00; //disable while setting baud rate
+ 0000 2224              clr R2
+ 0002 2AB8              out 0xa,R2
+ 0004                   .dbline 25
+ 0004           ;  UCSRA = 0x0;
+ 0004 2BB8              out 0xb,R2
+ 0006                   .dbline 26
+ 0006           ;  UCSRC = 0x06;
+ 0006 86E0              ldi R24,6
+ 0008 80BD              out 0x20,R24
+ 000A                   .dbline 28
+ 000A           ;  //UBRRL =207; //set baud rate lo
+ 000A           ;  UBRRL =0x33; //set baud rate lo
+ 000A 83E3              ldi R24,51
+ 000C 89B9              out 0x9,R24
+ 000E                   .dbline 30
+ 000E           ;  
+ 000E           ;  UBRRH = 0x00; //set baud rate hi
+ 000E 20BC              out 0x20,R2
+ 0010                   .dbline 31
+ 0010           ;  UCSRB = 0x98;
+ 0010 88E9              ldi R24,152
+ 0012 8AB9              out 0xa,R24
+ 0014                   .dbline -2
+ 0014           L1:
+ 0014                   .dbline 0 ; func end
+ 0014 0895              ret
+ 0016                   .dbend
+ 0016                   .dbfunc e USART_send _USART_send fV
+ 0016           ;           data -> R16
+                        .even
+ 0016           _USART_send::
+ 0016                   .dbline -1
+ 0016                   .dbline 36
+ 0016           ; }
+ 0016           ; 
+ 0016           ; 
+ 0016           ; void USART_send(unsigned char data)
+ 0016           ; {
+ 0016           L3:
+ 0016                   .dbline 39
+ 0016           ;  
+ 0016           ; /*等待发送缓冲器为空 */
+ 0016           ; while (! (UCSRA & 0x20));
+ 0016           L4:
+ 0016                   .dbline 39
+ 0016 5D9B              sbis 0xb,5
+ 0018 FECF              rjmp L3
+ 001A           X0:
+ 001A                   .dbline 41
+ 001A           ; /*将数据放入缓冲器，发送数据*/
+ 001A           ; UDR=data;
+ 001A 0CB9              out 0xc,R16
+ 001C                   .dbline -2
+ 001C           L2:
+ 001C                   .dbline 0 ; func end
+ 001C 0895              ret
+ 001E                   .dbsym r data 16 c
+ 001E                   .dbend
+                        .area vector(rom, abs)
+                        .org 44
+ 002C 0C940F00          jmp _uart0_rx_isr
+                        .area text(rom, con, rel)
+ 001E                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\uart.c
+ 001E                   .dbfunc e uart0_rx_isr _uart0_rx_isr fV
+ 001E           ;              j -> R12
+ 001E           ;           data -> y+0
+ 001E           ;              i -> R10
+ 001E           ;   UART_Timeout -> R20,R21
+                        .even
+ 001E           _uart0_rx_isr::
+ 001E 0A92              st -y,R0
+ 0020 1A92              st -y,R1
+ 0022 2A92              st -y,R2
+ 0024 3A92              st -y,R3
+ 0026 4A92              st -y,R4
+ 0028 5A92              st -y,R5
+ 002A 6A92              st -y,R6
+ 002C 7A92              st -y,R7
+ 002E 8A92              st -y,R8
+ 0030 9A92              st -y,R9
+ 0032 0A93              st -y,R16
+ 0034 1A93              st -y,R17
+ 0036 2A93              st -y,R18
+ 0038 3A93              st -y,R19
+ 003A 8A93              st -y,R24
+ 003C 9A93              st -y,R25
+ 003E AA93              st -y,R26
+ 0040 BA93              st -y,R27
+ 0042 EA93              st -y,R30
+ 0044 FA93              st -y,R31
+ 0046 0FB6              IN R0,63
+ 0048 0A92              st -y,R0
+ 004A 0E940000          xcall push_xgset303C
+ 004E 2F97              sbiw R28,15
+ 0050                   .dbline -1
+ 0050                   .dbline 48
+ 0050           ;  
+ 0050           ; 
+ 0050           ; }
+ 0050           ; 
+ 0050           ; #pragma interrupt_handler uart0_rx_isr:iv_USART0_RXC
+ 0050           ; void uart0_rx_isr(void)
+ 0050           ; {
+ 0050                   .dbline 50
+ 0050           ;     unsigned char data[15];
+ 0050           ;       unsigned int UART_Timeout = 0;
+ 0050 4427              clr R20
+ 0052 5527              clr R21
+ 0054                   .dbline 51
+ 0054           ;       unsigned char i = 0;
+ 0054 AA24              clr R10
+ 0056                   .dbline 52
+ 0056           ;       unsigned char j = 0;
+ 0056 CC24              clr R12
+ 0058                   .dbline 54
+ 0058           ; 
+ 0058           ;    data[i] = UDR;
+ 0058 CE01              movw R24,R28
+ 005A EA2D              mov R30,R10
+ 005C FF27              clr R31
+ 005E E80F              add R30,R24
+ 0060 F91F              adc R31,R25
+ 0062 2CB0              in R2,0xc
+ 0064 2082              std z+0,R2
+ 0066 1FC0              xjmp L8
+ 0068           L7:
+ 0068                   .dbline 56
+ 0068           ;          while(data[i]!='E')
+ 0068           ;                               {
+ 0068                   .dbline 58
+ 0068           ;                               
+ 0068           ;                               i++;
+ 0068 A394              inc R10
+ 006A 02C0              xjmp L11
+ 006C           L10:
+ 006C                   .dbline 61
+ 006C           ;                                       
+ 006C           ;                                       while((0==(UCSRA&0x80))&&(UART_Timeout<5000))
+ 006C           ;                                       {UART_Timeout++;}
+ 006C                   .dbline 61
+ 006C 4F5F              subi R20,255  ; offset = 1
+ 006E 5F4F              sbci R21,255
+ 0070                   .dbline 61
+ 0070           L11:
+ 0070                   .dbline 60
+ 0070 5F99              sbic 0xb,7
+ 0072 04C0              rjmp L13
+ 0074           X1:
+ 0074 4838              cpi R20,136
+ 0076 E3E1              ldi R30,19
+ 0078 5E07              cpc R21,R30
+ 007A C0F3              brlo L10
+ 007C           X2:
+ 007C           L13:
+ 007C                   .dbline 62
+ 007C           ;                                       if(UART_Timeout>=5000)
+ 007C 4838              cpi R20,136
+ 007E E3E1              ldi R30,19
+ 0080 5E07              cpc R21,R30
+ 0082 40F0              brlo L14
+ 0084           X3:
+ 0084                   .dbline 63
+ 0084           ;                                       {
+ 0084                   .dbline 64
+ 0084           ;                                               data[i]='E'; // 如果接收超时，退出中断
+ 0084 CE01              movw R24,R28
+ 0086 EA2D              mov R30,R10
+ 0088 FF27              clr R31
+ 008A E80F              add R30,R24
+ 008C F91F              adc R31,R25
+ 008E 85E4              ldi R24,69
+ 0090 8083              std z+0,R24
+ 0092                   .dbline 65
+ 0092           ;                                       }
+ 0092 07C0              xjmp L15
+ 0094           L14:
+ 0094                   .dbline 67
+ 0094           ;                                       else
+ 0094           ;                                       {
+ 0094                   .dbline 68
+ 0094           ;                                               data[i] = UDR;
+ 0094 CE01              movw R24,R28
+ 0096 EA2D              mov R30,R10
+ 0098 FF27              clr R31
+ 009A E80F              add R30,R24
+ 009C F91F              adc R31,R25
+ 009E 2CB0              in R2,0xc
+ 00A0 2082              std z+0,R2
+ 00A2                   .dbline 69
+ 00A2           ;                                       }
+ 00A2           L15:
+ 00A2                   .dbline 71
+ 00A2           ;                                       
+ 00A2           ;                                       UART_Timeout = 0;
+ 00A2 4427              clr R20
+ 00A4 5527              clr R21
+ 00A6                   .dbline 73
+ 00A6           ;                                       
+ 00A6           ;                               }
+ 00A6           L8:
+ 00A6                   .dbline 55
+ 00A6 CE01              movw R24,R28
+ 00A8 EA2D              mov R30,R10
+ 00AA FF27              clr R31
+ 00AC E80F              add R30,R24
+ 00AE F91F              adc R31,R25
+ 00B0 8081              ldd R24,z+0
+ 00B2 8534              cpi R24,69
+ 00B4 C9F6              brne L7
+ 00B6           X4:
+ 00B6                   .dbline 74
+ 00B6           ;  UCSRA&=~0x80;
+ 00B6 5F98              cbi 0xb,7
+ 00B8                   .dbline 78
+ 00B8           ; 
+ 00B8           ;  
+ 00B8           ; 
+ 00B8           ;   P_bao=(data[1]-0X30)*10000+(data[2]-0X30)*1000+(data[3]-0X30)*100+(data[4]-0X30)*10+(data[5]-0X30);
+ 00B8 2A81              ldd R18,y+2
+ 00BA 3327              clr R19
+ 00BC 08EE              ldi R16,1000
+ 00BE 13E0              ldi R17,3
+ 00C0 0E940000          xcall empy16s
+ 00C4 C801              movw R24,R16
+ 00C6 8058              subi R24,128
+ 00C8 9B4B              sbci R25,187
+ 00CA 2981              ldd R18,y+1
+ 00CC 3327              clr R19
+ 00CE 00E1              ldi R16,10000
+ 00D0 17E2              ldi R17,39
+ 00D2 0E940000          xcall empy16s
+ 00D6 F801              movw R30,R16
+ 00D8 E050              subi R30,0
+ 00DA F345              sbci R31,83
+ 00DC E80F              add R30,R24
+ 00DE F91F              adc R31,R25
+ 00E0 1B81              ldd R17,y+3
+ 00E2 04E6              ldi R16,100
+ 00E4 0103              mulsu R16,R17
+ 00E6 C001              movw R24,R0
+ 00E8 805C              subi R24,192
+ 00EA 9241              sbci R25,18
+ 00EC E80F              add R30,R24
+ 00EE F91F              adc R31,R25
+ 00F0 1C81              ldd R17,y+4
+ 00F2 0AE0              ldi R16,10
+ 00F4 0103              mulsu R16,R17
+ 00F6 C001              movw R24,R0
+ 00F8 805E              subi R24,224
+ 00FA 9140              sbci R25,1
+ 00FC E80F              add R30,R24
+ 00FE F91F              adc R31,R25
+ 0100 8D81              ldd R24,y+5
+ 0102 9927              clr R25
+ 0104 C097              sbiw R24,48
+ 0106 E80F              add R30,R24
+ 0108 F91F              adc R31,R25
+ 010A F0930100          sts _P_bao+1,R31
+ 010E E0930000          sts _P_bao,R30
+ 0112                   .dbline 81
+ 0112           ;    
+ 0112           ;    
+ 0112           ;    USART_send(0xc9); 
+ 0112 09EC              ldi R16,201
+ 0114 80DF              xcall _USART_send
+ 0116                   .dbline 82
+ 0116           ;    USART_send(0xe8);
+ 0116 08EE              ldi R16,232
+ 0118 7EDF              xcall _USART_send
+ 011A                   .dbline 84
+ 011A           ;     
+ 011A           ;    USART_send(0xD6); 
+ 011A 06ED              ldi R16,214
+ 011C 7CDF              xcall _USART_send
+ 011E                   .dbline 85
+ 011E           ;    USART_send(0xC3 ); 
+ 011E 03EC              ldi R16,195
+ 0120 7ADF              xcall _USART_send
+ 0122                   .dbline 87
+ 0122           ;    
+ 0122           ;    USART_send(0xCE); 
+ 0122 0EEC              ldi R16,206
+ 0124 78DF              xcall _USART_send
+ 0126                   .dbline 88
+ 0126           ;    USART_send(0xAA); 
+ 0126 0AEA              ldi R16,170
+ 0128 76DF              xcall _USART_send
+ 012A                   .dbline 90
+ 012A           ;    
+ 012A           ;    USART_send(0xA3); 
+ 012A 03EA              ldi R16,163
+ 012C 74DF              xcall _USART_send
+ 012E                   .dbline 91
+ 012E           ;    USART_send(0xBA); 
+ 012E 0AEB              ldi R16,186
+ 0130 72DF              xcall _USART_send
+ 0132                   .dbline 93
+ 0132           ;    
+ 0132           ;    USART_send(P_bao/10000%10+0x30); 
+ 0132 20E1              ldi R18,10000
+ 0134 37E2              ldi R19,39
+ 0136 00910000          lds R16,_P_bao
+ 013A 10910100          lds R17,_P_bao+1
+ 013E 0E940000          xcall div16u
+ 0142 2AE0              ldi R18,10
+ 0144 30E0              ldi R19,0
+ 0146 0E940000          xcall mod16u
+ 014A 005D              subi R16,208  ; offset = 48
+ 014C 1F4F              sbci R17,255
+ 014E 63DF              xcall _USART_send
+ 0150                   .dbline 94
+ 0150           ;    USART_send(P_bao/1000%10+0x30); 
+ 0150 28EE              ldi R18,1000
+ 0152 33E0              ldi R19,3
+ 0154 00910000          lds R16,_P_bao
+ 0158 10910100          lds R17,_P_bao+1
+ 015C 0E940000          xcall div16u
+ 0160 2AE0              ldi R18,10
+ 0162 30E0              ldi R19,0
+ 0164 0E940000          xcall mod16u
+ 0168 005D              subi R16,208  ; offset = 48
+ 016A 1F4F              sbci R17,255
+ 016C 54DF              xcall _USART_send
+ 016E                   .dbline 96
+ 016E           ;    
+ 016E           ;    USART_send(P_bao/100%10+0x30); 
+ 016E 24E6              ldi R18,100
+ 0170 30E0              ldi R19,0
+ 0172 00910000          lds R16,_P_bao
+ 0176 10910100          lds R17,_P_bao+1
+ 017A 0E940000          xcall div16u
+ 017E 2AE0              ldi R18,10
+ 0180 30E0              ldi R19,0
+ 0182 0E940000          xcall mod16u
+ 0186 005D              subi R16,208  ; offset = 48
+ 0188 1F4F              sbci R17,255
+ 018A 45DF              xcall _USART_send
+ 018C                   .dbline 97
+ 018C           ;    USART_send(P_bao/10%10+0x30); 
+ 018C 2AE0              ldi R18,10
+ 018E 30E0              ldi R19,0
+ 0190 00910000          lds R16,_P_bao
+ 0194 10910100          lds R17,_P_bao+1
+ 0198 0E940000          xcall div16u
+ 019C 2AE0              ldi R18,10
+ 019E 30E0              ldi R19,0
+ 01A0 0E940000          xcall mod16u
+ 01A4 005D              subi R16,208  ; offset = 48
+ 01A6 1F4F              sbci R17,255
+ 01A8 36DF              xcall _USART_send
+ 01AA                   .dbline 99
+ 01AA           ;    
+ 01AA           ;    USART_send(P_bao%10+0x30); 
+ 01AA 2AE0              ldi R18,10
+ 01AC 30E0              ldi R19,0
+ 01AE 00910000          lds R16,_P_bao
+ 01B2 10910100          lds R17,_P_bao+1
+ 01B6 0E940000          xcall mod16u
+ 01BA 005D              subi R16,208  ; offset = 48
+ 01BC 1F4F              sbci R17,255
+ 01BE 2BDF              xcall _USART_send
+ 01C0                   .dbline 100
+ 01C0           ;    USART_send(0x30);
+ 01C0 00E3              ldi R16,48
+ 01C2 29DF              xcall _USART_send
+ 01C4                   .dbline 102
+ 01C4           ;    
+ 01C4           ;    USART_send(0xBA ); 
+ 01C4 0AEB              ldi R16,186
+ 01C6 27DF              xcall _USART_send
+ 01C8                   .dbline 103
+ 01C8           ;    USART_send(0xC1 ); 
+ 01C8 01EC              ldi R16,193
+ 01CA 25DF              xcall _USART_send
+ 01CC                   .dbline 105
+ 01CC           ;    
+ 01CC           ;    USART_send(0xC3 ); 
+ 01CC 03EC              ldi R16,195
+ 01CE 23DF              xcall _USART_send
+ 01D0                   .dbline 106
+ 01D0           ;    USART_send(0xEB); 
+ 01D0 0BEE              ldi R16,235
+ 01D2 21DF              xcall _USART_send
+ 01D4                   .dbline -2
+ 01D4           L6:
+ 01D4                   .dbline 0 ; func end
+ 01D4 2F96              adiw R28,15
+ 01D6 0E940000          xcall pop_xgset303C
+ 01DA 0990              ld R0,y+
+ 01DC 0FBE              OUT 63,R0
+ 01DE F991              ld R31,y+
+ 01E0 E991              ld R30,y+
+ 01E2 B991              ld R27,y+
+ 01E4 A991              ld R26,y+
+ 01E6 9991              ld R25,y+
+ 01E8 8991              ld R24,y+
+ 01EA 3991              ld R19,y+
+ 01EC 2991              ld R18,y+
+ 01EE 1991              ld R17,y+
+ 01F0 0991              ld R16,y+
+ 01F2 9990              ld R9,y+
+ 01F4 8990              ld R8,y+
+ 01F6 7990              ld R7,y+
+ 01F8 6990              ld R6,y+
+ 01FA 5990              ld R5,y+
+ 01FC 4990              ld R4,y+
+ 01FE 3990              ld R3,y+
+ 0200 2990              ld R2,y+
+ 0202 1990              ld R1,y+
+ 0204 0990              ld R0,y+
+ 0206 1895              reti
+ 0208                   .dbsym r j 12 c
+ 0208                   .dbsym l data 0 A[15:15]c
+ 0208                   .dbsym r i 10 c
+ 0208                   .dbsym r UART_Timeout 20 i
+ 0208                   .dbend
+ 0208           ; 
+ 0208           ; }

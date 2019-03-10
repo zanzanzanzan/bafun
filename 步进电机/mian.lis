@@ -1,0 +1,1033 @@
+                        .module mian.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile mian.c
+ 0000                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0000                   .dbfunc e port_init _port_init fV
+                        .even
+ 0000           _port_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 60
+ 0000           ; //ICC-AVR application builder : 2016/5/14 10:46:21
+ 0000           ; // Target : M16
+ 0000           ; // Crystal: 4.0000Mhz
+ 0000           ; 
+ 0000           ; #include <iom16v.h>
+ 0000           ; #include <macros.h>
+ 0000           ; 
+ 0000           ; #include <delay.h>
+ 0000           ; #include <time.h>
+ 0000           ; #include <uart.h>
+ 0000           ; //delayms
+ 0000           ; //PA2 CLK
+ 0000           ; //PA3 SDA
+ 0000           ; 
+ 0000           ; 
+ 0000           ; #define  uint  unsigned int 
+ 0000           ; #define  uchar unsigned char 
+ 0000           ; #define  Nack_counter  10 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //************ 数据定义**************** 
+ 0000           ; unsigned char bit_out; 
+ 0000           ; unsigned char bit_in; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //
+ 0000           ; 
+ 0000           ; #define SCKOUT DDRA|= 0X4; 
+ 0000           ; #define SCL1 PORTA |= 0X4;
+ 0000           ; #define SCL0 PORTA &= ~0X4;
+ 0000           ; 
+ 0000           ; 
+ 0000           ; #define SDAOUT DDRA|= 0X8;
+ 0000           ; #define SDA1 PORTA |= 0X8;
+ 0000           ; #define SDA0 PORTA &= ~0X8;
+ 0000           ; 
+ 0000           ; #define PIN  DDRA &= ~0X8;
+ 0000           ; #define READ  PINA&0X8
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //************ 函数声明***************************************** 
+ 0000           ; void   start_bit(void);                 //MLX90614 发起始位子程序 
+ 0000           ; void   stop_bit(void);                 //MLX90614发结束位子程序 
+ 0000           ; uchar  rx_byte(void);              //MLX90614 接收字节子程序 
+ 0000           ; void   send_bit(void);             //MLX90614发送位子程序 
+ 0000           ; void   tx_byte(uchar dat_byte);     //MLX90614 接收字节子程序 
+ 0000           ; void   receive_bit(void);           //MLX90614接收位子程序 
+ 0000           ; uint   memread(unsigned char addr, unsigned char cmd);             // 读温度数据 
+ 0000           ; 
+ 0000           ; uchar DataH,DataL,Pecreg; 
+ 0000           ; 
+ 0000           ; void port_init(void)
+ 0000           ; {
+ 0000                   .dbline 61
+ 0000           ;  PORTA = 0x00;
+ 0000 2224              clr R2
+ 0002 2BBA              out 0x1b,R2
+ 0004                   .dbline 62
+ 0004           ;  DDRA  = 0x00;
+ 0004 2ABA              out 0x1a,R2
+ 0006                   .dbline 63
+ 0006           ;  PORTB = 0x00;
+ 0006 28BA              out 0x18,R2
+ 0008                   .dbline 64
+ 0008           ;  DDRB  = 0x00;
+ 0008 27BA              out 0x17,R2
+ 000A                   .dbline 66
+ 000A           ;  
+ 000A           ;  PORTC = 0x03; //m103 output only
+ 000A 83E0              ldi R24,3
+ 000C 85BB              out 0x15,R24
+ 000E                   .dbline 67
+ 000E           ;  DDRC  = 0x00;
+ 000E 24BA              out 0x14,R2
+ 0010                   .dbline 68
+ 0010           ;  PORTD = 0x00;
+ 0010 22BA              out 0x12,R2
+ 0012                   .dbline 69
+ 0012           ;  DDRD  = 0x00;
+ 0012 21BA              out 0x11,R2
+ 0014                   .dbline -2
+ 0014           L1:
+ 0014                   .dbline 0 ; func end
+ 0014 0895              ret
+ 0016                   .dbend
+                        .area data(ram, con, rel)
+ 0000                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0000           _P_bao::
+ 0000                   .blkb 2
+                        .area idata
+ 0000 6400              .word 100
+                        .area data(ram, con, rel)
+ 0002                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0002                   .dbsym e P_bao _P_bao i
+ 0002           _Bao_sum::
+ 0002                   .blkb 2
+                        .area idata
+ 0002 0000              .word 0
+                        .area data(ram, con, rel)
+ 0004                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0004                   .dbsym e Bao_sum _Bao_sum i
+ 0004           _Bao_time::
+ 0004                   .blkb 2
+                        .area idata
+ 0004 0000              .word 0
+                        .area data(ram, con, rel)
+ 0006                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0006                   .dbsym e Bao_time _Bao_time i
+                        .area text(rom, con, rel)
+ 0016                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0016                   .dbfunc e init_devices _init_devices fV
+                        .even
+ 0016           _init_devices::
+ 0016                   .dbline -1
+ 0016                   .dbline 79
+ 0016           ; }
+ 0016           ; 
+ 0016           ; 
+ 0016           ; 
+ 0016           ; unsigned int P_bao=100;
+ 0016           ; unsigned int Bao_sum=0;
+ 0016           ; unsigned int Bao_time=0;
+ 0016           ; //call this routine to initialize all peripherals
+ 0016           ; void init_devices(void)
+ 0016           ; {
+ 0016                   .dbline 81
+ 0016           ;  //stop errant interrupts until set up
+ 0016           ;  CLI(); //disable all interrupts
+ 0016 F894              cli
+ 0018                   .dbline 82
+ 0018           ;  port_init();
+ 0018 F3DF              xcall _port_init
+ 001A                   .dbline 83
+ 001A           ;  timer0_init();
+ 001A 0E940000          xcall _timer0_init
+ 001E                   .dbline 84
+ 001E           ;  uart0_init();
+ 001E 0E940000          xcall _uart0_init
+ 0022                   .dbline 86
+ 0022           ; 
+ 0022           ;  MCUCR = 0x00;
+ 0022 2224              clr R2
+ 0024 25BE              out 0x35,R2
+ 0026                   .dbline 87
+ 0026           ;  GICR  = 0x00;
+ 0026 2BBE              out 0x3b,R2
+ 0028                   .dbline 88
+ 0028           ;  TIMSK = 0x01; //timer interrupt sources
+ 0028 81E0              ldi R24,1
+ 002A 89BF              out 0x39,R24
+ 002C                   .dbline 89
+ 002C           ;  SEI(); //re-enable interrupts
+ 002C 7894              sei
+ 002E                   .dbline -2
+ 002E           L2:
+ 002E                   .dbline 0 ; func end
+ 002E 0895              ret
+ 0030                   .dbend
+                        .area data(ram, con, rel)
+ 0006                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0006           _count::
+ 0006                   .blkb 2
+                        .area idata
+ 0006 0000              .word 0
+                        .area data(ram, con, rel)
+ 0008                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0008                   .dbsym e count _count i
+                        .area text(rom, con, rel)
+ 0030                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0030                   .dbfunc e main _main fV
+ 0030           ;           addr -> <dead>
+ 0030           ;            Tem -> R20,R21
+                        .even
+ 0030           _main::
+ 0030                   .dbline -1
+ 0030                   .dbline 94
+ 0030           ;  //all peripherals are now initialized
+ 0030           ; }
+ 0030           ; unsigned int count=0;
+ 0030           ; void main(void)
+ 0030           ; {
+ 0030                   .dbline 97
+ 0030           ;  uint Tem; 
+ 0030           ;  unsigned char addr;
+ 0030           ;  init_devices();
+ 0030 F2DF              xcall _init_devices
+ 0032                   .dbline 99
+ 0032           ;  
+ 0032           ; SDAOUT;
+ 0032 D39A              sbi 0x1a,3
+ 0034                   .dbline 99
+ 0034                   .dbline 100
+ 0034           ; SCKOUT; 
+ 0034 D29A              sbi 0x1a,2
+ 0036                   .dbline 100
+ 0036                   .dbline 102
+ 0036           ;  //进入总线模式
+ 0036           ;  SCL1;SDA1;
+ 0036 DA9A              sbi 0x1b,2
+ 0038                   .dbline 102
+ 0038                   .dbline 102
+ 0038 DB9A              sbi 0x1b,3
+ 003A                   .dbline 102
+ 003A                   .dbline 103
+ 003A           ;  delayms(2);
+ 003A 02E0              ldi R16,2
+ 003C 10E0              ldi R17,0
+ 003E 0E940000          xcall _delayms
+ 0042                   .dbline 104
+ 0042           ;  SCL0;
+ 0042 DA98              cbi 0x1b,2
+ 0044                   .dbline 104
+ 0044                   .dbline 105
+ 0044           ;  delayms(5000);
+ 0044 08E8              ldi R16,5000
+ 0046 13E1              ldi R17,19
+ 0048 0E940000          xcall _delayms
+ 004C                   .dbline 106
+ 004C           ;  SCL1;
+ 004C DA9A              sbi 0x1b,2
+ 004E                   .dbline 106
+ 004E 33C0              xjmp L10
+ 0050           L4:
+ 0050                   .dbline 123
+ 0050           ; 
+ 0050           ;  
+ 0050           ;  
+ 0050           ;  //进入测试模式
+ 0050           ;  /*
+ 0050           ;  SCL0;SDA1;
+ 0050           ;  delayms(10);
+ 0050           ;  SCL1;
+ 0050           ;  delayms(10);
+ 0050           ;  SDA0;
+ 0050           ;  delayms(30000);
+ 0050           ;  SDA1;
+ 0050           ; */
+ 0050           ;  
+ 0050           ; 
+ 0050           ; while(0)
+ 0050           ; {
+ 0050                   .dbline 126
+ 0050           ; 
+ 0050           ; 
+ 0050           ; PIN;
+ 0050 D398              cbi 0x1a,3
+ 0052                   .dbline 126
+ 0052                   .dbline 127
+ 0052           ; if (READ)
+ 0052 CB9B              sbis 0x19,3
+ 0054 06C0              rjmp L7
+ 0056           X0:
+ 0056                   .dbline 128
+ 0056           ; {
+ 0056                   .dbline 129
+ 0056           ;  SCL1;
+ 0056 DA9A              sbi 0x1b,2
+ 0058                   .dbline 129
+ 0058                   .dbline 131
+ 0058           ; 
+ 0058           ;  delayms(100);
+ 0058 04E6              ldi R16,100
+ 005A 10E0              ldi R17,0
+ 005C 0E940000          xcall _delayms
+ 0060                   .dbline 132
+ 0060           ;  }
+ 0060 2AC0              xjmp L10
+ 0062           L7:
+ 0062                   .dbline 134
+ 0062           ;  else
+ 0062           ;  {
+ 0062                   .dbline 136
+ 0062           ; 
+ 0062           ;   SCL0;
+ 0062 DA98              cbi 0x1b,2
+ 0064                   .dbline 136
+ 0064                   .dbline 138
+ 0064           ; 
+ 0064           ;    delayms(200);
+ 0064 08EC              ldi R16,200
+ 0066 10E0              ldi R17,0
+ 0068 0E940000          xcall _delayms
+ 006C                   .dbline 139
+ 006C           ; }
+ 006C                   .dbline 141
+ 006C           ; 
+ 006C           ; }
+ 006C                   .dbline 122
+ 006C 24C0              xjmp L10
+ 006E           L9:
+ 006E                   .dbline 144
+ 006E           ;  
+ 006E           ;  while(1)
+ 006E           ;  {
+ 006E                   .dbline 148
+ 006E           ; 
+ 006E           ; 
+ 006E           ;           
+ 006E           ;  if((count>=20))
+ 006E 80910600          lds R24,_count
+ 0072 90910700          lds R25,_count+1
+ 0076 8431              cpi R24,20
+ 0078 E0E0              ldi R30,0
+ 007A 9E07              cpc R25,R30
+ 007C E0F0              brlo L12
+ 007E           X1:
+ 007E                   .dbline 149
+ 007E           ;   {
+ 007E                   .dbline 150
+ 007E           ;    count=0;
+ 007E 2224              clr R2
+ 0080 3324              clr R3
+ 0082 30920700          sts _count+1,R3
+ 0086 20920600          sts _count,R2
+ 008A                   .dbline 153
+ 008A           ;    //USART_send(0x55)*0.02-273.15;        
+ 008A           ;    
+ 008A           ;    Tem = memread(0,0x2e);
+ 008A 2EE2              ldi R18,46
+ 008C 0027              clr R16
+ 008E CBD0              xcall _memread
+ 0090                   .dbline 154
+ 0090           ;    Tem = memread(Tem&0xff,0x07);
+ 0090 27E0              ldi R18,7
+ 0092 1070              andi R17,0
+ 0094 C8D0              xcall _memread
+ 0096                   .dbline 156
+ 0096           ;    
+ 0096           ;    Tem = Tem / 50 - 273;
+ 0096 22E3              ldi R18,50
+ 0098 30E0              ldi R19,0
+ 009A 0E940000          xcall div16u
+ 009E A801              movw R20,R16
+ 00A0 4151              subi R20,17
+ 00A2 5140              sbci R21,1
+ 00A4                   .dbline 157
+ 00A4           ;       USART_send(Tem>>8);
+ 00A4 8A01              movw R16,R20
+ 00A6 012F              mov R16,R17
+ 00A8 1127              clr R17
+ 00AA 0E940000          xcall _USART_send
+ 00AE                   .dbline 158
+ 00AE           ;       USART_send(Tem&0xff);
+ 00AE 8A01              movw R16,R20
+ 00B0 1070              andi R17,0
+ 00B2 0E940000          xcall _USART_send
+ 00B6                   .dbline 161
+ 00B6           ; 
+ 00B6           ;     
+ 00B6           ;   }
+ 00B6           L12:
+ 00B6                   .dbline 164
+ 00B6           ;  
+ 00B6           ; 
+ 00B6           ; }
+ 00B6           L10:
+ 00B6                   .dbline 143
+ 00B6 DBCF              xjmp L9
+ 00B8           X2:
+ 00B8                   .dbline -2
+ 00B8           L3:
+ 00B8                   .dbline 0 ; func end
+ 00B8 0895              ret
+ 00BA                   .dbsym l addr 1 c
+ 00BA                   .dbsym r Tem 20 i
+ 00BA                   .dbend
+ 00BA                   .dbfunc e display _display fV
+ 00BA           ;              b -> R12,R13
+ 00BA           ;              a -> R10,R11
+ 00BA           ;              T -> R20,R21
+ 00BA           ;            Tem -> R10,R11
+                        .even
+ 00BA           _display::
+ 00BA 0E940000          xcall push_xgset303C
+ 00BE 5801              movw R10,R16
+ 00C0                   .dbline -1
+ 00C0                   .dbline 173
+ 00C0           ; }
+ 00C0           ; 
+ 00C0           ; 
+ 00C0           ; 
+ 00C0           ; 
+ 00C0           ; 
+ 00C0           ; //*********输入转换并显示********* 
+ 00C0           ; void display(uint Tem) 
+ 00C0           ; { 
+ 00C0                   .dbline 175
+ 00C0           ;  uint T,a,b; 
+ 00C0           ;  T=Tem*2; 
+ 00C0 A501              movw R20,R10
+ 00C2 440F              lsl R20
+ 00C4 551F              rol R21
+ 00C6                   .dbline 176
+ 00C6           ;  if(T>=27315) 
+ 00C6 433B              cpi R20,179
+ 00C8 EAE6              ldi R30,106
+ 00CA 5E07              cpc R21,R30
+ 00CC 88F0              brlo L15
+ 00CE           X3:
+ 00CE                   .dbline 177
+ 00CE           ;  { 
+ 00CE                   .dbline 178
+ 00CE           ;    T=T-27315; 
+ 00CE 435B              subi R20,179
+ 00D0 5A46              sbci R21,106
+ 00D2                   .dbline 179
+ 00D2           ;    a=T/100; 
+ 00D2 24E6              ldi R18,100
+ 00D4 30E0              ldi R19,0
+ 00D6 8A01              movw R16,R20
+ 00D8 0E940000          xcall div16u
+ 00DC 5801              movw R10,R16
+ 00DE                   .dbline 180
+ 00DE           ;    b=T-a*100; 
+ 00DE 04E6              ldi R16,100
+ 00E0 10E0              ldi R17,0
+ 00E2 9501              movw R18,R10
+ 00E4 0E940000          xcall empy16s
+ 00E8 6A01              movw R12,R20
+ 00EA C01A              sub R12,R16
+ 00EC D10A              sbc R13,R17
+ 00EE                   .dbline 181
+ 00EE           ;  } 
+ 00EE 13C0              xjmp L16
+ 00F0           L15:
+ 00F0                   .dbline 183
+ 00F0           ;  else 
+ 00F0           ;  { 
+ 00F0                   .dbline 184
+ 00F0           ;   T=27315-T; 
+ 00F0 83EB              ldi R24,27315
+ 00F2 9AE6              ldi R25,106
+ 00F4 841B              sub R24,R20
+ 00F6 950B              sbc R25,R21
+ 00F8 AC01              movw R20,R24
+ 00FA                   .dbline 185
+ 00FA           ;     a=T/100; 
+ 00FA 24E6              ldi R18,100
+ 00FC 30E0              ldi R19,0
+ 00FE 8C01              movw R16,R24
+ 0100 0E940000          xcall div16u
+ 0104 5801              movw R10,R16
+ 0106                   .dbline 186
+ 0106           ;     b=T-a*100; 
+ 0106 04E6              ldi R16,100
+ 0108 10E0              ldi R17,0
+ 010A 9501              movw R18,R10
+ 010C 0E940000          xcall empy16s
+ 0110 6A01              movw R12,R20
+ 0112 C01A              sub R12,R16
+ 0114 D10A              sbc R13,R17
+ 0116                   .dbline 187
+ 0116           ;  } 
+ 0116           L16:
+ 0116                   .dbline -2
+ 0116           L14:
+ 0116                   .dbline 0 ; func end
+ 0116 0C940000          xjmp pop_xgset303C
+ 011A                   .dbsym r b 12 i
+ 011A                   .dbsym r a 10 i
+ 011A                   .dbsym r T 20 i
+ 011A                   .dbsym r Tem 10 i
+ 011A                   .dbend
+ 011A                   .dbfunc e start_bit _start_bit fV
+                        .even
+ 011A           _start_bit::
+ 011A                   .dbline -1
+ 011A                   .dbline 192
+ 011A           ; } 
+ 011A           ; 
+ 011A           ; //************************************ 
+ 011A           ; void   start_bit(void) 
+ 011A           ; { 
+ 011A                   .dbline 193
+ 011A           ;    SDAOUT;
+ 011A D39A              sbi 0x1a,3
+ 011C                   .dbline 193
+ 011C                   .dbline 194
+ 011C           ;    SDA1; 
+ 011C DB9A              sbi 0x1b,3
+ 011E                   .dbline 194
+ 011E                   .dbline 195
+ 011E           ;    delayms(3);
+ 011E 03E0              ldi R16,3
+ 0120 10E0              ldi R17,0
+ 0122 0E940000          xcall _delayms
+ 0126                   .dbline 196
+ 0126           ;    SCL1; 
+ 0126 DA9A              sbi 0x1b,2
+ 0128                   .dbline 196
+ 0128                   .dbline 197
+ 0128           ;    delayms(3);
+ 0128 03E0              ldi R16,3
+ 012A 10E0              ldi R17,0
+ 012C 0E940000          xcall _delayms
+ 0130                   .dbline 198
+ 0130           ;    SDA0; 
+ 0130 DB98              cbi 0x1b,3
+ 0132                   .dbline 198
+ 0132                   .dbline 199
+ 0132           ;    delayms(3);
+ 0132 03E0              ldi R16,3
+ 0134 10E0              ldi R17,0
+ 0136 0E940000          xcall _delayms
+ 013A                   .dbline 200
+ 013A           ;    SCL0; 
+ 013A DA98              cbi 0x1b,2
+ 013C                   .dbline 200
+ 013C                   .dbline 201
+ 013C           ;    delayms(3);
+ 013C 03E0              ldi R16,3
+ 013E 10E0              ldi R17,0
+ 0140                   .dbline -2
+ 0140           L17:
+ 0140                   .dbline 0 ; func end
+ 0140 0C940000          xjmp _delayms
+ 0144                   .dbend
+ 0144                   .dbfunc e stop_bit _stop_bit fV
+                        .even
+ 0144           _stop_bit::
+ 0144                   .dbline -1
+ 0144                   .dbline 206
+ 0144           ;  
+ 0144           ; } 
+ 0144           ; //------------------------------ 
+ 0144           ; void   stop_bit(void) 
+ 0144           ; { 
+ 0144                   .dbline 207
+ 0144           ;    SDAOUT;
+ 0144 D39A              sbi 0x1a,3
+ 0146                   .dbline 207
+ 0146                   .dbline 208
+ 0146           ;    SCL0; 
+ 0146 DA98              cbi 0x1b,2
+ 0148                   .dbline 208
+ 0148                   .dbline 209
+ 0148           ;    delayms(3);
+ 0148 03E0              ldi R16,3
+ 014A 10E0              ldi R17,0
+ 014C 0E940000          xcall _delayms
+ 0150                   .dbline 210
+ 0150           ;    SDA0; 
+ 0150 DB98              cbi 0x1b,3
+ 0152                   .dbline 210
+ 0152                   .dbline 211
+ 0152           ;    delayms(3);
+ 0152 03E0              ldi R16,3
+ 0154 10E0              ldi R17,0
+ 0156 0E940000          xcall _delayms
+ 015A                   .dbline 212
+ 015A           ;    SCL1; 
+ 015A DA9A              sbi 0x1b,2
+ 015C                   .dbline 212
+ 015C                   .dbline 213
+ 015C           ;    delayms(3);
+ 015C 03E0              ldi R16,3
+ 015E 10E0              ldi R17,0
+ 0160 0E940000          xcall _delayms
+ 0164                   .dbline 214
+ 0164           ;    SDA1; 
+ 0164 DB9A              sbi 0x1b,3
+ 0166                   .dbline 214
+ 0166                   .dbline -2
+ 0166           L18:
+ 0166                   .dbline 0 ; func end
+ 0166 0895              ret
+ 0168                   .dbend
+ 0168                   .dbfunc e tx_byte _tx_byte fV
+ 0168           ;              n -> R20
+ 0168           ;              i -> R22
+ 0168           ;            dat -> R12
+ 0168           ;       dat_byte -> R10
+                        .even
+ 0168           _tx_byte::
+ 0168 0E940000          xcall push_xgsetF03C
+ 016C A02E              mov R10,R16
+ 016E                   .dbline -1
+ 016E                   .dbline 242
+ 016E           ; } 
+ 016E           ; 
+ 016E           ; /*
+ 016E           ; void  tx_byte(uchar dat_byte) 
+ 016E           ; { 
+ 016E           ;    char i,n,dat; 
+ 016E           ;    n=Nack_counter; 
+ 016E           ;    dat=dat_byte; 
+ 016E           ;    for(i=0;i<8;i++) 
+ 016E           ;    { 
+ 016E           ;      if(dat&0x80) 
+ 016E           ;       bit_out=1; 
+ 016E           ;      else 
+ 016E           ;       bit_out=0; 
+ 016E           ;      send_bit(); 
+ 016E           ;      dat=dat<<1; 
+ 016E           ;    } 
+ 016E           ;    
+ 016E           ;    receive_bit(); 
+ 016E           ; 
+ 016E           ; } */
+ 016E           ; 
+ 016E           ; 
+ 016E           ; 
+ 016E           ; //--------- 发送一个字节--------- 
+ 016E           ; 
+ 016E           ; void  tx_byte(uchar dat_byte) 
+ 016E           ; { 
+ 016E                   .dbline 244
+ 016E           ;    char i,n,dat; 
+ 016E           ;    n=Nack_counter; 
+ 016E 4AE0              ldi R20,10
+ 0170           L20:
+ 0170                   .dbline 246
+ 0170           ; TX_again: 
+ 0170           ;    dat=dat_byte; 
+ 0170 CA2C              mov R12,R10
+ 0172                   .dbline 247
+ 0172           ;    for(i=0;i<8;i++) 
+ 0172 6627              clr R22
+ 0174 0CC0              xjmp L24
+ 0176           L21:
+ 0176                   .dbline 248
+ 0176           ;    { 
+ 0176                   .dbline 249
+ 0176           ;      if(dat&0x80) 
+ 0176 C7FE              sbrs R12,7
+ 0178 04C0              rjmp L25
+ 017A           X4:
+ 017A                   .dbline 250
+ 017A           ;        {
+ 017A                   .dbline 251
+ 017A           ;       bit_out=1; 
+ 017A 81E0              ldi R24,1
+ 017C 80930400          sts _bit_out,R24
+ 0180                   .dbline 252
+ 0180           ;         }
+ 0180 03C0              xjmp L26
+ 0182           L25:
+ 0182                   .dbline 254
+ 0182           ;      else 
+ 0182           ;        {
+ 0182                   .dbline 255
+ 0182           ;       bit_out=0;
+ 0182 2224              clr R2
+ 0184 20920400          sts _bit_out,R2
+ 0188                   .dbline 256
+ 0188           ;         } 
+ 0188           L26:
+ 0188                   .dbline 257
+ 0188           ;      send_bit(); 
+ 0188 11D0              xcall _send_bit
+ 018A                   .dbline 258
+ 018A           ;      dat=dat<<1; 
+ 018A CC0C              lsl R12
+ 018C                   .dbline 259
+ 018C           ;    } 
+ 018C           L22:
+ 018C                   .dbline 247
+ 018C 6395              inc R22
+ 018E           L24:
+ 018E                   .dbline 247
+ 018E 6830              cpi R22,8
+ 0190 90F3              brlo L21
+ 0192           X5:
+ 0192                   .dbline 261
+ 0192           ;    
+ 0192           ;    receive_bit(); 
+ 0192 36D0              xcall _receive_bit
+ 0194                   .dbline 262
+ 0194           ;    if(bit_in==1) 
+ 0194 80910300          lds R24,_bit_in
+ 0198 8130              cpi R24,1
+ 019A 31F4              brne L32
+ 019C           X6:
+ 019C                   .dbline 263
+ 019C           ;    { 
+ 019C                   .dbline 264
+ 019C           ;     stop_bit(); 
+ 019C D3DF              xcall _stop_bit
+ 019E                   .dbline 265
+ 019E           ;     if(n!=0) 
+ 019E 4423              tst R20
+ 01A0 19F0              breq L32
+ 01A2           X7:
+ 01A2                   .dbline 266
+ 01A2           ;     {n--;goto Repeat;} 
+ 01A2                   .dbline 266
+ 01A2 4A95              dec R20
+ 01A4                   .dbline 266
+ 01A4                   .dbline 268
+ 01A4           ;     else 
+ 01A4           ;      goto exit; 
+ 01A4                   .dbline 271
+ 01A4           ;    } 
+ 01A4           ;    else 
+ 01A4           ;     goto exit; 
+ 01A4           L31:
+ 01A4                   .dbline 273
+ 01A4           ; Repeat: 
+ 01A4           ;     start_bit(); 
+ 01A4 BADF              xcall _start_bit
+ 01A6                   .dbline 274
+ 01A6           ;     goto TX_again; 
+ 01A6 E4CF              xjmp L20
+ 01A8           L32:
+ 01A8                   .dbline 276
+ 01A8           ; exit: 
+ 01A8           ; ;
+ 01A8                   .dbline -2
+ 01A8           L19:
+ 01A8                   .dbline 0 ; func end
+ 01A8 0C940000          xjmp pop_xgsetF03C
+ 01AC                   .dbsym r n 20 c
+ 01AC                   .dbsym r i 22 c
+ 01AC                   .dbsym r dat 12 c
+ 01AC                   .dbsym r dat_byte 10 c
+ 01AC                   .dbend
+ 01AC                   .dbfunc e send_bit _send_bit fV
+                        .even
+ 01AC           _send_bit::
+ 01AC                   .dbline -1
+ 01AC                   .dbline 284
+ 01AC           ;   // USART_send(n)  ; 
+ 01AC           ; } 
+ 01AC           ; 
+ 01AC           ; //300 720us
+ 01AC           ; //低电平  27 ms  高电平时  45 us
+ 01AC           ; //-----------发送一个位--------- 
+ 01AC           ; void  send_bit(void) 
+ 01AC           ; { 
+ 01AC                   .dbline 285
+ 01AC           ;    SDAOUT;
+ 01AC D39A              sbi 0x1a,3
+ 01AE                   .dbline 285
+ 01AE                   .dbline 286
+ 01AE           ;   if(bit_out==0) 
+ 01AE 20900400          lds R2,_bit_out
+ 01B2 2220              tst R2
+ 01B4 11F4              brne L34
+ 01B6           X8:
+ 01B6                   .dbline 287
+ 01B6           ;   {
+ 01B6                   .dbline 288
+ 01B6           ;      SDA0; 
+ 01B6 DB98              cbi 0x1b,3
+ 01B8                   .dbline 288
+ 01B8                   .dbline 289
+ 01B8           ;   }
+ 01B8 01C0              xjmp L35
+ 01BA           L34:
+ 01BA                   .dbline 291
+ 01BA           ;   else 
+ 01BA           ;   {
+ 01BA                   .dbline 292
+ 01BA           ;      SDA1; 
+ 01BA DB9A              sbi 0x1b,3
+ 01BC                   .dbline 292
+ 01BC                   .dbline 293
+ 01BC           ;   }
+ 01BC           L35:
+ 01BC                   .dbline 294
+ 01BC           ;   delayms(1);
+ 01BC 01E0              ldi R16,1
+ 01BE 10E0              ldi R17,0
+ 01C0 0E940000          xcall _delayms
+ 01C4                   .dbline 295
+ 01C4           ;   SCL1; 
+ 01C4 DA9A              sbi 0x1b,2
+ 01C6                   .dbline 295
+ 01C6                   .dbline 296
+ 01C6           ;   delayms(3);
+ 01C6 03E0              ldi R16,3
+ 01C8 10E0              ldi R17,0
+ 01CA 0E940000          xcall _delayms
+ 01CE                   .dbline 297
+ 01CE           ;   SCL0; 
+ 01CE DA98              cbi 0x1b,2
+ 01D0                   .dbline 297
+ 01D0                   .dbline 298
+ 01D0           ;   delayms(2);
+ 01D0 02E0              ldi R16,2
+ 01D2 10E0              ldi R17,0
+ 01D4                   .dbline -2
+ 01D4           L33:
+ 01D4                   .dbline 0 ; func end
+ 01D4 0C940000          xjmp _delayms
+ 01D8                   .dbend
+ 01D8                   .dbfunc e rx_byte _rx_byte fc
+ 01D8           ;              i -> R20
+ 01D8           ;            dat -> R10
+                        .even
+ 01D8           _rx_byte::
+ 01D8 AA92              st -y,R10
+ 01DA 4A93              st -y,R20
+ 01DC                   .dbline -1
+ 01DC                   .dbline 303
+ 01DC           ; 
+ 01DC           ; } 
+ 01DC           ; //---------- 接收一个字节-------- 
+ 01DC           ; uchar rx_byte(void) 
+ 01DC           ; { 
+ 01DC                   .dbline 305
+ 01DC           ;   uchar i,dat; 
+ 01DC           ;   dat=0; 
+ 01DC AA24              clr R10
+ 01DE                   .dbline 306
+ 01DE           ;   for(i=0;i<8;i++) 
+ 01DE 4427              clr R20
+ 01E0 08C0              xjmp L40
+ 01E2           L37:
+ 01E2                   .dbline 307
+ 01E2           ;   { 
+ 01E2                   .dbline 308
+ 01E2           ;     dat=dat<<1; 
+ 01E2 AA0C              lsl R10
+ 01E4                   .dbline 309
+ 01E4           ;     receive_bit(); 
+ 01E4 0DD0              xcall _receive_bit
+ 01E6                   .dbline 310
+ 01E6           ;     if(bit_in==0x8) 
+ 01E6 80910300          lds R24,_bit_in
+ 01EA 8830              cpi R24,8
+ 01EC 09F4              brne L41
+ 01EE           X9:
+ 01EE                   .dbline 311
+ 01EE           ;      dat=dat+1; 
+ 01EE A394              inc R10
+ 01F0           L41:
+ 01F0                   .dbline 312
+ 01F0           ;   } 
+ 01F0           L38:
+ 01F0                   .dbline 306
+ 01F0 4395              inc R20
+ 01F2           L40:
+ 01F2                   .dbline 306
+ 01F2 4830              cpi R20,8
+ 01F4 B0F3              brlo L37
+ 01F6           X10:
+ 01F6                   .dbline 313
+ 01F6           ;   send_bit(); 
+ 01F6 DADF              xcall _send_bit
+ 01F8                   .dbline 314
+ 01F8           ;   return dat; 
+ 01F8 0A2D              mov R16,R10
+ 01FA                   .dbline -2
+ 01FA           L36:
+ 01FA                   .dbline 0 ; func end
+ 01FA 4991              ld R20,y+
+ 01FC A990              ld R10,y+
+ 01FE 0895              ret
+ 0200                   .dbsym r i 20 c
+ 0200                   .dbsym r dat 10 c
+ 0200                   .dbend
+ 0200                   .dbfunc e receive_bit _receive_bit fV
+                        .even
+ 0200           _receive_bit::
+ 0200                   .dbline -1
+ 0200                   .dbline 319
+ 0200           ; } 
+ 0200           ; 
+ 0200           ; //---------- 接收一个位---------- 
+ 0200           ; void receive_bit(void) 
+ 0200           ; { 
+ 0200                   .dbline 321
+ 0200           ;   //SDA1;
+ 0200           ;   PIN;
+ 0200 D398              cbi 0x1a,3
+ 0202                   .dbline 321
+ 0202                   .dbline 322
+ 0202           ;   delayms(1);
+ 0202 01E0              ldi R16,1
+ 0204 10E0              ldi R17,0
+ 0206 0E940000          xcall _delayms
+ 020A                   .dbline 323
+ 020A           ;   SCL1; 
+ 020A DA9A              sbi 0x1b,2
+ 020C                   .dbline 323
+ 020C                   .dbline 325
+ 020C           ; 
+ 020C           ;   delayms(3);
+ 020C 03E0              ldi R16,3
+ 020E 10E0              ldi R17,0
+ 0210 0E940000          xcall _delayms
+ 0214                   .dbline 326
+ 0214           ;   bit_in=READ; 
+ 0214 89B3              in R24,0x19
+ 0216 8870              andi R24,8
+ 0218 80930300          sts _bit_in,R24
+ 021C                   .dbline 328
+ 021C           ;   //delayms(2);
+ 021C           ;   SCL0; 
+ 021C DA98              cbi 0x1b,2
+ 021E                   .dbline 328
+ 021E                   .dbline 329
+ 021E           ;   delayms(2);
+ 021E 02E0              ldi R16,2
+ 0220 10E0              ldi R17,0
+ 0222                   .dbline -2
+ 0222           L43:
+ 0222                   .dbline 0 ; func end
+ 0222 0C940000          xjmp _delayms
+ 0226                   .dbend
+ 0226                   .dbfunc e memread _memread fi
+ 0226           ;            cmd -> R12
+ 0226           ;     slave_addr -> R10
+                        .even
+ 0226           _memread::
+ 0226 AA92              st -y,R10
+ 0228 CA92              st -y,R12
+ 022A C22E              mov R12,R18
+ 022C A02E              mov R10,R16
+ 022E                   .dbline -1
+ 022E                   .dbline 341
+ 022E           ; } 
+ 022E           ; //------------ 延时-------------- 
+ 022E           ; /*void   delay(uint N) 
+ 022E           ; { 
+ 022E           ;   uint i; 
+ 022E           ;   for(i=0;i<N;i++) 
+ 022E           ;   
+ 022E           ;      _nop_(); 
+ 022E           ; } */
+ 022E           ; //------------------------------ 
+ 022E           ; uint memread(unsigned char slave_addr, unsigned char cmd) 
+ 022E           ; { 
+ 022E                   .dbline 342
+ 022E           ;   start_bit(); 
+ 022E 75DF              xcall _start_bit
+ 0230                   .dbline 343
+ 0230           ;   tx_byte(slave_addr << 1);  //Send SlaveAddress ==============================
+ 0230 0A2D              mov R16,R10
+ 0232 000F              lsl R16
+ 0234 99DF              xcall _tx_byte
+ 0236                   .dbline 345
+ 0236           ;   //tx_byte(0x00); 
+ 0236           ;   tx_byte(cmd);  //Send Command 
+ 0236 0C2D              mov R16,R12
+ 0238 97DF              xcall _tx_byte
+ 023A                   .dbline 347
+ 023A           ;   //------------ 
+ 023A           ;   start_bit(); 
+ 023A 6FDF              xcall _start_bit
+ 023C                   .dbline 349
+ 023C           ;   //tx_byte(0x01); 
+ 023C           ;   tx_byte((slave_addr << 1)+1);  //Send SlaveAddress ==============================
+ 023C 0A2D              mov R16,R10
+ 023E 000F              lsl R16
+ 0240 0F5F              subi R16,255    ; addi 1
+ 0242 92DF              xcall _tx_byte
+ 0244                   .dbline 350
+ 0244           ;   bit_out=0; 
+ 0244 2224              clr R2
+ 0246 20920400          sts _bit_out,R2
+ 024A                   .dbline 351
+ 024A           ;   DataL=rx_byte(); 
+ 024A C6DF              xcall _rx_byte
+ 024C 00930100          sts _DataL,R16
+ 0250                   .dbline 352
+ 0250           ;   bit_out=0; 
+ 0250 2224              clr R2
+ 0252 20920400          sts _bit_out,R2
+ 0256                   .dbline 353
+ 0256           ;   DataH=rx_byte(); 
+ 0256 C0DF              xcall _rx_byte
+ 0258 00930200          sts _DataH,R16
+ 025C                   .dbline 354
+ 025C           ;   bit_out=1; 
+ 025C 81E0              ldi R24,1
+ 025E 80930400          sts _bit_out,R24
+ 0262                   .dbline 355
+ 0262           ;   Pecreg=rx_byte(); 
+ 0262 BADF              xcall _rx_byte
+ 0264 A02E              mov R10,R16
+ 0266 A0920000          sts _Pecreg,R10
+ 026A                   .dbline 356
+ 026A           ;   stop_bit(); 
+ 026A 6CDF              xcall _stop_bit
+ 026C                   .dbline 357
+ 026C           ;   return(DataH*256+DataL); 
+ 026C 20910200          lds R18,_DataH
+ 0270 3327              clr R19
+ 0272 00E0              ldi R16,256
+ 0274 11E0              ldi R17,1
+ 0276 0E940000          xcall empy16s
+ 027A 1801              movw R2,R16
+ 027C 40900100          lds R4,_DataL
+ 0280 5524              clr R5
+ 0282 240C              add R2,R4
+ 0284 351C              adc R3,R5
+ 0286 8101              movw R16,R2
+ 0288                   .dbline -2
+ 0288           L44:
+ 0288                   .dbline 0 ; func end
+ 0288 C990              ld R12,y+
+ 028A A990              ld R10,y+
+ 028C 0895              ret
+ 028E                   .dbsym r cmd 12 c
+ 028E                   .dbsym r slave_addr 10 c
+ 028E                   .dbend
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\mian.c
+ 0000           _Pecreg::
+ 0000                   .blkb 1
+ 0001                   .dbsym e Pecreg _Pecreg c
+ 0001           _DataL::
+ 0001                   .blkb 1
+ 0002                   .dbsym e DataL _DataL c
+ 0002           _DataH::
+ 0002                   .blkb 1
+ 0003                   .dbsym e DataH _DataH c
+ 0003           _bit_in::
+ 0003                   .blkb 1
+ 0004                   .dbsym e bit_in _bit_in c
+ 0004           _bit_out::
+ 0004                   .blkb 1
+ 0005                   .dbsym e bit_out _bit_out c
+ 0005           ; } 
+ 0005           ;  

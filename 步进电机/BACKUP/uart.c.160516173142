@@ -1,0 +1,97 @@
+
+#include <iom16v.h>
+#include <macros.h>
+
+extern unsigned int P_bao;
+extern unsigned int Bao_sum;
+//UART0 initialize
+// desired baud rate: 9600
+// actual: baud rate:9615 (0.2%)
+void uart0_init(void)
+{
+ UCSRB = 0x00; //disable while setting baud rate
+ UCSRA = 0x02;
+ UCSRC = BIT(URSEL) | 0x06;
+ UBRRL =207; //set baud rate lo
+ UBRRL =155; //set baud rate lo
+ 
+ UBRRH = 0x00; //set baud rate hi
+ UCSRB = 0x98;
+}
+
+
+void USART_send(unsigned char data)
+{
+ 
+/*等待发送缓冲器为空 */
+while (! (UCSRA & 0x20));
+/*将数据放入缓冲器，发送数据*/
+UDR=data;
+ 
+
+}
+
+#pragma interrupt_handler uart0_rx_isr:iv_USART0_RXC
+void uart0_rx_isr(void)
+{
+    unsigned char data[15];
+	unsigned int UART_Timeout = 0;
+	unsigned char i = 0;
+	unsigned char j = 0;
+
+   data[i] = UDR;
+         while(data[i]!='E')
+				{
+				
+				i++;
+					
+					while((0==(UCSRA&0x80))&&(UART_Timeout<5000))
+					{UART_Timeout++;}
+					if(UART_Timeout>=5000)
+					{
+						data[i]='E'; // 如果接收超时，退出中断
+					}
+					else
+					{
+						data[i] = UDR;
+					}
+					
+					UART_Timeout = 0;
+					
+				}
+ UCSRA&=~0x80;
+
+ 
+if((data[0]=='S')&&(data[6]=='E'))
+{
+  P_bao=(data[1]-0X30)*10000+(data[2]-0X30)*1000+(data[3]-0X30)*100+(data[4]-0X30)*10+(data[5]-0X30);
+   
+   
+   USART_send(0xc9); 
+   USART_send(0xe8);
+    
+   USART_send(0xD6); 
+   USART_send(0xC3 ); 
+   
+   USART_send(0xCE); 
+   USART_send(0xAA); 
+   
+   USART_send(0xA3); 
+   USART_send(0xBA); 
+   
+   USART_send(P_bao/10000%10+0x30); 
+   USART_send(P_bao/1000%10+0x30); 
+   
+   USART_send(P_bao/100%10+0x30); 
+   USART_send(P_bao/10%10+0x30); 
+   
+   USART_send(P_bao%10+0x30); 
+   USART_send(0x30);
+   
+   USART_send(0xBA ); 
+   USART_send(0xC1 ); 
+   
+   USART_send(0xC3 ); 
+   USART_send(0xEB); 
+}
+}

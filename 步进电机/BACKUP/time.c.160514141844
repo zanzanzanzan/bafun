@@ -1,0 +1,39 @@
+
+#include <iom16v.h>
+#include <macros.h>
+
+
+//TIMER0 initialize - prescale:64
+// WGM: Normal
+// desired value: 1KHz
+// actual value:  1.008KHz (0.8%)
+void timer0_init(void)
+{
+ TCCR0 = 0x00; //stop
+ TCNT0 = 0xC2; //set count
+ OCR0  = 0xff;  //set compare
+ TCCR0 = 0x05; //start timer
+}
+extern unsigned int count;
+
+
+
+/*
+最小定时精度是10MS毫秒 
+讲数据进行切分 
+当PC检测到低电平的时候对数据进行分析；
+数据<200毫秒的时候,不进行数据的累加  
+之后到PC0为高电平的时候才将数据进行累加
+设置时间 包括最小时间间隔的设置 控制精度是最小时间进行设置
+将数据2S进行一次数据的跟新；
+
+
+*/
+
+
+#pragma interrupt_handler timer0_ovf_isr:iv_TIM0_OVF
+void timer0_ovf_isr(void)
+{
+ TCNT0 = 99; //reload counter value
+ count++;
+}

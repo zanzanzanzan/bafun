@@ -1,0 +1,111 @@
+                        .module delay.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile delay.c
+ 0000                   .dbfile E:\WORK\北京康杰斯\16程序\步进电机\delay.c
+ 0000                   .dbfunc e delay _delay fV
+ 0000           ;              i -> R20
+ 0000           ;              j -> R16,R17
+                        .even
+ 0000           _delay::
+ 0000 4A93              st -y,R20
+ 0002                   .dbline -1
+ 0002                   .dbline 4
+ 0002           ; #include<delay.h>
+ 0002           ; 
+ 0002           ; void delay(int j)
+ 0002           ; {
+ 0002                   .dbline 6
+ 0002           ; unsigned char i;
+ 0002           ; for(;j>1;j--)
+ 0002 08C0              xjmp L5
+ 0004           L2:
+ 0004                   .dbline 7
+ 0004           ;    for(i=100;i>1;i--);
+ 0004 44E6              ldi R20,100
+ 0006 01C0              xjmp L9
+ 0008           L6:
+ 0008                   .dbline 7
+ 0008           L7:
+ 0008                   .dbline 7
+ 0008 4A95              dec R20
+ 000A           L9:
+ 000A                   .dbline 7
+ 000A 81E0              ldi R24,1
+ 000C 8417              cp R24,R20
+ 000E E0F3              brlo L6
+ 0010           X0:
+ 0010           L3:
+ 0010                   .dbline 6
+ 0010 0150              subi R16,1
+ 0012 1040              sbci R17,0
+ 0014           L5:
+ 0014                   .dbline 6
+ 0014 81E0              ldi R24,1
+ 0016 90E0              ldi R25,0
+ 0018 8017              cp R24,R16
+ 001A 9107              cpc R25,R17
+ 001C 9CF3              brlt L2
+ 001E           X1:
+ 001E                   .dbline -2
+ 001E           L1:
+ 001E                   .dbline 0 ; func end
+ 001E 4991              ld R20,y+
+ 0020 0895              ret
+ 0022                   .dbsym r i 20 c
+ 0022                   .dbsym r j 16 I
+ 0022                   .dbend
+ 0022                   .dbfunc e delayms _delayms fV
+ 0022           ;              i -> R20
+ 0022           ;              j -> R16,R17
+                        .even
+ 0022           _delayms::
+ 0022 4A93              st -y,R20
+ 0024                   .dbline -1
+ 0024                   .dbline 12
+ 0024           ; 
+ 0024           ; }
+ 0024           ; 
+ 0024           ; void delayms(int j)
+ 0024           ; {
+ 0024                   .dbline 14
+ 0024           ; unsigned char i;
+ 0024           ; for(;j>1;j--)
+ 0024 08C0              xjmp L14
+ 0026           L11:
+ 0026                   .dbline 15
+ 0026           ;    for(i=2;i>1;i--);
+ 0026 42E0              ldi R20,2
+ 0028 01C0              xjmp L18
+ 002A           L15:
+ 002A                   .dbline 15
+ 002A           L16:
+ 002A                   .dbline 15
+ 002A 4A95              dec R20
+ 002C           L18:
+ 002C                   .dbline 15
+ 002C 81E0              ldi R24,1
+ 002E 8417              cp R24,R20
+ 0030 E0F3              brlo L15
+ 0032           X2:
+ 0032           L12:
+ 0032                   .dbline 14
+ 0032 0150              subi R16,1
+ 0034 1040              sbci R17,0
+ 0036           L14:
+ 0036                   .dbline 14
+ 0036 81E0              ldi R24,1
+ 0038 90E0              ldi R25,0
+ 003A 8017              cp R24,R16
+ 003C 9107              cpc R25,R17
+ 003E 9CF3              brlt L11
+ 0040           X3:
+ 0040                   .dbline -2
+ 0040           L10:
+ 0040                   .dbline 0 ; func end
+ 0040 4991              ld R20,y+
+ 0042 0895              ret
+ 0044                   .dbsym r i 20 c
+ 0044                   .dbsym r j 16 I
+ 0044                   .dbend
+ 0044           ; 
+ 0044           ; }
