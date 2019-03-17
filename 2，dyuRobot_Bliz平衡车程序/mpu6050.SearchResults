@@ -1,0 +1,7 @@
+---- MPU_INTBP_CFG_REG Matches (3 in 2 files) ----
+MPU_Init in mpu6050.c (dyuRobot_Bliz控制板_MPU6050测试代码\HARDWARE\MPU6050) : 	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
+MPU_Init in mpu6050.c (dyuRobot_Bliz控制板_MPU6050测试代码\HARDWARE\MPU6050) : 	res=MPU_Read_Byte(MPU_INTBP_CFG_REG);
+mpu6050.h (dyuRobot_Bliz控制板_MPU6050测试代码\HARDWARE\MPU6050) line 49 : #define MPU_INTBP_CFG_REG		0X37	//中断/旁路设置寄存器
+---- MPU_INTBP_CFG_REG Search Errors Encountered (1) ----
+The following 1 files could not be processed:
+F:\北京康杰斯\大鱼电子Bliz平衡车资料V2.0\2，dyuRobot_Bliz平衡车程序\dyuRobot_Bliz控制板_MPU6050测试代码\USER\JLinkLog.txt : File could not be opened.
