@@ -254,9 +254,9 @@ typedef union __NVM_DATA__ //要存入非易失存储器内的数据
         4  增加期望值设置(12MMA)
 		**/
 		unsigned char set_default_zhuansu;
-		unsigned char set_model;
+		unsigned char set_model;//0 0是原来的模式      1 是PID模式
 		unsigned char set_wuliao_PID_P;
-		unsigned char set_qiwang_value;
+		unsigned char set_qiwang_value;  //期望是是5 到19Ma
 
 		
         

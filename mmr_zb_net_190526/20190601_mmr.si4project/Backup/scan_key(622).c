@@ -1314,7 +1314,7 @@ void deal_key(unsigned char key_value)
 					{
 						//默认转速之间
 						if (uart_rx_buf[5] > m_rPara.para.min_vel 
-							&&  uart_rx_buf[5] < m_rPara.para.max_vel)
+							&&  uart_rx_buf[5] > m_rPara.para.max_vel)
 						{
 							m_rPara.para.set_default_zhuansu =  uart_rx_buf[5];
 							eeprom_write_byte_user(&m_ePara[0].para.set_default_zhuansu,m_rPara.para.set_default_zhuansu);	
@@ -1338,7 +1338,7 @@ void deal_key(unsigned char key_value)
 					{
 						//比例参数
 						if (uart_rx_buf[5]  > 0
-							&&  uart_rx_buf[5] < 10)
+							&&  uart_rx_buf[5] < 255)
 						{
 							m_rPara.para.set_wuliao_PID_P = uart_rx_buf[5];
 							eeprom_write_byte_user(&m_ePara[0].para.set_wuliao_PID_P,m_rPara.para.set_wuliao_PID_P);	

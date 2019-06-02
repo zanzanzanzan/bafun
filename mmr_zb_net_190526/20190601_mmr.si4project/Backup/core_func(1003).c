@@ -1204,11 +1204,11 @@ void material_2_vel(unsigned short m)
 		{
 			
 			m_temp_current.ml = m;
-		    m_temp_qiwang.ml = m_rPara.para.set_qiwang_value ;//0 ~200
-			m_temp_current.ml  = m_temp_current.ml >>6 /5/10;//0 ~1024
+		    m_temp_qiwang.ml = m_rPara.para.set_qiwang_value * 10;//0 ~200
+			m_temp_current.ml  = m_temp_current.ml >>6 /5;//0 ~1024
 
 			//积分限制幅度
-			if (m_temp_qiwang.ml > m_temp_current.ml)
+			if (m_temp_qiwang.ml < m_temp_current.ml)
 			{
 				liaowei_PID_I = liaowei_PID_I + 1;
 				if (liaowei_PID_I >  40 )
@@ -1225,19 +1225,9 @@ void material_2_vel(unsigned short m)
 				}
 			}
 			//比例控制
-			if ( m_temp_current.ml - m_temp_qiwang.ml >0)
-			{
-				auto_vel_temp =  ( m_temp_current.ml - m_temp_qiwang.ml) * m_rPara.para.set_qiwang_value;
-				auto_vel_temp =  auto_vel_temp/5/5/10;
-			}else
-			{
-				auto_vel_temp =	(m_temp_qiwang.ml - m_temp_current.ml) * m_rPara.para.set_qiwang_value;
-				auto_vel_temp = - auto_vel_temp/5/5/10;
-
-			}
-		
+			auto_vel_temp = ( m_temp_current.ml - m_temp_qiwang.ml) * m_rPara.para.set_qiwang_value;
 			auto_vel_value =m_rPara.para.set_default_zhuansu;
-			auto_vel_value +=auto_vel_temp+ liaowei_PID_I;
+			auto_vel_value +=auto_vel_temp + liaowei_PID_I;
 
 			if(auto_vel_value < 0)
 			{

@@ -1,0 +1,35 @@
+---- auto_vel Matches (34 in 4 files) ----
+core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) line 169 : volatile unsigned short auto_vel;
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel > m_rPara.para.max_vel)
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			auto_vel = m_rPara.para.max_vel;
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel <= m_rPara.para.min_vel)
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			auto_vel = 0;
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				bpwmb = (auto_vel*9)/3;//9v - 300转
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel > m_rPara.para.max_vel)
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			auto_vel = m_rPara.para.max_vel;
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel <= m_rPara.para.min_vel)
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			auto_vel = 0;
+fmotor_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				bpwmb = ((auto_vel*8)/3)+200; //20mA - 300转
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel > m_rPara.para.max_vel)
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			auto_vel = m_rPara.para.max_vel;
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel <= m_rPara.para.min_vel)
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			auto_vel = 0;
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				bpwma = (auto_vel*9)/3;//9v - 300转
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel > m_rPara.para.max_vel)
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			auto_vel = m_rPara.para.max_vel;
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel <= m_rPara.para.min_vel)
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			auto_vel = 0;
+fmotor_vel_a in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				bpwma = ((auto_vel*8)/3)+200; //20mA - 300转
+uart_tx in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				m_vel=auto_vel;
+uart_tx in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				if (mb_is_invalid == 1 && auto_vel > 0)
+material_2_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		auto_vel = m_temp.ml/51550;
+material_2_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		if(auto_vel < 5)
+material_2_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			if(auto_vel < 1)
+material_2_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 		auto_vel += m_rPara.para.min_vel;//
+material_2_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				auto_vel = m_rPara.para.min_vel;
+material_2_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				auto_vel = m_rPara.para.max_vel;
+material_2_vel in core_func.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 				auto_vel = auto_vel_value;
+core_func.h (mmr_zb_net_190526\mmr_zb_net\src\module) line 139 : extern unsigned short auto_vel;
+led_display in display.c (mmr_zb_net_190526\mmr_zb_net\src\module) : 			m_vel=auto_vel;
+new 29.c (mmr_zb_net_190526\mmr_zb_net\src\module) line 242 : 				m_vel=auto_vel;
+new 29.c (mmr_zb_net_190526\mmr_zb_net\src\module) line 345 : 				if (mb_is_invalid == 1 && auto_vel > 0)

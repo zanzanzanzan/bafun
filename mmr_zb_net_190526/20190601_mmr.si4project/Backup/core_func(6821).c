@@ -1152,14 +1152,9 @@ void uart_tx(void)
 
 
 /////////////////////////////////////////////////////////////////
-signed char liaowei_PID_I =0;
 void material_2_vel(unsigned short m)
 {
 	UCHAR4 m_temp;
-	UCHAR4 m_temp_qiwang;
-	UCHAR4 m_temp_current;
-	signed short auto_vel_temp = 0;
-	signed short auto_vel_value = 0;
 	m_temp.ml = m;
 	if(m_temp.ms[0] > m_material_stop_modify)//12890
 	{
@@ -1195,75 +1190,6 @@ void material_2_vel(unsigned short m)
 		}
 		//
 		auto_vel += m_rPara.para.min_vel;//
-
-
-
-		//之前的逻辑不变增加PID逻辑处理
-
-		if( m_rPara.para.set_model ==1)
-		{
-			
-			m_temp_current.ml = m;
-		    m_temp_qiwang.ml = m_rPara.para.set_qiwang_value ;//0 ~200
-			m_temp_current.ml  = m_temp_current.ml >>6 /5/10;//0 ~1024
-
-			//积分限制幅度
-			if (m_temp_qiwang.ml > m_temp_current.ml)
-			{
-				liaowei_PID_I = liaowei_PID_I + 1;
-				if (liaowei_PID_I >  40 )
-				{
-					liaowei_PID_I = 40;
-				}
-			}
-			else
-			{
-				liaowei_PID_I = liaowei_PID_I - 1;
-				if (liaowei_PID_I <  -40 )
-				{
-					liaowei_PID_I = -40;
-				}
-			}
-			//比例控制
-			if ( m_temp_current.ml - m_temp_qiwang.ml >0)
-			{
-				auto_vel_temp =  ( m_temp_current.ml - m_temp_qiwang.ml) * m_rPara.para.set_qiwang_value;
-				auto_vel_temp =  auto_vel_temp/5/5/10;
-			}else
-			{
-				auto_vel_temp =	(m_temp_qiwang.ml - m_temp_current.ml) * m_rPara.para.set_qiwang_value;
-				auto_vel_temp = - auto_vel_temp/5/5/10;
-
-			}
-		
-			auto_vel_value =m_rPara.para.set_default_zhuansu;
-			auto_vel_value +=auto_vel_temp+ liaowei_PID_I;
-
-			if(auto_vel_value < 0)
-			{
-				auto_vel = m_rPara.para.min_vel;
-
-			}else if(auto_vel_value >  m_rPara.para.max_vel)
-			{
-				auto_vel = m_rPara.para.max_vel;
-			}
-			else
-			{	
-				//实际的PID控制
-				auto_vel = auto_vel_value;
-			}
-
-			
-
-
-		}
-
-
-
-
-
-
-		
 		//
 		//判断是否需要亮高位灯
 		//为高料位比较
@@ -1655,7 +1581,7 @@ void read_para(unsigned char flag)
 	if(m_rPara.para.set_default_zhuansu < m_rPara.para.min_vel
 		|| m_rPara.para.set_default_zhuansu > m_rPara.para.max_vel)
 	{
-		m_rPara.para.set_default_zhuansu = m_rPara.para.min_vel >>1 + m_rPara.para.max_vel >> 1 ;
+		m_rPara.para.set_default_zhuansu = m_rPara.para.min_vel >>2 + m_rPara.para.max_vel >> 2 ;
 	}
 
     //设置模式
@@ -2159,7 +2085,7 @@ void set_default_para(void)
 	unsigned char set_qiwang_value;
 	**/
 
-	tmp.para.set_default_zhuansu = tmp.para.max_vel>>1 + tmp.para.min_vel>>1;
+	tmp.para.set_default_zhuansu = tmp.para.max_vel>>2 + tmp.para.min_vel>>2;
 	tmp.para.set_model = 0;
 	tmp.para.set_wuliao_PID_P = 1;
 	tmp.para.set_qiwang_value = 12;

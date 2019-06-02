@@ -283,7 +283,7 @@ extern volatile unsigned long boot_time;
 
 #define TEMP_CHANGE_TEMP      204//参数设定      nothing
 
-#define SET_LIAOWEI_VALUE      205//参数设定     PID控制
+#define SET_LIAOWEI_VALUE      205//参数设定      nothing
 
 
 

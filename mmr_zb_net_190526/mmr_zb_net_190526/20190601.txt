@@ -17,3 +17,10 @@ unsigned char set_wuliao_PID_P;
 unsigned char set_qiwang_value;
 
 
+m_rPara.para.min_vel
+
+
+m_rPara.para.max_vel
+
+
+SET_LIAOWEI_VALUE
