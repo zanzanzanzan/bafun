@@ -1519,10 +1519,10 @@ ISR(USART0_RX_vect)
 		}
 		
 		
-				if(i>38)
-				{
-					return;
-				}
+		if(i>38)
+		{
+			return;
+		}
 		UART_Timeout = 0;
 		
 	}

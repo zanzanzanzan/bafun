@@ -256,7 +256,12 @@ typedef union __NVM_DATA__ //要存入非易失存储器内的数据
 		unsigned char set_default_zhuansu;
 		unsigned char set_model;//0 0是原来的模式      1 是PID模式
 		unsigned char set_wuliao_PID_P;
-		unsigned char set_qiwang_value;  //期望是是5 到19Ma
+
+		unsigned char set_qiwang_value;  		 //期望是是5 到19Ma
+		unsigned char set_yuankong_auto_delay;   //期望是是8默认   1~30
+		unsigned char set_yuankong_auto_delay1;  //期望是是8默认   1~30
+		unsigned char set_yuankong_auto_delay2;  //期望是是8默认   1~30
+
 
 		
         

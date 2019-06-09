@@ -1201,6 +1201,7 @@ void deal_key(unsigned char key_value)
 						part_stop();
 						li_he_zha = 0;
 					}
+					bit_remote=0;//退出远控模式,不改变磨辊运行状态
 					set_date = 0;
 				}
 				break;
@@ -1353,6 +1354,16 @@ void deal_key(unsigned char key_value)
 						{
 							m_rPara.para.set_qiwang_value = uart_rx_buf[5];
 							eeprom_write_byte_user(&m_ePara[0].para.set_qiwang_value,m_rPara.para.set_qiwang_value);	
+						
+						}
+						
+					}else if (uart_rx_buf[3] == 0x5)
+					{
+						if (uart_rx_buf[5]	> 1
+							&&	uart_rx_buf[5] < 30)
+						{
+							m_rPara.para.set_yuankong_auto_delay = uart_rx_buf[5];
+							eeprom_write_byte_user(&m_ePara[0].para.set_yuankong_auto_delay,m_rPara.para.set_yuankong_auto_delay);	
 						
 						}
 						

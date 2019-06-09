@@ -941,9 +941,9 @@ zan_temp =m_material_value;
 zan_temp=(m_material_value>>6)/5;
 				uart_tx_buf[6] = zan_temp>>8;	
 				
-				uart_tx_buf[7] = zan_temp&0xff;				
+				uart_tx_buf[7] = zan_temp&0xff;	//995			
 
-				uart_tx_buf[8] = 0;
+				uart_tx_buf[8] = m_rPara.para.set_yuankong_auto_delay;//996
 				break;
 			}
 			default :
@@ -1697,6 +1697,14 @@ void read_para(unsigned char flag)
 	}
 
 
+	//设置远控自动延迟时间
+	m_rPara.para.set_yuankong_auto_delay=eeprom_read_byte_user(&m_ePara[0].para.set_yuankong_auto_delay);
+	if(m_rPara.para.set_yuankong_auto_delay == 1 
+		|| 	m_rPara.para.set_yuankong_auto_delay > 30	)
+	{
+		m_rPara.para.set_yuankong_auto_delay = 8 ;
+	}
+
 	
 	/////////////////////////////////
 }
@@ -2173,6 +2181,7 @@ void set_default_para(void)
 	tmp.para.set_model = 0;
 	tmp.para.set_wuliao_PID_P = 1;
 	tmp.para.set_qiwang_value = 12;
+	tmp.para.set_yuankong_auto_delay = 8;
 	
 	
     
@@ -2298,6 +2307,7 @@ void write_para_to_eeprom(NVM_DATA *p,unsigned char rst_used_hours)
 	eeprom_write_byte_user(&m_ePara[0].para.set_model,p->para.set_model);//23//30
 	eeprom_write_byte_user(&m_ePara[0].para.set_wuliao_PID_P,p->para.set_wuliao_PID_P);//23//30
 	eeprom_write_byte_user(&m_ePara[0].para.set_qiwang_value,p->para.set_qiwang_value);//23//30
+	eeprom_write_byte_user(&m_ePara[0].para.set_yuankong_auto_delay,p->para.set_yuankong_auto_delay);//23//30
 
 	
 }
@@ -2584,7 +2594,9 @@ void run_in_remote_ctrl(void)
 			}
 		}
 		//
+		//信号来了之后进入
 		//远控自动运行
+
 		if((0==byz) && (0==byq))
 		{
 			the_last_time_of_byz_byq_low = boot_time;
@@ -2603,7 +2615,10 @@ void run_in_remote_ctrl(void)
 						//其它
 						if(FALSE == timer_is_running(MT_AUTO_RUN_DELAY))
 						{
-							SetTimer(MT_AUTO_RUN_DELAY, 8*1000, 0);//远程状态下 YQ YZ信号同时输入等待8秒执行自动
+							//SetTimer(MT_AUTO_RUN_DELAY, 8*1000, 0);//远程状态下 YQ YZ信号同时输入等待8秒执行自动
+						   SetTimer(MT_AUTO_RUN_DELAY, m_rPara.para.set_yuankong_auto_delay*1000, 0);
+
+							
 						}					
 					}
 				}
@@ -2614,10 +2629,13 @@ void run_in_remote_ctrl(void)
 			//byz和byq不全为低电平
 			the_last_time_of_byz_byq_high = boot_time;
 			//
+
 			if((boot_time-the_last_time_of_byz_byq_low) > 200)
 			{
+				bit_auto = 0;					
 				if(1 == bit_fmotor)
 				{
+				    	
 					KillTimer(MT_AUTO_RUN_DELAY);
 					reset_cause = RST_CAUSE_OTHER;
 					part_stop();
