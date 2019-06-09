@@ -96,8 +96,8 @@ int main(void)
 		{
 			i =0;
 		  //printf("pitch=%.2f,roll=%.2f,yaw=%.2f\n",pitch,roll,yaw);
-			//printf("gyrox=%d,gyroy=%d,gyroz=%d\n",gyrox,gyroy,gyroz);
-			printf("aacx=%d,aacy=%d,aacz=%d\n",aacx,aacy,aacz);
+			printf("gyrox=%d,gyroy=%d,gyroz=%d\n",gyrox,gyroy,gyroz);
+			//printf("aacx=%d,aacy=%d,aacz=%d\n",aacx,aacy,aacz);
 		}
 		/*也可以使用电脑上位机查看,如果没有购买OLED屏幕的客户打开电脑上位机,使用串口打印到上位机即可查看***/
 	} 	

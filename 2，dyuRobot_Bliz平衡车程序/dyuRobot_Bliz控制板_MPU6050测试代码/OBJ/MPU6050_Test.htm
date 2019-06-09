@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\MPU6050_Test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\MPU6050_Test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 4.1 [Build 894]: Last Updated: Sun Mar 17 11:56:12 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 4.1 [Build 894]: Last Updated: Sun Mar 24 16:33:01 2019
 <BR><P>
 <H3>Maximum Stack Usage =        328 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -645,7 +645,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Gyro_Fsr
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Accel_Fsr
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_LPF
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
 </UL>
@@ -655,26 +655,28 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
+<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
 </UL>
 
-<P><STRONG><a name="[9f]"></a>MPU_Set_Rate</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, mpu6050.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = MPU_Set_Rate &rArr; MPU_Set_LPF &rArr; MPU_Write_Byte &rArr; MPU_IIC_Wait_Ack &rArr; MPU_IIC_Stop &rArr; MPU_IIC_Delay
-</UL>
-<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_LPF
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Byte
-</UL>
-<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
-</UL>
-
-<P><STRONG><a name="[a0]"></a>MPU_Read_Byte</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, mpu6050.o(.text))
+<P><STRONG><a name="[9f]"></a>MPU_Read_Byte</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, mpu6050.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = MPU_Read_Byte &rArr; MPU_IIC_Read_Byte &rArr; MPU_IIC_NAck &rArr; MPU_IIC_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Wait_Ack
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Stop
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Start
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Send_Byte
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
+</UL>
+
+<P><STRONG><a name="[a1]"></a>MPU_Set_Rate</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, mpu6050.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = MPU_Set_Rate &rArr; MPU_Set_LPF &rArr; MPU_Write_Byte &rArr; MPU_IIC_Wait_Ack &rArr; MPU_IIC_Stop &rArr; MPU_IIC_Delay
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_LPF
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Byte
 </UL>
 <BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
 </UL>
@@ -695,14 +697,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
 </UL>
 
-<P><STRONG><a name="[56]"></a>MPU_Init</STRONG> (Thumb, 138 bytes, Stack size 8 bytes, mpu6050.o(.text))
+<P><STRONG><a name="[56]"></a>MPU_Init</STRONG> (Thumb, 120 bytes, Stack size 8 bytes, mpu6050.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = MPU_Init &rArr; MPU_Set_Rate &rArr; MPU_Set_LPF &rArr; MPU_Write_Byte &rArr; MPU_IIC_Wait_Ack &rArr; MPU_IIC_Stop &rArr; MPU_IIC_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Init
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Gyro_Fsr
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Accel_Fsr
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Byte
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
@@ -716,7 +718,7 @@ Global Symbols
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Stop
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Start
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Send_Byte
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
 </UL>
 <BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_read_mem
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_read_fifo_stream
@@ -803,7 +805,7 @@ Global Symbols
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Stop
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Start
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Send_Byte
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
 </UL>
 
 <P><STRONG><a name="[a4]"></a>MPU_IIC_Init</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, mpuiic.o(.text))
@@ -823,7 +825,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Len
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Len
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Byte
 </UL>
 
@@ -835,7 +837,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Wait_Ack
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Len
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Len
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Byte
 </UL>
 
@@ -847,7 +849,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Len
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Len
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Byte
 </UL>
 
@@ -856,7 +858,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Delay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
 </UL>
 
 <P><STRONG><a name="[b0]"></a>MPU_IIC_NAck</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, mpuiic.o(.text))
@@ -864,7 +866,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Delay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
 </UL>
 
 <P><STRONG><a name="[9b]"></a>MPU_IIC_Send_Byte</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, mpuiic.o(.text))
@@ -874,11 +876,11 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Len
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Len
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Byte
 </UL>
 
-<P><STRONG><a name="[a1]"></a>MPU_IIC_Read_Byte</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, mpuiic.o(.text))
+<P><STRONG><a name="[a0]"></a>MPU_IIC_Read_Byte</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, mpuiic.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = MPU_IIC_Read_Byte &rArr; MPU_IIC_NAck &rArr; MPU_IIC_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_NAck
@@ -886,7 +888,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Len
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Byte
 </UL>
 
 <P><STRONG><a name="[b2]"></a>mpu_reg_dump</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, inv_mpu.o(.text), UNUSED)
@@ -1018,7 +1020,7 @@ Global Symbols
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_init
 </UL>
 
-<P><STRONG><a name="[be]"></a>mpu_init</STRONG> (Thumb, 418 bytes, Stack size 16 bytes, inv_mpu.o(.text))
+<P><STRONG><a name="[be]"></a>mpu_init</STRONG> (Thumb, 422 bytes, Stack size 16 bytes, inv_mpu.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
 <LI>Call Chain = mpu_init &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1055,7 +1057,7 @@ Global Symbols
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Len
 </UL>
 
-<P><STRONG><a name="[c2]"></a>mpu_get_temperature</STRONG> (Thumb, 150 bytes, Stack size 48 bytes, inv_mpu.o(.text), UNUSED)
+<P><STRONG><a name="[c2]"></a>mpu_get_temperature</STRONG> (Thumb, 234 bytes, Stack size 48 bytes, inv_mpu.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mget_ms
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Len
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
@@ -1067,7 +1069,7 @@ Global Symbols
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
 
-<P><STRONG><a name="[c7]"></a>mpu_set_accel_bias</STRONG> (Thumb, 468 bytes, Stack size 40 bytes, inv_mpu.o(.text), UNUSED)
+<P><STRONG><a name="[c7]"></a>mpu_set_accel_bias</STRONG> (Thumb, 380 bytes, Stack size 40 bytes, inv_mpu.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Len
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Read_Len
 </UL>

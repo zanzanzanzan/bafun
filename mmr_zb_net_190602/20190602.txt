@@ -1,0 +1,26 @@
+1  增加转速初始值
+2  增加切换开关
+3  增比例参数设置
+4  增加期望值设置
+
+
+/****
+
+1  增加转速初始值(最低和最高转速的初始值)
+2  增加切换开关(默认值原来你的)
+3  增比例参数设置(最高转速-最低转速/12)
+4  增加期望值设置(12MA)
+**/
+unsigned char set_default_zhuansu;
+unsigned char set_model;
+unsigned char set_wuliao_PID_P;
+unsigned char set_qiwang_value;
+
+
+m_rPara.para.min_vel
+
+
+m_rPara.para.max_vel
+
+
+SET_LIAOWEI_VALUE

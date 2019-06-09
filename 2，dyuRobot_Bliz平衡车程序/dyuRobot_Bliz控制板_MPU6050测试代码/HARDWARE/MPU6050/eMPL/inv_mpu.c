@@ -789,7 +789,7 @@ int mpu_init(void)
             st.chip_cfg.accel_half = 0;
         else {
             log_e("Unsupported software product rev %d.\n", rev);
-            //return -1;
+            return -1;
         }
     } else {
         if (i2c_read(st.hw->addr, st.reg->prod_id, 1, data))

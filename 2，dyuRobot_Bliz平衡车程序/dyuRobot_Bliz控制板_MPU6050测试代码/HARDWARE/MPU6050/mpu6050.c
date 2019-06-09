@@ -23,11 +23,10 @@ u8 MPU_Init(void)
 	MPU_Write_Byte(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭
 	MPU_Write_Byte(MPU_FIFO_EN_REG,0X00);	//关闭FIFO
 	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
-	res=MPU_Read_Byte(MPU_INTBP_CFG_REG);
+	res=MPU_Read_Byte(MPU_INTBP_CFG_REG); 
 	res=MPU_Read_Byte(MPU_DEVICE_ID_REG); 
-  res=MPU_Read_Byte(0x75);
 	//if(res==MPU_ADDR)//器件ID正确
-	if (res == 0x72)
+	if(1)//器件ID正确
 	{
 		MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X01);	//设置CLKSEL,PLL X轴为参考
 		MPU_Write_Byte(MPU_PWR_MGMT2_REG,0X00);	//加速度与陀螺仪都工作
@@ -77,6 +76,7 @@ u8 MPU_Set_Rate(u16 rate)
 	if(rate<4)rate=4;
 	data=1000/rate-1;
 	data=MPU_Write_Byte(MPU_SAMPLE_RATE_REG,data);	//设置数字低通滤波器
+	data = MPU_Read_Byte(MPU_SAMPLE_RATE_REG); 
  	return MPU_Set_LPF(rate/2);	//自动设置LPF为采样率的一半
 }
 

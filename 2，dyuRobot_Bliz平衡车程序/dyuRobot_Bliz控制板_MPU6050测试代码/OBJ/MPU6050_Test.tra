@@ -48,7 +48,7 @@
 ### ADS-LD Output File: '..\OBJ\MPU6050_Test.axf'
 ### ADS-LD Command File: '..\OBJ\MPU6050_Test.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '..\OBJ\MPU6050_Test.lnp', Handle=0x0000041C
+### Creating CmdFile '..\OBJ\MPU6050_Test.lnp', Handle=0x00000308
 ### Writing '.lnp' file
 ### ADS-LD Command file '..\OBJ\MPU6050_Test.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

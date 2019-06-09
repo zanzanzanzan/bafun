@@ -235,8 +235,8 @@ void hardward_init(void)
 	//定时器1
 	TCCR1A = 0xf2;//oc1a,oc1b匹配时置1,达到TOP时清零
 	TCCR1B = 0x19;//时钟不分频
-	ICR1 = PWM_TOP;//TOP//4kHz
-    OCR1A = PWM_TOP/2;//电压输出初始占空比50%,2.5v
+	ICR1 = PWM_TOP1;//TOP//4kHz
+    OCR1A = PWM_TOP1/2;//电压输出初始占空比50%,2.5v
     OCR1B = PWM_LOW;//触发脉冲,占空比LOW_PULSE/PWM_TOP(低电平时间)
     //外中断
     MCUCR &= 0xf0;
@@ -730,13 +730,14 @@ ISR(INT1_vect)
         #ifndef __TEST__
         if(m_mcur.ms < m_ml_set)
         {
-            m_cur_pwm.ms = (PWM_TOP/5)-2;//150//200
-            OCR1A = (unsigned short)PWM_TOP-m_cur_pwm.ms;//800,1v
+            //m_cur_pwm.ms = (PWM_TOP/5)-2;//150//200
+            m_cur_pwm.ms = (PWM_TOP/PWM_BILI)-2;//150//200
+            OCR1A = (unsigned short)PWM_TOP1-m_cur_pwm.ms;//800,1v
         }
         else if(m_mcur.ms > m_mh_set)
         {
             m_cur_pwm.ms = PWM_TOP-1;
-            OCR1A = (unsigned short)PWM_TOP-m_cur_pwm.ms;//1,5v
+            OCR1A = (unsigned short)PWM_TOP1-m_cur_pwm.ms;//1,5v
         }
         else
         {
@@ -744,18 +745,20 @@ ISR(INT1_vect)
             unsigned short m_offset;
             m_offset = m_mcur.ms-m_ml_set;//当前测得的值减去低位设置值
             m_temp.ml = m_offset;
-            m_temp.ml *= (unsigned short)((PWM_TOP/5)*4);//等距的平分1v到5v
+            //m_temp.ml *= (unsigned short)((PWM_TOP/5)*4);//等距的平分1v到5v
+             m_temp.ml *= (unsigned short)((PWM_TOP/PWM_BILI)*(PWM_BILI -1));//等距的平分1v到5v
             m_offset = m_mh_set-m_ml_set;//高位设置值减去低位设置值
             m_temp.ml += m_offset>>1;//四舍五入
             m_temp.ml /= m_offset;
-            m_temp.ms[0] += (PWM_TOP/5);//加入最低的1v
+            //m_temp.ms[0] += (PWM_TOP/5);//加入最低的1v
+             m_temp.ms[0] += (PWM_TOP/PWM_BILI);//加入最低的1v
             //
             if(m_temp.ms[0] > PWM_TOP)
 			{
                 m_temp.ms[0] = PWM_TOP-1;
 			}
             m_cur_pwm.ms=m_temp.ms[0];
-            OCR1A=(unsigned short)PWM_TOP-m_cur_pwm.ms;
+            OCR1A=(unsigned short)PWM_TOP1-m_cur_pwm.ms;
         }
         #endif                
         //

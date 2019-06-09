@@ -7,6 +7,7 @@
   //MPU IIC ÑÓÊ±º¯Êý
 void MPU_IIC_Delay(void)
 {
+	//delay_us(2);
 	delay_us(2);
 }
 
