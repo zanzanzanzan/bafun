@@ -48,6 +48,7 @@ extern void mb_signal_handling(void);
 extern void dw_signal_handling(void);
 extern void lw_signal_handling(void);
 extern void qr_ql_signal_handling(void);
+void set_default_para(void);
 /////////////////////////////////////////////////////////////////
 /////////////在显示板上显示的灯状态
 extern volatile U8_BIT led_buf[14];

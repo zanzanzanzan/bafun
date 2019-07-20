@@ -205,7 +205,7 @@ void bootloader_handling(void)
 //
 //串口接收中断
 //
-unsigned char usart1_receive_data[10];
+unsigned char usart1_receive_data[24];
 unsigned char usart1_receive_count =0;
 extern unsigned char temp_data[40];
 void temp_rtu_rx_frame(unsigned char val)

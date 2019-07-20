@@ -8,6 +8,7 @@
 #include "typedef_user.h"
 #include "core_func.h"
 #include "modbus_rtu.h"
+#include "w5500_manager.h"
 /////////////////////////////////////////////////////////////////
 
 //unsigned char 

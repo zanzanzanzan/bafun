@@ -6,9 +6,11 @@
 
 #if USED_W5500 == TRUE 
 
-extern Bool init_w5500(U32 reset_ms);
+Bool init_w5500(U32 reset_ms);
 extern void w5500_task(void);
-extern void w5500_read_para(void);
+ void w5500_read_para(void);
+//void w5500_read_para(void);
+
 
 
 #endif

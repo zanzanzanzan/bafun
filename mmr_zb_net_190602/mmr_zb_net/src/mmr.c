@@ -62,7 +62,7 @@ extern unsigned int you_gao;
 extern unsigned int you_di;
 extern unsigned char temp_data[80] ;//温度分配公司，0-1 代表一个温度
 extern unsigned char tempe_flag;
-unsigned int temp_count_data[16] ={0};
+unsigned int temp_count_data[11] ={0};
 
 unsigned char temp1_flag_count;
 
@@ -823,6 +823,9 @@ void display_current_value(void)
 unsigned int AD_CHANGE =0;
     unsigned int i = 0,j=0;
 //unsigned int	ad_counter = 0;
+
+static unsigned long AD_time_mogun_delay=0;
+
 void ad_value_handling(void)
 {
 	UCHAR4 m_temp;
@@ -923,9 +926,16 @@ void ad_value_handling(void)
 							//eeprom_write_byte_user(&m_ePara[0].para.all_stop_id, m_rPara.para.all_stop_id);
 
 							
-							
-    						all_stop();
-    					}
+							if (boot_time - AD_time_mogun_delay  > (NO_CURRENT_DELAY_TIME_S*1000))
+							{
+								all_stop();
+							}
+
+						}
+						else
+						{
+							AD_time_mogun_delay = boot_time;
+						}
     				}
                 }
 			}
@@ -1186,7 +1196,16 @@ if(ad_counter[0] >= 1024)//约一秒得到一个数据
 					//bit_remote=0;//退出远控模式
 					modbus_status.status.m_yk = STATUS_OFF;
 					m_rPara.para.all_stop_id = 7;
-					all_stop();
+					//ZANXIAOFEIQUXIAOQONG
+					if (boot_time - AD_time_mogun_delay  > (NO_CURRENT_DELAY_TIME_S*1000))
+					{
+						all_stop();
+					}
+
+				}
+				else
+				{
+					AD_time_mogun_delay = boot_time;
 				}
 			}
 			
@@ -1237,8 +1256,19 @@ if(ad_counter[0] >= 1024)//约一秒得到一个数据
 						//bit_remote=0;//退出远控模式
 						modbus_status.status.m_yk = STATUS_OFF;
 						m_rPara.para.all_stop_id = 8;
-						all_stop();
+									
+					
+						if (boot_time - AD_time_mogun_delay  > (NO_CURRENT_DELAY_TIME_S*1000))
+						{
+							all_stop();
+						}
+
 					}
+					else
+					{
+						AD_time_mogun_delay = boot_time;
+					}
+				}
 				}
 			}
 			break;

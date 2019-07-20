@@ -171,6 +171,10 @@ extern volatile unsigned long boot_time;
 #define LED_DIS_X		45
 #define LED_DIS_Y		46
 #define LED_DIS_Z		47
+
+#define NO_CURRENT_DELAY_TIME_S           7//延迟时间7M
+
+
 ////////////////////////////////////////////////////////////////
 //按键设置
 #define KEY_ZDJQD           40//主电机启动

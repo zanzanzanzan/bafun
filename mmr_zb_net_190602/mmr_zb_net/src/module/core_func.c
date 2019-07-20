@@ -99,7 +99,7 @@ volatile unsigned char comm_error_delay;
 volatile unsigned short ad_counter[8];
 volatile UCHAR4 ad_add_value[8];
 unsigned char uart_rx_counter;
-unsigned char uart_rx_buf[30],uart_tx_buf[40];
+unsigned char uart_rx_buf[12],uart_tx_buf[10];
 unsigned char temp_data[80] = {0};//温度分配公司，0-1 代表一个温度
 unsigned char tempe_flag= 0;
 
@@ -722,7 +722,7 @@ signed short PID_Temp =0;
 void uart_tx(void)
 {
 	unsigned char i;
-	UCHAR4 temp;
+	//UCHAR4 temp;
 	unsigned short m_vel,m_material_value_temp,zan_temp;
 	//
 
@@ -1665,7 +1665,7 @@ void read_para(unsigned char flag)
 	if(m_rPara.para.set_default_zhuansu < m_rPara.para.min_vel
 		|| m_rPara.para.set_default_zhuansu > m_rPara.para.max_vel)
 	{
-		m_rPara.para.set_default_zhuansu = m_rPara.para.min_vel >>1 + m_rPara.para.max_vel >> 1 ;
+		m_rPara.para.set_default_zhuansu = (m_rPara.para.min_vel >>1) + (m_rPara.para.max_vel >> 1) ;
 	}
 
     //设置模式
@@ -2177,7 +2177,7 @@ void set_default_para(void)
 	unsigned char set_qiwang_value;
 	**/
 
-	tmp.para.set_default_zhuansu = tmp.para.max_vel>>1 + tmp.para.min_vel>>1;
+	tmp.para.set_default_zhuansu = (tmp.para.max_vel>>1) + (tmp.para.min_vel>>1);
 	tmp.para.set_model = 0;
 	tmp.para.set_wuliao_PID_P = 1;
 	tmp.para.set_qiwang_value = 12;
