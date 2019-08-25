@@ -188,7 +188,7 @@ void deal_key(unsigned char key_value)
 					//li_he_zha = 0;
 
                     TRACE_STRING("set zhu dian ji qi dong ");
-					if(0==bit_mmotor)
+					//if(0==bit_mmotor)
 					{
                          TRACE_STRING("set zhu dian ji qi dong2 ");
                         roll_out();
@@ -480,6 +480,8 @@ void deal_key(unsigned char key_value)
 					//
                     li_he_zha = 0;
 					bit_led_hz = 0;
+					//离扎初始化看门狗服务
+					//while(1);
 					//set_idle_wait = 0;
 
 				}

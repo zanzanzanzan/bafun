@@ -99,9 +99,12 @@ volatile unsigned char comm_error_delay;
 volatile unsigned short ad_counter[8];
 volatile UCHAR4 ad_add_value[8];
 unsigned char uart_rx_counter;
-unsigned char uart_rx_buf[12],uart_tx_buf[10];
+unsigned char uart_rx_buf[12],uart_tx_buf[20];
 unsigned char temp_data[80] = {0};//温度分配公司，0-1 代表一个温度
 unsigned char tempe_flag= 0;
+
+
+volatile unsigned char bit_buffer_mmotor[20];
 
 volatile unsigned char uart_tx_addr;
 //
@@ -852,17 +855,6 @@ void uart_tx(void)
 
 				uart_tx_buf[6] = m_rPara.para.cur1_full;	 //608
 				
-				/*
-				uart_tx_buf[15] = m_rPara.para.material_port; //609    no use
-
-				uart_tx_buf[16] = m_rPara.para.manual_vel / 256;//610  no use
-				uart_tx_buf[17] = m_rPara.para.manual_vel  % 256;
-
-				uart_tx_buf[18] = m_rPara.para.limited_hours / 256; //611  no use
-				uart_tx_buf[7] = m_rPara.para.limited_hours  % 256;
-
-				uart_tx_buf[20] = m_rPara.para.all_stop_id; 		//612	no use
-				*/
 
 				uart_tx_buf[7] = m_rPara.para.material_start;	  //613
 				
@@ -877,15 +869,7 @@ void uart_tx(void)
 				
 				uart_tx_buf[2] = m_rPara.para.current1_modify;	 //615
 
-				/*
-				uart_tx_buf[24] = m_rPara.para.para_seted_flag / 256; //616   no use
-				uart_tx_buf[25] = m_rPara.para.para_seted_flag	% 256;
-
-				uart_tx_buf[26] = m_rPara.para.addr_modbus;   //617   no use
-
-
-				uart_tx_buf[27] = m_rPara.para.baud_modbus;   //618   no use
-				*/
+		
 				uart_tx_buf[3] = m_rPara.para.mb_level_pulse;  //619  
 
 
@@ -894,10 +878,7 @@ void uart_tx(void)
 
 				uart_tx_buf[5] = m_rPara.para.current2_modify; //622
 
-				/*
-				uart_tx_buf[6] = m_rPara.para.used_hours / 256;  //623	 no use
-				uart_tx_buf[7] = m_rPara.para.used_hours  % 256;	
-				*/
+		
 				uart_tx_buf[6] = m_rPara.para.mmotor_cur2;	//949
 
 
@@ -922,8 +903,6 @@ void uart_tx(void)
 				
 				uart_tx_buf[7] = set_date;	//温度标价			
 
-
-				//uart_tx_buf[8] = temp_data[1]; //	 no use
 				uart_tx_buf[8] = m_rPara.para.all_stop_id;//	 635
 				break;
 			}
@@ -1119,38 +1098,9 @@ zan_temp=(m_material_value>>6)/5;
 		UDR0 = uart_tx_buf[0];
 		uart_tx_addr = 1;
 	}
-	/*else
-	{
-
-		if (temp1_flag_count > 50 )
-		{
 
 
 
-			temp1_flag_count  = 0;
-			uart_tx_buf[0] = 0x55;
-			uart_tx_buf[1] = 'A';
-			uart_tx_buf[2] = 'A';
-			uart_tx_buf[3] = 'A';
-			uart_tx_buf[4] = 'A';
-
-			send_uart1_to_computer(uart_tx_buf,5);
-
-		}
-	}*/
-
-/*
-	TRACE_STRING("usart  =");
-	
-	send_ulong_ascii(set_date ,TRUE);
-	if (set_date < 16)
-	{
-	for(i=0; i<7; i++)
-		{
-	send_ulong_ascii(uart_tx_buf[i] ,TRUE);
-		}
-		}
-*/
 
 }
 
