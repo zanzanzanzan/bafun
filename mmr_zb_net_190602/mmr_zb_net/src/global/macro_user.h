@@ -179,7 +179,7 @@ extern volatile unsigned long boot_time;
 //按键设置
 #define KEY_ZDJQD           40//主电机启动
 //#define KEY_MGLZ            41//磨辊离轧
-#define KEY_TJ              41//41//停机
+#define KEY_TJ              41//41//停机   本地
 #define KEY_ZDYX            42//自动运行
 //#define KEY_MGHZ            43//磨辊合轧
 #define KEY_MGLZHZ          43//磨辊离合轧
