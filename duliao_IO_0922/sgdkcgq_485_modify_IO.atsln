@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "sgdkcgq_485_modify_IO", "sgdkcgq_485_modify_IO\sgdkcgq_485_modify_IO.cproj", "{962C87B4-5EA1-445A-934B-F6EC1456115F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		default|AVR = default|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{962C87B4-5EA1-445A-934B-F6EC1456115F}.default|AVR.ActiveCfg = default|AVR
+		{962C87B4-5EA1-445A-934B-F6EC1456115F}.default|AVR.Build.0 = default|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "sgdkcgq_485_cry4m16m_pulse_ad", "sgdkcgq_485_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad.cproj", "{40CB8DBD-2120-4248-B200-40D2E371EB05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		default|AVR = default|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40CB8DBD-2120-4248-B200-40D2E371EB05}.default|AVR.ActiveCfg = default|AVR
+		{40CB8DBD-2120-4248-B200-40D2E371EB05}.default|AVR.Build.0 = default|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

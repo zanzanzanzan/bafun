@@ -1,0 +1,4 @@
+---- KEY_CJ_TEMP Matches (3 in 2 files) ----
+macro_user.h (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src\global) line 286 : #define KEY_CJ_TEMP           203//参数设定      nothing
+deal_key in scan_key.c (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src\module) : 				case KEY_CJ_TEMP://停机
+deal_key in scan_key.c (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src\module) : 				case KEY_CJ_TEMP://停机
