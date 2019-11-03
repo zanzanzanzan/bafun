@@ -1,0 +1,3524 @@
+
+sgdkcgq_485_cry4m16m_pulse_ad.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .apflag       00000008  000017f8  000017f8  000013c6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .eeprom       000001ea  00810080  00810080  000013ce  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .text         000012f2  00000000  00000000  000000d4  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  3 .data         00000000  00800060  000012f2  000013c6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  4 .bss          00000131  00800060  00800060  000013ce  2**0
+                  ALLOC
+  5 .comment      00000030  00000000  00000000  000015b8  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000120  00000000  00000000  000015e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00001a7e  00000000  00000000  00001708  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 000004d6  00000000  00000000  00003186  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   000007cb  00000000  00000000  0000365c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  0000035c  00000000  00000000  00003e28  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    00000731  00000000  00000000  00004184  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    0000146b  00000000  00000000  000048b5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000118  00000000  00000000  00005d20  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+       0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+       2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+       4:	2a c8       	rjmp	.-4012   	; 0xfffff05a <__eeprom_end+0xff7eedf0>
+       6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+       8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+       a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+       c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+       e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+      10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+      12:	d5 c7       	rjmp	.+4010   	; 0xfbe <__vector_9>
+      14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+      16:	76 c8       	rjmp	.-3860   	; 0xfffff104 <__eeprom_end+0xff7eee9a>
+      18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+      1a:	4b c8       	rjmp	.-3946   	; 0xfffff0b2 <__eeprom_end+0xff7eee48>
+      1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+      1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+      20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+      22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+      24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+      26:	11 24       	eor	r1, r1
+      28:	1f be       	out	0x3f, r1	; 63
+      2a:	cf e5       	ldi	r28, 0x5F	; 95
+      2c:	d4 e0       	ldi	r29, 0x04	; 4
+      2e:	de bf       	out	0x3e, r29	; 62
+      30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+      32:	10 e0       	ldi	r17, 0x00	; 0
+      34:	a0 e6       	ldi	r26, 0x60	; 96
+      36:	b0 e0       	ldi	r27, 0x00	; 0
+      38:	e2 ef       	ldi	r30, 0xF2	; 242
+      3a:	f2 e1       	ldi	r31, 0x12	; 18
+      3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+      3e:	05 90       	lpm	r0, Z+
+      40:	0d 92       	st	X+, r0
+      42:	a0 36       	cpi	r26, 0x60	; 96
+      44:	b1 07       	cpc	r27, r17
+      46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+      48:	21 e0       	ldi	r18, 0x01	; 1
+      4a:	a0 e6       	ldi	r26, 0x60	; 96
+      4c:	b0 e0       	ldi	r27, 0x00	; 0
+      4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+      50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+      52:	a1 39       	cpi	r26, 0x91	; 145
+      54:	b2 07       	cpc	r27, r18
+      56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+      58:	14 d7       	rcall	.+3624   	; 0xe82 <main>
+      5a:	49 c9       	rjmp	.-3438   	; 0xfffff2ee <__eeprom_end+0xff7ef084>
+
+0000005c <__bad_interrupt>:
+      5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <SetTimer>:
+//extern LCD_BUF_PACKET lcd_dis_buf;
+extern unsigned long boot_time;
+//
+/////////////////////////////////////////////
+unsigned short SetTimer(unsigned short id,unsigned long ms,signed char retry)
+{	
+      5e:	0f 93       	push	r16
+      60:	1f 93       	push	r17
+      62:	cf 93       	push	r28
+      64:	c2 2f       	mov	r28, r18
+	//软件定时器细粒度由主时钟定时器细粒度决定，软件定时器定时时间大于
+	//实际设置的时间，但一般不会多于一个主时钟定时器的细粒度。如本项目
+	//中，软件定时器的定时时间一般不会比设置值多1ms。
+	unsigned char i;
+	//
+	if(SOFT_TIMER_ERROR == id)
+      66:	00 97       	sbiw	r24, 0x00	; 0
+      68:	09 f4       	brne	.+2      	; 0x6c <SetTimer+0xe>
+      6a:	69 c0       	rjmp	.+210    	; 0x13e <SetTimer+0xe0>
+	{
+		return SOFT_TIMER_ERROR;
+	}
+	if(0 == ms)
+      6c:	41 15       	cp	r20, r1
+      6e:	51 05       	cpc	r21, r1
+      70:	61 05       	cpc	r22, r1
+      72:	71 05       	cpc	r23, r1
+      74:	09 f4       	brne	.+2      	; 0x78 <SetTimer+0x1a>
+      76:	63 c0       	rjmp	.+198    	; 0x13e <SetTimer+0xe0>
+      78:	20 e0       	ldi	r18, 0x00	; 0
+      7a:	30 e0       	ldi	r19, 0x00	; 0
+	}
+	//
+	//搜索id号匹配的软件定时器
+	for(i=0; i<SOFT_TIMER_NUM; i++)
+	{
+		if(soft_timer[i].id == id)
+      7c:	1c e0       	ldi	r17, 0x0C	; 12
+      7e:	12 9f       	mul	r17, r18
+      80:	f0 01       	movw	r30, r0
+      82:	13 9f       	mul	r17, r19
+      84:	f0 0d       	add	r31, r0
+      86:	11 24       	eor	r1, r1
+      88:	ea 59       	subi	r30, 0x9A	; 154
+      8a:	ff 4f       	sbci	r31, 0xFF	; 255
+      8c:	a0 81       	ld	r26, Z
+      8e:	b1 81       	ldd	r27, Z+1	; 0x01
+      90:	a8 17       	cp	r26, r24
+      92:	b9 07       	cpc	r27, r25
+      94:	e1 f4       	brne	.+56     	; 0xce <SetTimer+0x70>
+		{
+			soft_timer[i].enable = TRUE;
+      96:	81 e0       	ldi	r24, 0x01	; 1
+      98:	83 87       	std	Z+11, r24	; 0x0b
+			soft_timer[i].ms = ms;
+      9a:	42 83       	std	Z+2, r20	; 0x02
+      9c:	53 83       	std	Z+3, r21	; 0x03
+      9e:	64 83       	std	Z+4, r22	; 0x04
+      a0:	75 83       	std	Z+5, r23	; 0x05
+			soft_timer[i].overtime = soft_timer[i].ms + boot_time;
+      a2:	42 81       	ldd	r20, Z+2	; 0x02
+      a4:	53 81       	ldd	r21, Z+3	; 0x03
+      a6:	64 81       	ldd	r22, Z+4	; 0x04
+      a8:	75 81       	ldd	r23, Z+5	; 0x05
+      aa:	00 91 86 01 	lds	r16, 0x0186
+      ae:	10 91 87 01 	lds	r17, 0x0187
+      b2:	20 91 88 01 	lds	r18, 0x0188
+      b6:	30 91 89 01 	lds	r19, 0x0189
+      ba:	40 0f       	add	r20, r16
+      bc:	51 1f       	adc	r21, r17
+      be:	62 1f       	adc	r22, r18
+      c0:	73 1f       	adc	r23, r19
+      c2:	46 83       	std	Z+6, r20	; 0x06
+      c4:	57 83       	std	Z+7, r21	; 0x07
+      c6:	60 87       	std	Z+8, r22	; 0x08
+      c8:	71 87       	std	Z+9, r23	; 0x09
+			soft_timer[i].retry = retry;
+      ca:	c2 87       	std	Z+10, r28	; 0x0a
+			//
+			return id;
+      cc:	3a c0       	rjmp	.+116    	; 0x142 <SetTimer+0xe4>
+      ce:	2f 5f       	subi	r18, 0xFF	; 255
+      d0:	3f 4f       	sbci	r19, 0xFF	; 255
+	{
+		return SOFT_TIMER_ERROR;
+	}
+	//
+	//搜索id号匹配的软件定时器
+	for(i=0; i<SOFT_TIMER_NUM; i++)
+      d2:	28 30       	cpi	r18, 0x08	; 8
+      d4:	31 05       	cpc	r19, r1
+      d6:	99 f6       	brne	.-90     	; 0x7e <SetTimer+0x20>
+      d8:	20 e0       	ldi	r18, 0x00	; 0
+      da:	30 e0       	ldi	r19, 0x00	; 0
+	}
+	//
+	//id号匹配的软件定时器没有找到，搜索空闲的软件定时器
+	for(i=0; i<SOFT_TIMER_NUM; i++)
+	{
+		if(FALSE == soft_timer[i].enable)
+      dc:	1c e0       	ldi	r17, 0x0C	; 12
+      de:	12 9f       	mul	r17, r18
+      e0:	f0 01       	movw	r30, r0
+      e2:	13 9f       	mul	r17, r19
+      e4:	f0 0d       	add	r31, r0
+      e6:	11 24       	eor	r1, r1
+      e8:	ea 59       	subi	r30, 0x9A	; 154
+      ea:	ff 4f       	sbci	r31, 0xFF	; 255
+      ec:	df 01       	movw	r26, r30
+      ee:	1b 96       	adiw	r26, 0x0b	; 11
+      f0:	03 85       	ldd	r16, Z+11	; 0x0b
+      f2:	01 11       	cpse	r16, r1
+      f4:	1f c0       	rjmp	.+62     	; 0x134 <SetTimer+0xd6>
+		{
+			soft_timer[i].enable = TRUE;
+      f6:	21 e0       	ldi	r18, 0x01	; 1
+      f8:	2c 93       	st	X, r18
+			soft_timer[i].id = id;
+      fa:	91 83       	std	Z+1, r25	; 0x01
+      fc:	80 83       	st	Z, r24
+			soft_timer[i].ms = ms;
+      fe:	42 83       	std	Z+2, r20	; 0x02
+     100:	53 83       	std	Z+3, r21	; 0x03
+     102:	64 83       	std	Z+4, r22	; 0x04
+     104:	75 83       	std	Z+5, r23	; 0x05
+			soft_timer[i].overtime = soft_timer[i].ms + boot_time;
+     106:	42 81       	ldd	r20, Z+2	; 0x02
+     108:	53 81       	ldd	r21, Z+3	; 0x03
+     10a:	64 81       	ldd	r22, Z+4	; 0x04
+     10c:	75 81       	ldd	r23, Z+5	; 0x05
+     10e:	00 91 86 01 	lds	r16, 0x0186
+     112:	10 91 87 01 	lds	r17, 0x0187
+     116:	20 91 88 01 	lds	r18, 0x0188
+     11a:	30 91 89 01 	lds	r19, 0x0189
+     11e:	40 0f       	add	r20, r16
+     120:	51 1f       	adc	r21, r17
+     122:	62 1f       	adc	r22, r18
+     124:	73 1f       	adc	r23, r19
+     126:	46 83       	std	Z+6, r20	; 0x06
+     128:	57 83       	std	Z+7, r21	; 0x07
+     12a:	60 87       	std	Z+8, r22	; 0x08
+     12c:	71 87       	std	Z+9, r23	; 0x09
+			soft_timer[i].retry = retry;
+     12e:	c2 87       	std	Z+10, r28	; 0x0a
+			//
+			return id;			
+     130:	dc 01       	movw	r26, r24
+     132:	07 c0       	rjmp	.+14     	; 0x142 <SetTimer+0xe4>
+     134:	2f 5f       	subi	r18, 0xFF	; 255
+     136:	3f 4f       	sbci	r19, 0xFF	; 255
+			return id;
+		}
+	}
+	//
+	//id号匹配的软件定时器没有找到，搜索空闲的软件定时器
+	for(i=0; i<SOFT_TIMER_NUM; i++)
+     138:	28 30       	cpi	r18, 0x08	; 8
+     13a:	31 05       	cpc	r19, r1
+     13c:	81 f6       	brne	.-96     	; 0xde <SetTimer+0x80>
+	//中，软件定时器的定时时间一般不会比设置值多1ms。
+	unsigned char i;
+	//
+	if(SOFT_TIMER_ERROR == id)
+	{
+		return SOFT_TIMER_ERROR;
+     13e:	a0 e0       	ldi	r26, 0x00	; 0
+     140:	b0 e0       	ldi	r27, 0x00	; 0
+			return id;			
+		}
+	}
+	//
+	return SOFT_TIMER_ERROR;
+}
+     142:	cd 01       	movw	r24, r26
+     144:	cf 91       	pop	r28
+     146:	1f 91       	pop	r17
+     148:	0f 91       	pop	r16
+     14a:	08 95       	ret
+
+0000014c <timer_run>:
+	//
+	return SOFT_TIMER_ERROR;
+}
+/////////////////////////////////////////////
+void timer_run(void)
+{
+     14c:	cf 93       	push	r28
+     14e:	df 93       	push	r29
+	unsigned char id;
+	//
+	//避免初始化异常
+	soft_timer_id %= SOFT_TIMER_NUM;
+     150:	80 91 64 00 	lds	r24, 0x0064
+     154:	90 91 65 00 	lds	r25, 0x0065
+     158:	87 70       	andi	r24, 0x07	; 7
+     15a:	99 27       	eor	r25, r25
+     15c:	90 93 65 00 	sts	0x0065, r25
+     160:	80 93 64 00 	sts	0x0064, r24
+	//
+	for(id=0; id<SOFT_TIMER_NUM; id++)
+	{
+		if(TRUE == soft_timer[soft_timer_id].enable)
+		{
+			if(boot_time >= soft_timer[soft_timer_id].overtime)
+     164:	80 91 86 01 	lds	r24, 0x0186
+     168:	90 91 87 01 	lds	r25, 0x0187
+     16c:	a0 91 88 01 	lds	r26, 0x0188
+     170:	b0 91 89 01 	lds	r27, 0x0189
+     174:	c8 e0       	ldi	r28, 0x08	; 8
+	//避免初始化异常
+	soft_timer_id %= SOFT_TIMER_NUM;
+	//
+	for(id=0; id<SOFT_TIMER_NUM; id++)
+	{
+		if(TRUE == soft_timer[soft_timer_id].enable)
+     176:	dc e0       	ldi	r29, 0x0C	; 12
+     178:	40 91 64 00 	lds	r20, 0x0064
+     17c:	50 91 65 00 	lds	r21, 0x0065
+     180:	2c e0       	ldi	r18, 0x0C	; 12
+     182:	d4 9f       	mul	r29, r20
+     184:	f0 01       	movw	r30, r0
+     186:	d5 9f       	mul	r29, r21
+     188:	f0 0d       	add	r31, r0
+     18a:	11 24       	eor	r1, r1
+     18c:	ea 59       	subi	r30, 0x9A	; 154
+     18e:	ff 4f       	sbci	r31, 0xFF	; 255
+     190:	33 85       	ldd	r19, Z+11	; 0x0b
+     192:	31 30       	cpi	r19, 0x01	; 1
+     194:	09 f0       	breq	.+2      	; 0x198 <timer_run+0x4c>
+     196:	a7 c0       	rjmp	.+334    	; 0x2e6 <timer_run+0x19a>
+		{
+			if(boot_time >= soft_timer[soft_timer_id].overtime)
+     198:	40 91 64 00 	lds	r20, 0x0064
+     19c:	50 91 65 00 	lds	r21, 0x0065
+     1a0:	d4 9f       	mul	r29, r20
+     1a2:	f0 01       	movw	r30, r0
+     1a4:	d5 9f       	mul	r29, r21
+     1a6:	f0 0d       	add	r31, r0
+     1a8:	11 24       	eor	r1, r1
+     1aa:	ea 59       	subi	r30, 0x9A	; 154
+     1ac:	ff 4f       	sbci	r31, 0xFF	; 255
+     1ae:	46 81       	ldd	r20, Z+6	; 0x06
+     1b0:	57 81       	ldd	r21, Z+7	; 0x07
+     1b2:	60 85       	ldd	r22, Z+8	; 0x08
+     1b4:	71 85       	ldd	r23, Z+9	; 0x09
+     1b6:	84 17       	cp	r24, r20
+     1b8:	95 07       	cpc	r25, r21
+     1ba:	a6 07       	cpc	r26, r22
+     1bc:	b7 07       	cpc	r27, r23
+     1be:	08 f4       	brcc	.+2      	; 0x1c2 <timer_run+0x76>
+     1c0:	92 c0       	rjmp	.+292    	; 0x2e6 <timer_run+0x19a>
+			{
+				//根据重试参数判断是否关闭定时器
+				if(-1 != soft_timer[soft_timer_id].retry)
+     1c2:	80 91 64 00 	lds	r24, 0x0064
+     1c6:	90 91 65 00 	lds	r25, 0x0065
+     1ca:	28 9f       	mul	r18, r24
+     1cc:	f0 01       	movw	r30, r0
+     1ce:	29 9f       	mul	r18, r25
+     1d0:	f0 0d       	add	r31, r0
+     1d2:	11 24       	eor	r1, r1
+     1d4:	ea 59       	subi	r30, 0x9A	; 154
+     1d6:	ff 4f       	sbci	r31, 0xFF	; 255
+     1d8:	82 85       	ldd	r24, Z+10	; 0x0a
+     1da:	8f 3f       	cpi	r24, 0xFF	; 255
+     1dc:	49 f1       	breq	.+82     	; 0x230 <timer_run+0xe4>
+				{
+					//重试次数为-1代表一直运行
+					if(soft_timer[soft_timer_id].retry > 0)
+     1de:	80 91 64 00 	lds	r24, 0x0064
+     1e2:	90 91 65 00 	lds	r25, 0x0065
+     1e6:	28 9f       	mul	r18, r24
+     1e8:	f0 01       	movw	r30, r0
+     1ea:	29 9f       	mul	r18, r25
+     1ec:	f0 0d       	add	r31, r0
+     1ee:	11 24       	eor	r1, r1
+     1f0:	ea 59       	subi	r30, 0x9A	; 154
+     1f2:	ff 4f       	sbci	r31, 0xFF	; 255
+     1f4:	82 85       	ldd	r24, Z+10	; 0x0a
+     1f6:	18 16       	cp	r1, r24
+     1f8:	7c f4       	brge	.+30     	; 0x218 <timer_run+0xcc>
+					{
+						//减重试次数
+						soft_timer[soft_timer_id].retry--;
+     1fa:	80 91 64 00 	lds	r24, 0x0064
+     1fe:	90 91 65 00 	lds	r25, 0x0065
+     202:	28 9f       	mul	r18, r24
+     204:	f0 01       	movw	r30, r0
+     206:	29 9f       	mul	r18, r25
+     208:	f0 0d       	add	r31, r0
+     20a:	11 24       	eor	r1, r1
+     20c:	ea 59       	subi	r30, 0x9A	; 154
+     20e:	ff 4f       	sbci	r31, 0xFF	; 255
+     210:	82 85       	ldd	r24, Z+10	; 0x0a
+     212:	81 50       	subi	r24, 0x01	; 1
+     214:	82 87       	std	Z+10, r24	; 0x0a
+     216:	0c c0       	rjmp	.+24     	; 0x230 <timer_run+0xe4>
+					}
+					else
+					{
+						//关闭定时器
+						soft_timer[soft_timer_id].enable = FALSE;
+     218:	80 91 64 00 	lds	r24, 0x0064
+     21c:	90 91 65 00 	lds	r25, 0x0065
+     220:	28 9f       	mul	r18, r24
+     222:	f0 01       	movw	r30, r0
+     224:	29 9f       	mul	r18, r25
+     226:	f0 0d       	add	r31, r0
+     228:	11 24       	eor	r1, r1
+     22a:	ea 59       	subi	r30, 0x9A	; 154
+     22c:	ff 4f       	sbci	r31, 0xFF	; 255
+     22e:	13 86       	std	Z+11, r1	; 0x0b
+					}					
+				}
+				//
+				//在执行定时器服务程序的过程中能够再次设置定时器				
+				OnTimer(soft_timer[soft_timer_id].id);//定时器溢出处理
+     230:	80 91 64 00 	lds	r24, 0x0064
+     234:	90 91 65 00 	lds	r25, 0x0065
+     238:	cc e0       	ldi	r28, 0x0C	; 12
+     23a:	c8 9f       	mul	r28, r24
+     23c:	f0 01       	movw	r30, r0
+     23e:	c9 9f       	mul	r28, r25
+     240:	f0 0d       	add	r31, r0
+     242:	11 24       	eor	r1, r1
+     244:	ea 59       	subi	r30, 0x9A	; 154
+     246:	ff 4f       	sbci	r31, 0xFF	; 255
+     248:	80 81       	ld	r24, Z
+     24a:	91 81       	ldd	r25, Z+1	; 0x01
+     24c:	7b d4       	rcall	.+2294   	; 0xb44 <OnTimer>
+				//
+				//定时器服务程序运行时间不算在定时时间内
+				if(TRUE == soft_timer[soft_timer_id].enable)
+     24e:	80 91 64 00 	lds	r24, 0x0064
+     252:	90 91 65 00 	lds	r25, 0x0065
+     256:	c8 9f       	mul	r28, r24
+     258:	f0 01       	movw	r30, r0
+     25a:	c9 9f       	mul	r28, r25
+     25c:	f0 0d       	add	r31, r0
+     25e:	11 24       	eor	r1, r1
+     260:	ea 59       	subi	r30, 0x9A	; 154
+     262:	ff 4f       	sbci	r31, 0xFF	; 255
+     264:	83 85       	ldd	r24, Z+11	; 0x0b
+     266:	81 30       	cpi	r24, 0x01	; 1
+     268:	51 f5       	brne	.+84     	; 0x2be <timer_run+0x172>
+				{
+					//定时继续运行，重置定时器时间
+					soft_timer[soft_timer_id].overtime = soft_timer[soft_timer_id].ms + boot_time;
+     26a:	20 91 64 00 	lds	r18, 0x0064
+     26e:	30 91 65 00 	lds	r19, 0x0065
+     272:	80 91 64 00 	lds	r24, 0x0064
+     276:	90 91 65 00 	lds	r25, 0x0065
+     27a:	c8 9f       	mul	r28, r24
+     27c:	f0 01       	movw	r30, r0
+     27e:	c9 9f       	mul	r28, r25
+     280:	f0 0d       	add	r31, r0
+     282:	11 24       	eor	r1, r1
+     284:	ea 59       	subi	r30, 0x9A	; 154
+     286:	ff 4f       	sbci	r31, 0xFF	; 255
+     288:	82 81       	ldd	r24, Z+2	; 0x02
+     28a:	93 81       	ldd	r25, Z+3	; 0x03
+     28c:	a4 81       	ldd	r26, Z+4	; 0x04
+     28e:	b5 81       	ldd	r27, Z+5	; 0x05
+     290:	40 91 86 01 	lds	r20, 0x0186
+     294:	50 91 87 01 	lds	r21, 0x0187
+     298:	60 91 88 01 	lds	r22, 0x0188
+     29c:	70 91 89 01 	lds	r23, 0x0189
+     2a0:	84 0f       	add	r24, r20
+     2a2:	95 1f       	adc	r25, r21
+     2a4:	a6 1f       	adc	r26, r22
+     2a6:	b7 1f       	adc	r27, r23
+     2a8:	c2 9f       	mul	r28, r18
+     2aa:	f0 01       	movw	r30, r0
+     2ac:	c3 9f       	mul	r28, r19
+     2ae:	f0 0d       	add	r31, r0
+     2b0:	11 24       	eor	r1, r1
+     2b2:	ea 59       	subi	r30, 0x9A	; 154
+     2b4:	ff 4f       	sbci	r31, 0xFF	; 255
+     2b6:	86 83       	std	Z+6, r24	; 0x06
+     2b8:	97 83       	std	Z+7, r25	; 0x07
+     2ba:	a0 87       	std	Z+8, r26	; 0x08
+     2bc:	b1 87       	std	Z+9, r27	; 0x09
+				}
+				//
+				soft_timer_id++;
+     2be:	80 91 64 00 	lds	r24, 0x0064
+     2c2:	90 91 65 00 	lds	r25, 0x0065
+     2c6:	01 96       	adiw	r24, 0x01	; 1
+     2c8:	90 93 65 00 	sts	0x0065, r25
+     2cc:	80 93 64 00 	sts	0x0064, r24
+				soft_timer_id %= SOFT_TIMER_NUM;
+     2d0:	80 91 64 00 	lds	r24, 0x0064
+     2d4:	90 91 65 00 	lds	r25, 0x0065
+     2d8:	87 70       	andi	r24, 0x07	; 7
+     2da:	99 27       	eor	r25, r25
+     2dc:	90 93 65 00 	sts	0x0065, r25
+     2e0:	80 93 64 00 	sts	0x0064, r24
+				//
+				return;//执行了一次有效的定时服务后退出，等待下次扫描
+     2e4:	17 c0       	rjmp	.+46     	; 0x314 <timer_run+0x1c8>
+			}
+		}
+		//
+		soft_timer_id++;
+     2e6:	20 91 64 00 	lds	r18, 0x0064
+     2ea:	30 91 65 00 	lds	r19, 0x0065
+     2ee:	2f 5f       	subi	r18, 0xFF	; 255
+     2f0:	3f 4f       	sbci	r19, 0xFF	; 255
+     2f2:	30 93 65 00 	sts	0x0065, r19
+     2f6:	20 93 64 00 	sts	0x0064, r18
+		soft_timer_id %= SOFT_TIMER_NUM;	
+     2fa:	20 91 64 00 	lds	r18, 0x0064
+     2fe:	30 91 65 00 	lds	r19, 0x0065
+     302:	27 70       	andi	r18, 0x07	; 7
+     304:	33 27       	eor	r19, r19
+     306:	30 93 65 00 	sts	0x0065, r19
+     30a:	20 93 64 00 	sts	0x0064, r18
+     30e:	c1 50       	subi	r28, 0x01	; 1
+	unsigned char id;
+	//
+	//避免初始化异常
+	soft_timer_id %= SOFT_TIMER_NUM;
+	//
+	for(id=0; id<SOFT_TIMER_NUM; id++)
+     310:	09 f0       	breq	.+2      	; 0x314 <timer_run+0x1c8>
+     312:	32 cf       	rjmp	.-412    	; 0x178 <timer_run+0x2c>
+		}
+		//
+		soft_timer_id++;
+		soft_timer_id %= SOFT_TIMER_NUM;	
+	}		
+}
+     314:	df 91       	pop	r29
+     316:	cf 91       	pop	r28
+     318:	08 95       	ret
+
+0000031a <check_bootloader>:
+	1100	kkkk	kkkk	kkkk
+	*/
+	//
+	unsigned char tmp[4];
+	//
+	apli_id[0]; //纯粹为了避免编译器优化掉apli_id数组
+     31a:	80 91 f8 17 	lds	r24, 0x17F8
+	//
+	tmp[0] = pgm_read_byte(0x1801)&0xf0;
+     31e:	e1 e0       	ldi	r30, 0x01	; 1
+     320:	f8 e1       	ldi	r31, 0x18	; 24
+     322:	84 91       	lpm	r24, Z
+	tmp[1] = pgm_read_byte(0x1805)&0xf0;
+     324:	e5 e0       	ldi	r30, 0x05	; 5
+     326:	f8 e1       	ldi	r31, 0x18	; 24
+     328:	e4 91       	lpm	r30, Z
+	//
+	unsigned char tmp[4];
+	//
+	apli_id[0]; //纯粹为了避免编译器优化掉apli_id数组
+	//
+	tmp[0] = pgm_read_byte(0x1801)&0xf0;
+     32a:	80 7f       	andi	r24, 0xF0	; 240
+	tmp[1] = pgm_read_byte(0x1805)&0xf0;
+	if((0xc0!=tmp[0]) || (0xc0!=tmp[1]))
+     32c:	80 3c       	cpi	r24, 0xC0	; 192
+     32e:	19 f4       	brne	.+6      	; 0x336 <check_bootloader+0x1c>
+	unsigned char tmp[4];
+	//
+	apli_id[0]; //纯粹为了避免编译器优化掉apli_id数组
+	//
+	tmp[0] = pgm_read_byte(0x1801)&0xf0;
+	tmp[1] = pgm_read_byte(0x1805)&0xf0;
+     330:	e0 7f       	andi	r30, 0xF0	; 240
+	if((0xc0!=tmp[0]) || (0xc0!=tmp[1]))
+     332:	e0 3c       	cpi	r30, 0xC0	; 192
+     334:	a1 f0       	breq	.+40     	; 0x35e <check_bootloader+0x44>
+	{
+		//bootloader missed
+		//
+		DEBUG_STRING("bootloader missed\r\n\0");
+		//
+		wdt_reset(); //检测到没有引导软件，应用软件不执行
+     336:	a8 95       	wdr
+		wdt_disable();
+     338:	88 e1       	ldi	r24, 0x18	; 24
+     33a:	0f b6       	in	r0, 0x3f	; 63
+     33c:	f8 94       	cli
+     33e:	80 93 41 00 	sts	0x0041, r24
+     342:	10 92 41 00 	sts	0x0041, r1
+     346:	0f be       	out	0x3f, r0	; 63
+		//
+		for(;;) //没有bootloader
+		{
+			set_sleep_mode(SLEEP_MODE_IDLE);
+     348:	85 b7       	in	r24, 0x35	; 53
+     34a:	8f 78       	andi	r24, 0x8F	; 143
+     34c:	85 bf       	out	0x35, r24	; 53
+			sleep_enable();
+     34e:	85 b7       	in	r24, 0x35	; 53
+     350:	80 68       	ori	r24, 0x80	; 128
+     352:	85 bf       	out	0x35, r24	; 53
+			sleep_cpu();
+     354:	88 95       	sleep
+			sleep_disable();
+     356:	85 b7       	in	r24, 0x35	; 53
+     358:	8f 77       	andi	r24, 0x7F	; 127
+     35a:	85 bf       	out	0x35, r24	; 53
+     35c:	f5 cf       	rjmp	.-22     	; 0x348 <check_bootloader+0x2e>
+		}
+	}
+	//
+	asm volatile("nop");
+     35e:	00 00       	nop
+     360:	08 95       	ret
+
+00000362 <hardward_init>:
+}
+////////////////////////////////////////////////////////////
+void hardward_init(void)
+{
+	//硬件初始化程序,设置固定的端口方向,串口属性,AD属性等
+	wdt_disable();
+     362:	88 e1       	ldi	r24, 0x18	; 24
+     364:	0f b6       	in	r0, 0x3f	; 63
+     366:	f8 94       	cli
+     368:	80 93 41 00 	sts	0x0041, r24
+     36c:	10 92 41 00 	sts	0x0041, r1
+     370:	0f be       	out	0x3f, r0	; 63
+	//I/O设置
+	PORTB=0;//先设置所有的口为高阻
+     372:	18 ba       	out	0x18, r1	; 24
+	//
+    DDRB = _BV(PB1)|_BV(PB2);
+     374:	86 e0       	ldi	r24, 0x06	; 6
+     376:	87 bb       	out	0x17, r24	; 23
+    PORTD = _BV(PD2)|_BV(PD3);
+     378:	8c e0       	ldi	r24, 0x0C	; 12
+     37a:	82 bb       	out	0x12, r24	; 18
+	DDRD = _BV(PD7);//根据需要设置输出口
+     37c:	90 e8       	ldi	r25, 0x80	; 128
+     37e:	91 bb       	out	0x11, r25	; 17
+    PORTC = _BV(PC2)|_BV(PC3);
+     380:	85 bb       	out	0x15, r24	; 21
+    DDRC = _BV(PC4)|_BV(PC5);
+     382:	80 e3       	ldi	r24, 0x30	; 48
+     384:	84 bb       	out	0x14, r24	; 20
+	//定时器0
+	TCCR0 = 0x03;//64分频
+     386:	83 e0       	ldi	r24, 0x03	; 3
+     388:	83 bf       	out	0x33, r24	; 51
+	{
+		TCNT0 = 255-62;//4MHz时钟,计数62次,约1毫秒
+	}
+	#elif F_CPU == F_16M
+	{
+		TCNT0 = 255-250;//16MHz时钟,计数250次,约1毫秒
+     38a:	85 e0       	ldi	r24, 0x05	; 5
+     38c:	82 bf       	out	0x32, r24	; 50
+	#else
+	{
+		#error "F_CPU error"
+	}
+	#endif
+	TIMSK |=_BV(TOIE0);//定时器0溢出中断使能
+     38e:	89 b7       	in	r24, 0x39	; 57
+     390:	81 60       	ori	r24, 0x01	; 1
+     392:	89 bf       	out	0x39, r24	; 57
+	//定时器1
+	TCCR1A = 0xf2;//oc1a,oc1b匹配时置1,达到TOP时清零
+     394:	82 ef       	ldi	r24, 0xF2	; 242
+     396:	8f bd       	out	0x2f, r24	; 47
+	TCCR1B = 0x19;//时钟不分频
+     398:	89 e1       	ldi	r24, 0x19	; 25
+     39a:	8e bd       	out	0x2e, r24	; 46
+	ICR1 = PWM_TOP;//TOP//4kHz
+     39c:	80 e9       	ldi	r24, 0x90	; 144
+     39e:	91 e0       	ldi	r25, 0x01	; 1
+     3a0:	97 bd       	out	0x27, r25	; 39
+     3a2:	86 bd       	out	0x26, r24	; 38
+    OCR1A = PWM_TOP/2;//电压输出初始占空比50%,2.5v
+     3a4:	88 ec       	ldi	r24, 0xC8	; 200
+     3a6:	90 e0       	ldi	r25, 0x00	; 0
+     3a8:	9b bd       	out	0x2b, r25	; 43
+     3aa:	8a bd       	out	0x2a, r24	; 42
+    OCR1B = PWM_LOW;//触发脉冲,占空比LOW_PULSE/PWM_TOP(低电平时间)
+     3ac:	84 e0       	ldi	r24, 0x04	; 4
+     3ae:	90 e0       	ldi	r25, 0x00	; 0
+     3b0:	99 bd       	out	0x29, r25	; 41
+     3b2:	88 bd       	out	0x28, r24	; 40
+	ADMUX |= ICM7555_AD;
+	ADCSRA = 0x8f;//1000 1111//允许ad转换,单次转换方式,允许中断,128分频
+	#endif
+	//
+    //外中断
+    MCUCR &= 0xf0;
+     3b4:	85 b7       	in	r24, 0x35	; 53
+     3b6:	80 7f       	andi	r24, 0xF0	; 240
+     3b8:	85 bf       	out	0x35, r24	; 53
+    MCUCR |= 0x08;//外中断1下降沿触发
+     3ba:	85 b7       	in	r24, 0x35	; 53
+     3bc:	88 60       	ori	r24, 0x08	; 8
+     3be:	85 bf       	out	0x35, r24	; 53
+    GICR &= 0x3f;
+     3c0:	8b b7       	in	r24, 0x3b	; 59
+     3c2:	8f 73       	andi	r24, 0x3F	; 63
+     3c4:	8b bf       	out	0x3b, r24	; 59
+    GICR |= _BV(INT1);//外中断1使能
+     3c6:	8b b7       	in	r24, 0x3b	; 59
+     3c8:	80 68       	ori	r24, 0x80	; 128
+     3ca:	8b bf       	out	0x3b, r24	; 59
+	//
+	#if USART_TEST == FALSE
+	{
+		//38461.5 Bd //0.2%
+		UBRRH = 0;
+     3cc:	10 bc       	out	0x20, r1	; 32
+		{
+			UBRRL = 12;
+		}
+		#elif F_CPU == F_16M
+		{
+			UBRRL = 51;
+     3ce:	83 e3       	ldi	r24, 0x33	; 51
+     3d0:	89 b9       	out	0x09, r24	; 9
+		#else
+		{
+			#error "F_CPU error"
+		}
+		#endif
+		UCSRA = (1<<U2X);//波特率分频因子从16降到8
+     3d2:	82 e0       	ldi	r24, 0x02	; 2
+     3d4:	8b b9       	out	0x0b, r24	; 11
+		UCSRB = (1<<RXEN)|(1<<TXEN)|(1<<RXCIE)|(1<<TXCIE);//接收和发送中断使能
+     3d6:	88 ed       	ldi	r24, 0xD8	; 216
+     3d8:	8a b9       	out	0x0a, r24	; 10
+		UCSRC = (1<<URSEL)|(3<<UCSZ0);//8N1
+     3da:	86 e8       	ldi	r24, 0x86	; 134
+     3dc:	80 bd       	out	0x20, r24	; 32
+		b485en = 0;//接收使能,发送禁止
+     3de:	97 98       	cbi	0x12, 7	; 18
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+     3e0:	8f e1       	ldi	r24, 0x1F	; 31
+     3e2:	9e e4       	ldi	r25, 0x4E	; 78
+     3e4:	01 97       	sbiw	r24, 0x01	; 1
+     3e6:	f1 f7       	brne	.-4      	; 0x3e4 <hardward_init+0x82>
+     3e8:	00 c0       	rjmp	.+0      	; 0x3ea <hardward_init+0x88>
+     3ea:	00 00       	nop
+     3ec:	08 95       	ret
+
+000003ee <softward_init>:
+	_delay_ms(5);
+}
+////////////////////////////////////////////////////////////////
+void softward_init(void)
+{
+    MCUCR &= 0x0f;//休眠禁止,空闲模式
+     3ee:	85 b7       	in	r24, 0x35	; 53
+     3f0:	8f 70       	andi	r24, 0x0F	; 15
+     3f2:	85 bf       	out	0x35, r24	; 53
+    //
+    ms1_counter = 0;
+     3f4:	10 92 65 01 	sts	0x0165, r1
+    ms10_counter = 0;
+     3f8:	10 92 66 01 	sts	0x0166, r1
+    ms100_counter = 0;
+     3fc:	10 92 8c 01 	sts	0x018C, r1
+    s1_counter = 0;
+     400:	10 92 8a 01 	sts	0x018A, r1
+    m_ms = 0;
+     404:	10 92 68 01 	sts	0x0168, r1
+     408:	10 92 67 01 	sts	0x0167, r1
+    m_minute = 0;
+     40c:	10 92 6f 01 	sts	0x016F, r1
+     410:	10 92 6e 01 	sts	0x016E, r1
+	//
+    m_pulse_counter = 0;//检测脉冲个数
+     414:	10 92 90 01 	sts	0x0190, r1
+     418:	10 92 8f 01 	sts	0x018F, r1
+    m_pulse_value.ml = 0;//检测脉冲宽度值
+     41c:	10 92 d0 00 	sts	0x00D0, r1
+     420:	10 92 d1 00 	sts	0x00D1, r1
+     424:	10 92 d2 00 	sts	0x00D2, r1
+     428:	10 92 d3 00 	sts	0x00D3, r1
+    //
+	m_cgq_ack=0;
+     42c:	10 92 6b 01 	sts	0x016B, r1
+    //
+    m_pulse_value_bak.ms[0] = PULSE_TOP/2;
+     430:	80 e0       	ldi	r24, 0x00	; 0
+     432:	9b e4       	ldi	r25, 0x4B	; 75
+     434:	90 93 c9 00 	sts	0x00C9, r25
+     438:	80 93 c8 00 	sts	0x00C8, r24
+    m_pulse_value_bak.ms[1] = PULSE_TOP/2;
+     43c:	90 93 cb 00 	sts	0x00CB, r25
+     440:	80 93 ca 00 	sts	0x00CA, r24
+    m_pulse_value_bak.ms[2] = PULSE_TOP/2;
+     444:	90 93 cd 00 	sts	0x00CD, r25
+     448:	80 93 cc 00 	sts	0x00CC, r24
+    m_pulse_value_bak.ms[3] = PULSE_TOP/2;
+     44c:	90 93 cf 00 	sts	0x00CF, r25
+     450:	80 93 ce 00 	sts	0x00CE, r24
+    m_ad_value_bak.ms[2] = PULSE_TOP/2;
+    m_ad_value_bak.ms[3] = PULSE_TOP/2;
+	#endif
+
+	//
+	m_pulse_value_rc = PULSE_BOTTOM;
+     454:	80 e0       	ldi	r24, 0x00	; 0
+     456:	99 e1       	ldi	r25, 0x19	; 25
+     458:	90 93 c7 00 	sts	0x00C7, r25
+     45c:	80 93 c6 00 	sts	0x00C6, r24
+	m_ad_value_rc = PULSE_BOTTOM;
+     460:	90 93 71 01 	sts	0x0171, r25
+     464:	80 93 70 01 	sts	0x0170, r24
+	//
+	uart_frame_head_ok = 0;
+     468:	10 92 6c 01 	sts	0x016C, r1
+	command_gaoliaowei = 0;
+     46c:	10 92 69 01 	sts	0x0169, r1
+	command_diliaowei = 0;
+     470:	10 92 6a 01 	sts	0x016A, r1
+	uart_send_enable = 0;
+     474:	10 92 8b 01 	sts	0x018B, r1
+	//
+	pulse_value_counter=0;
+     478:	10 92 8e 01 	sts	0x018E, r1
+	pulse_value_write_id=0;
+     47c:	10 92 6d 01 	sts	0x016D, r1
+	pulse_value_read_id=0;
+     480:	10 92 df 00 	sts	0x00DF, r1
+	//
+	boot_time = 0;
+     484:	10 92 86 01 	sts	0x0186, r1
+     488:	10 92 87 01 	sts	0x0187, r1
+     48c:	10 92 88 01 	sts	0x0188, r1
+     490:	10 92 89 01 	sts	0x0189, r1
+	boot_time_sub = 0;
+     494:	10 92 8d 01 	sts	0x018D, r1
+     498:	08 95       	ret
+
+0000049a <wdt_reset_mcu>:
+}
+////////////////////////////////////////////////////////////////
+void wdt_reset_mcu(void)
+{
+	//通过看门狗来复位单片机
+	wdt_reset();
+     49a:	a8 95       	wdr
+	wdt_disable();
+     49c:	88 e1       	ldi	r24, 0x18	; 24
+     49e:	0f b6       	in	r0, 0x3f	; 63
+     4a0:	f8 94       	cli
+     4a2:	80 93 41 00 	sts	0x0041, r24
+     4a6:	10 92 41 00 	sts	0x0041, r1
+     4aa:	0f be       	out	0x3f, r0	; 63
+     4ac:	2f ef       	ldi	r18, 0xFF	; 255
+     4ae:	80 e7       	ldi	r24, 0x70	; 112
+     4b0:	92 e0       	ldi	r25, 0x02	; 2
+     4b2:	21 50       	subi	r18, 0x01	; 1
+     4b4:	80 40       	sbci	r24, 0x00	; 0
+     4b6:	90 40       	sbci	r25, 0x00	; 0
+     4b8:	e1 f7       	brne	.-8      	; 0x4b2 <wdt_reset_mcu+0x18>
+     4ba:	00 c0       	rjmp	.+0      	; 0x4bc <wdt_reset_mcu+0x22>
+     4bc:	00 00       	nop
+	_delay_ms(50);
+	cli();//看门狗复位单片机
+     4be:	f8 94       	cli
+	wdt_enable(WDTO_120MS);
+     4c0:	2b e0       	ldi	r18, 0x0B	; 11
+     4c2:	88 e1       	ldi	r24, 0x18	; 24
+     4c4:	90 e0       	ldi	r25, 0x00	; 0
+     4c6:	0f b6       	in	r0, 0x3f	; 63
+     4c8:	f8 94       	cli
+     4ca:	a8 95       	wdr
+     4cc:	80 93 41 00 	sts	0x0041, r24
+     4d0:	0f be       	out	0x3f, r0	; 63
+     4d2:	20 93 41 00 	sts	0x0041, r18
+     4d6:	ff cf       	rjmp	.-2      	; 0x4d6 <wdt_reset_mcu+0x3c>
+
+000004d8 <eeprom_read_word_2>:
+        m_ml_set = PULSE_BOTTOM;
+	}
+}
+////////////////////////////////////////////////////////////////
+unsigned short eeprom_read_word_2(const uint16_t *p)
+{
+     4d8:	cf 93       	push	r28
+	unsigned short tmp;
+	//
+	unsigned m_sreg = SREG;
+     4da:	cf b7       	in	r28, 0x3f	; 63
+	cli();
+     4dc:	f8 94       	cli
+	wdt_reset();
+     4de:	a8 95       	wdr
+	eeprom_busy_wait();
+     4e0:	e1 99       	sbic	0x1c, 1	; 28
+     4e2:	fe cf       	rjmp	.-4      	; 0x4e0 <eeprom_read_word_2+0x8>
+	tmp = eeprom_read_word((uint16_t *)p);
+     4e4:	df d6       	rcall	.+3518   	; 0x12a4 <__eerd_word_m8a>
+	eeprom_busy_wait();
+     4e6:	e1 99       	sbic	0x1c, 1	; 28
+     4e8:	fe cf       	rjmp	.-4      	; 0x4e6 <eeprom_read_word_2+0xe>
+	SREG = m_sreg;
+     4ea:	cf bf       	out	0x3f, r28	; 63
+	//
+	return tmp;
+}
+     4ec:	cf 91       	pop	r28
+     4ee:	08 95       	ret
+
+000004f0 <eeprom_write_word_2>:
+////////////////////////////////////////////////////////////////
+void eeprom_write_word_2(const uint16_t *p, unsigned short val)
+{
+     4f0:	cf 93       	push	r28
+	unsigned m_sreg = SREG;
+     4f2:	cf b7       	in	r28, 0x3f	; 63
+	cli();
+     4f4:	f8 94       	cli
+	wdt_reset();
+     4f6:	a8 95       	wdr
+	eeprom_busy_wait();
+     4f8:	e1 99       	sbic	0x1c, 1	; 28
+     4fa:	fe cf       	rjmp	.-4      	; 0x4f8 <eeprom_write_word_2+0x8>
+	eeprom_write_word((uint16_t *)p, val);
+     4fc:	d8 d6       	rcall	.+3504   	; 0x12ae <__eewr_word_m8a>
+	eeprom_busy_wait();
+     4fe:	e1 99       	sbic	0x1c, 1	; 28
+     500:	fe cf       	rjmp	.-4      	; 0x4fe <eeprom_write_word_2+0xe>
+	SREG = m_sreg;
+     502:	cf bf       	out	0x3f, r28	; 63
+}
+     504:	cf 91       	pop	r28
+     506:	08 95       	ret
+
+00000508 <eeprom_read_word_user>:
+////////////////////////////////////////////////////////////////
+unsigned short eeprom_read_word_user(const uint16_t *p1)
+{
+     508:	2f 92       	push	r2
+     50a:	3f 92       	push	r3
+     50c:	4f 92       	push	r4
+     50e:	5f 92       	push	r5
+     510:	6f 92       	push	r6
+     512:	7f 92       	push	r7
+     514:	8f 92       	push	r8
+     516:	9f 92       	push	r9
+     518:	af 92       	push	r10
+     51a:	bf 92       	push	r11
+     51c:	cf 92       	push	r12
+     51e:	df 92       	push	r13
+     520:	ef 92       	push	r14
+     522:	ff 92       	push	r15
+     524:	0f 93       	push	r16
+     526:	1f 93       	push	r17
+     528:	cf 93       	push	r28
+     52a:	df 93       	push	r29
+     52c:	00 d0       	rcall	.+0      	; 0x52e <eeprom_read_word_user+0x26>
+     52e:	00 d0       	rcall	.+0      	; 0x530 <eeprom_read_word_user+0x28>
+     530:	cd b7       	in	r28, 0x3d	; 61
+     532:	de b7       	in	r29, 0x3e	; 62
+     534:	3c 01       	movw	r6, r24
+	unsigned short tmp,tmp1,tmp2,tmp3,tmp4,tmp5;
+	//
+	tmp = 0xff;
+	//
+	const uint16_t *p2 = (const uint16_t *)(p1+EEPROM_DATA_WORD_SIZE);
+     536:	2c 01       	movw	r4, r24
+     538:	82 e6       	ldi	r24, 0x62	; 98
+     53a:	48 0e       	add	r4, r24
+     53c:	51 1c       	adc	r5, r1
+	const uint16_t *p3 = (const uint16_t *)(p1+2*EEPROM_DATA_WORD_SIZE);
+     53e:	43 01       	movw	r8, r6
+     540:	e4 ec       	ldi	r30, 0xC4	; 196
+     542:	8e 0e       	add	r8, r30
+     544:	91 1c       	adc	r9, r1
+	const uint16_t *p4 = (const uint16_t *)(p1+3*EEPROM_DATA_WORD_SIZE);
+     546:	13 01       	movw	r2, r6
+     548:	fa ed       	ldi	r31, 0xDA	; 218
+     54a:	2f 1a       	sub	r2, r31
+     54c:	fe ef       	ldi	r31, 0xFE	; 254
+     54e:	3f 0a       	sbc	r3, r31
+	const uint16_t *p5 = (const uint16_t *)(p1+4*EEPROM_DATA_WORD_SIZE);
+     550:	53 01       	movw	r10, r6
+     552:	88 e7       	ldi	r24, 0x78	; 120
+     554:	a8 1a       	sub	r10, r24
+     556:	8e ef       	ldi	r24, 0xFE	; 254
+     558:	b8 0a       	sbc	r11, r24
+	//
+	tmp1 = eeprom_read_word_2(p1);
+     55a:	c3 01       	movw	r24, r6
+     55c:	bd df       	rcall	.-134    	; 0x4d8 <eeprom_read_word_2>
+     55e:	ac 01       	movw	r20, r24
+	tmp2 = eeprom_read_word_2(p2);
+     560:	c2 01       	movw	r24, r4
+     562:	4b 83       	std	Y+3, r20	; 0x03
+     564:	5c 83       	std	Y+4, r21	; 0x04
+     566:	b8 df       	rcall	.-144    	; 0x4d8 <eeprom_read_word_2>
+     568:	8c 01       	movw	r16, r24
+	tmp3 = eeprom_read_word_2(p3);
+     56a:	c4 01       	movw	r24, r8
+     56c:	b5 df       	rcall	.-150    	; 0x4d8 <eeprom_read_word_2>
+     56e:	7c 01       	movw	r14, r24
+	tmp4 = eeprom_read_word_2(p4);
+     570:	c1 01       	movw	r24, r2
+     572:	b2 df       	rcall	.-156    	; 0x4d8 <eeprom_read_word_2>
+     574:	9c 01       	movw	r18, r24
+	tmp5 = eeprom_read_word_2(p5);
+     576:	c5 01       	movw	r24, r10
+     578:	29 83       	std	Y+1, r18	; 0x01
+     57a:	3a 83       	std	Y+2, r19	; 0x02
+     57c:	ad df       	rcall	.-166    	; 0x4d8 <eeprom_read_word_2>
+     57e:	6c 01       	movw	r12, r24
+	//
+	if((tmp1==tmp2) && (tmp1==tmp3)) //123
+     580:	4b 81       	ldd	r20, Y+3	; 0x03
+     582:	5c 81       	ldd	r21, Y+4	; 0x04
+     584:	29 81       	ldd	r18, Y+1	; 0x01
+     586:	3a 81       	ldd	r19, Y+2	; 0x02
+     588:	40 17       	cp	r20, r16
+     58a:	51 07       	cpc	r21, r17
+     58c:	71 f5       	brne	.+92     	; 0x5ea <eeprom_read_word_user+0xe2>
+     58e:	4e 15       	cp	r20, r14
+     590:	5f 05       	cpc	r21, r15
+     592:	89 f4       	brne	.+34     	; 0x5b6 <eeprom_read_word_user+0xae>
+	{
+		tmp = tmp1;
+		if(tmp != tmp4)
+     594:	42 17       	cp	r20, r18
+     596:	53 07       	cpc	r21, r19
+     598:	29 f0       	breq	.+10     	; 0x5a4 <eeprom_read_word_user+0x9c>
+		{
+			eeprom_write_word_2(p4,tmp);
+     59a:	ba 01       	movw	r22, r20
+     59c:	c1 01       	movw	r24, r2
+     59e:	a8 df       	rcall	.-176    	; 0x4f0 <eeprom_write_word_2>
+     5a0:	5c 81       	ldd	r21, Y+4	; 0x04
+     5a2:	4b 81       	ldd	r20, Y+3	; 0x03
+		}
+		//
+		if(tmp != tmp5)
+     5a4:	4c 15       	cp	r20, r12
+     5a6:	5d 05       	cpc	r21, r13
+     5a8:	09 f4       	brne	.+2      	; 0x5ac <eeprom_read_word_user+0xa4>
+     5aa:	90 c0       	rjmp	.+288    	; 0x6cc <eeprom_read_word_user+0x1c4>
+		{
+			eeprom_write_word_2(p5,tmp);
+     5ac:	ba 01       	movw	r22, r20
+     5ae:	c5 01       	movw	r24, r10
+     5b0:	4b 83       	std	Y+3, r20	; 0x03
+     5b2:	5c 83       	std	Y+4, r21	; 0x04
+     5b4:	10 c0       	rjmp	.+32     	; 0x5d6 <eeprom_read_word_user+0xce>
+		}
+	}
+	else if((tmp1==tmp2) && (tmp1==tmp4)) //124
+     5b6:	42 17       	cp	r20, r18
+     5b8:	53 07       	cpc	r21, r19
+     5ba:	89 f4       	brne	.+34     	; 0x5de <eeprom_read_word_user+0xd6>
+	{
+		tmp = tmp1;
+		if(tmp != tmp3)
+		{
+			eeprom_write_word_2(p3,tmp);
+     5bc:	ba 01       	movw	r22, r20
+     5be:	c4 01       	movw	r24, r8
+     5c0:	4b 83       	std	Y+3, r20	; 0x03
+     5c2:	5c 83       	std	Y+4, r21	; 0x04
+     5c4:	95 df       	rcall	.-214    	; 0x4f0 <eeprom_write_word_2>
+		}
+		//
+		if(tmp != tmp5)
+     5c6:	4b 81       	ldd	r20, Y+3	; 0x03
+     5c8:	5c 81       	ldd	r21, Y+4	; 0x04
+     5ca:	4c 15       	cp	r20, r12
+     5cc:	5d 05       	cpc	r21, r13
+     5ce:	09 f4       	brne	.+2      	; 0x5d2 <eeprom_read_word_user+0xca>
+     5d0:	7d c0       	rjmp	.+250    	; 0x6cc <eeprom_read_word_user+0x1c4>
+		{
+			eeprom_write_word_2(p5,tmp);
+     5d2:	ba 01       	movw	r22, r20
+     5d4:	c5 01       	movw	r24, r10
+     5d6:	8c df       	rcall	.-232    	; 0x4f0 <eeprom_write_word_2>
+     5d8:	4b 81       	ldd	r20, Y+3	; 0x03
+     5da:	5c 81       	ldd	r21, Y+4	; 0x04
+     5dc:	77 c0       	rjmp	.+238    	; 0x6cc <eeprom_read_word_user+0x1c4>
+		}
+	}
+	else if((tmp1==tmp2) && (tmp1==tmp5)) //125
+     5de:	48 17       	cp	r20, r24
+     5e0:	59 07       	cpc	r21, r25
+     5e2:	69 f5       	brne	.+90     	; 0x63e <eeprom_read_word_user+0x136>
+	{
+		tmp = tmp1;
+		if(tmp != tmp3)
+		{
+			eeprom_write_word_2(p3,tmp);
+     5e4:	ba 01       	movw	r22, r20
+     5e6:	c4 01       	movw	r24, r8
+     5e8:	0e c0       	rjmp	.+28     	; 0x606 <eeprom_read_word_user+0xfe>
+		if(tmp != tmp4)
+		{
+			eeprom_write_word_2(p4,tmp);
+		}
+	}
+	else if((tmp1==tmp3) && (tmp1==tmp4)) //134
+     5ea:	4e 15       	cp	r20, r14
+     5ec:	5f 05       	cpc	r21, r15
+     5ee:	99 f4       	brne	.+38     	; 0x616 <eeprom_read_word_user+0x10e>
+     5f0:	42 17       	cp	r20, r18
+     5f2:	53 07       	cpc	r21, r19
+     5f4:	19 f4       	brne	.+6      	; 0x5fc <eeprom_read_word_user+0xf4>
+	{
+		tmp = tmp1;
+		if(tmp != tmp2)
+		{
+			eeprom_write_word_2(p2,tmp);
+     5f6:	ba 01       	movw	r22, r20
+     5f8:	c2 01       	movw	r24, r4
+     5fa:	e2 cf       	rjmp	.-60     	; 0x5c0 <eeprom_read_word_user+0xb8>
+		if(tmp != tmp5)
+		{
+			eeprom_write_word_2(p5,tmp);
+		}
+	}
+	else if((tmp1==tmp3) && (tmp1==tmp5)) //135
+     5fc:	48 17       	cp	r20, r24
+     5fe:	59 07       	cpc	r21, r25
+     600:	d1 f5       	brne	.+116    	; 0x676 <eeprom_read_word_user+0x16e>
+	{
+		tmp = tmp1;
+		if(tmp != tmp2)
+		{
+			eeprom_write_word_2(p2,tmp);
+     602:	ba 01       	movw	r22, r20
+     604:	c2 01       	movw	r24, r4
+     606:	4b 83       	std	Y+3, r20	; 0x03
+     608:	5c 83       	std	Y+4, r21	; 0x04
+     60a:	72 df       	rcall	.-284    	; 0x4f0 <eeprom_write_word_2>
+		}
+		//
+		if(tmp != tmp4)
+		{
+			eeprom_write_word_2(p4,tmp);
+     60c:	4b 81       	ldd	r20, Y+3	; 0x03
+     60e:	5c 81       	ldd	r21, Y+4	; 0x04
+     610:	ba 01       	movw	r22, r20
+     612:	c1 01       	movw	r24, r2
+     614:	e0 cf       	rjmp	.-64     	; 0x5d6 <eeprom_read_word_user+0xce>
+		}
+	}
+	else if((tmp1==tmp4) && (tmp1==tmp5)) //145
+     616:	42 17       	cp	r20, r18
+     618:	53 07       	cpc	r21, r19
+     61a:	89 f4       	brne	.+34     	; 0x63e <eeprom_read_word_user+0x136>
+     61c:	48 17       	cp	r20, r24
+     61e:	59 07       	cpc	r21, r25
+     620:	71 f4       	brne	.+28     	; 0x63e <eeprom_read_word_user+0x136>
+	{
+		tmp = tmp1;
+		if(tmp != tmp3)
+		{
+			eeprom_write_word_2(p3,tmp);
+     622:	ba 01       	movw	r22, r20
+     624:	c4 01       	movw	r24, r8
+     626:	4b 83       	std	Y+3, r20	; 0x03
+     628:	5c 83       	std	Y+4, r21	; 0x04
+     62a:	62 df       	rcall	.-316    	; 0x4f0 <eeprom_write_word_2>
+		}
+		//
+		if(tmp != tmp2)
+     62c:	4b 81       	ldd	r20, Y+3	; 0x03
+     62e:	5c 81       	ldd	r21, Y+4	; 0x04
+     630:	40 17       	cp	r20, r16
+     632:	51 07       	cpc	r21, r17
+     634:	09 f4       	brne	.+2      	; 0x638 <eeprom_read_word_user+0x130>
+     636:	4a c0       	rjmp	.+148    	; 0x6cc <eeprom_read_word_user+0x1c4>
+		{
+			eeprom_write_word_2(p2,tmp);
+     638:	ba 01       	movw	r22, r20
+     63a:	c2 01       	movw	r24, r4
+     63c:	cc cf       	rjmp	.-104    	; 0x5d6 <eeprom_read_word_user+0xce>
+		}
+	}
+	else if((tmp2==tmp3) && (tmp2==tmp4)) //234
+     63e:	0e 15       	cp	r16, r14
+     640:	1f 05       	cpc	r17, r15
+     642:	c9 f4       	brne	.+50     	; 0x676 <eeprom_read_word_user+0x16e>
+     644:	02 17       	cp	r16, r18
+     646:	13 07       	cpc	r17, r19
+     648:	61 f4       	brne	.+24     	; 0x662 <eeprom_read_word_user+0x15a>
+	{
+		tmp = tmp2;
+		if(tmp != tmp1)
+     64a:	04 17       	cp	r16, r20
+     64c:	15 07       	cpc	r17, r21
+     64e:	19 f0       	breq	.+6      	; 0x656 <eeprom_read_word_user+0x14e>
+		{
+			eeprom_write_word_2(p1,tmp);
+     650:	b8 01       	movw	r22, r16
+     652:	c3 01       	movw	r24, r6
+     654:	4d df       	rcall	.-358    	; 0x4f0 <eeprom_write_word_2>
+		}
+		//
+		if(tmp != tmp5)
+     656:	0c 15       	cp	r16, r12
+     658:	1d 05       	cpc	r17, r13
+     65a:	b9 f1       	breq	.+110    	; 0x6ca <eeprom_read_word_user+0x1c2>
+		{
+			eeprom_write_word_2(p5,tmp);
+     65c:	b8 01       	movw	r22, r16
+     65e:	c5 01       	movw	r24, r10
+     660:	33 c0       	rjmp	.+102    	; 0x6c8 <eeprom_read_word_user+0x1c0>
+		}
+	}
+	else if((tmp2==tmp3) && (tmp2==tmp5)) //235
+     662:	0c 15       	cp	r16, r12
+     664:	1d 05       	cpc	r17, r13
+     666:	49 f5       	brne	.+82     	; 0x6ba <eeprom_read_word_user+0x1b2>
+	{
+		tmp = tmp2;
+		if(tmp != tmp1)
+     668:	04 17       	cp	r16, r20
+     66a:	15 07       	cpc	r17, r21
+     66c:	59 f1       	breq	.+86     	; 0x6c4 <eeprom_read_word_user+0x1bc>
+		{
+			eeprom_write_word_2(p1,tmp);
+     66e:	b8 01       	movw	r22, r16
+     670:	c3 01       	movw	r24, r6
+     672:	3e df       	rcall	.-388    	; 0x4f0 <eeprom_write_word_2>
+     674:	27 c0       	rjmp	.+78     	; 0x6c4 <eeprom_read_word_user+0x1bc>
+		if(tmp != tmp4)
+		{
+			eeprom_write_word_2(p4,tmp);
+		}
+	}
+	else if((tmp2==tmp4) && (tmp2==tmp5)) //245
+     676:	02 17       	cp	r16, r18
+     678:	13 07       	cpc	r17, r19
+     67a:	61 f4       	brne	.+24     	; 0x694 <eeprom_read_word_user+0x18c>
+     67c:	0c 15       	cp	r16, r12
+     67e:	1d 05       	cpc	r17, r13
+     680:	e1 f4       	brne	.+56     	; 0x6ba <eeprom_read_word_user+0x1b2>
+	{
+		tmp = tmp2;
+		if(tmp != tmp1)
+     682:	04 17       	cp	r16, r20
+     684:	15 07       	cpc	r17, r21
+     686:	19 f0       	breq	.+6      	; 0x68e <eeprom_read_word_user+0x186>
+		{
+			eeprom_write_word_2(p1,tmp);
+     688:	b8 01       	movw	r22, r16
+     68a:	c3 01       	movw	r24, r6
+     68c:	31 df       	rcall	.-414    	; 0x4f0 <eeprom_write_word_2>
+		}
+		//
+		if(tmp != tmp3)
+		{
+			eeprom_write_word_2(p3,tmp);
+     68e:	b8 01       	movw	r22, r16
+     690:	c4 01       	movw	r24, r8
+     692:	1a c0       	rjmp	.+52     	; 0x6c8 <eeprom_read_word_user+0x1c0>
+		}
+	}
+	else if((tmp3==tmp4) && (tmp3==tmp5)) //345
+     694:	e2 16       	cp	r14, r18
+     696:	f3 06       	cpc	r15, r19
+     698:	81 f4       	brne	.+32     	; 0x6ba <eeprom_read_word_user+0x1b2>
+     69a:	ec 14       	cp	r14, r12
+     69c:	fd 04       	cpc	r15, r13
+     69e:	69 f4       	brne	.+26     	; 0x6ba <eeprom_read_word_user+0x1b2>
+	{
+		tmp = tmp3;
+		if(tmp != tmp1)
+     6a0:	e4 16       	cp	r14, r20
+     6a2:	f5 06       	cpc	r15, r21
+     6a4:	19 f0       	breq	.+6      	; 0x6ac <eeprom_read_word_user+0x1a4>
+		{
+			eeprom_write_word_2(p1,tmp);
+     6a6:	b7 01       	movw	r22, r14
+     6a8:	c3 01       	movw	r24, r6
+     6aa:	22 df       	rcall	.-444    	; 0x4f0 <eeprom_write_word_2>
+		}
+		//
+		if(tmp != tmp2)
+     6ac:	e0 16       	cp	r14, r16
+     6ae:	f1 06       	cpc	r15, r17
+     6b0:	39 f0       	breq	.+14     	; 0x6c0 <eeprom_read_word_user+0x1b8>
+		{
+			eeprom_write_word_2(p2,tmp);
+     6b2:	b7 01       	movw	r22, r14
+     6b4:	c2 01       	movw	r24, r4
+     6b6:	1c df       	rcall	.-456    	; 0x4f0 <eeprom_write_word_2>
+     6b8:	03 c0       	rjmp	.+6      	; 0x6c0 <eeprom_read_word_user+0x1b8>
+////////////////////////////////////////////////////////////////
+unsigned short eeprom_read_word_user(const uint16_t *p1)
+{
+	unsigned short tmp,tmp1,tmp2,tmp3,tmp4,tmp5;
+	//
+	tmp = 0xff;
+     6ba:	4f ef       	ldi	r20, 0xFF	; 255
+     6bc:	50 e0       	ldi	r21, 0x00	; 0
+     6be:	06 c0       	rjmp	.+12     	; 0x6cc <eeprom_read_word_user+0x1c4>
+     6c0:	a7 01       	movw	r20, r14
+     6c2:	04 c0       	rjmp	.+8      	; 0x6cc <eeprom_read_word_user+0x1c4>
+			eeprom_write_word_2(p1,tmp);
+		}
+		//
+		if(tmp != tmp4)
+		{
+			eeprom_write_word_2(p4,tmp);
+     6c4:	b8 01       	movw	r22, r16
+     6c6:	c1 01       	movw	r24, r2
+     6c8:	13 df       	rcall	.-474    	; 0x4f0 <eeprom_write_word_2>
+     6ca:	a8 01       	movw	r20, r16
+			eeprom_write_word_2(p2,tmp);
+		}
+	}
+	//
+	return tmp;
+}
+     6cc:	ca 01       	movw	r24, r20
+     6ce:	0f 90       	pop	r0
+     6d0:	0f 90       	pop	r0
+     6d2:	0f 90       	pop	r0
+     6d4:	0f 90       	pop	r0
+     6d6:	df 91       	pop	r29
+     6d8:	cf 91       	pop	r28
+     6da:	1f 91       	pop	r17
+     6dc:	0f 91       	pop	r16
+     6de:	ff 90       	pop	r15
+     6e0:	ef 90       	pop	r14
+     6e2:	df 90       	pop	r13
+     6e4:	cf 90       	pop	r12
+     6e6:	bf 90       	pop	r11
+     6e8:	af 90       	pop	r10
+     6ea:	9f 90       	pop	r9
+     6ec:	8f 90       	pop	r8
+     6ee:	7f 90       	pop	r7
+     6f0:	6f 90       	pop	r6
+     6f2:	5f 90       	pop	r5
+     6f4:	4f 90       	pop	r4
+     6f6:	3f 90       	pop	r3
+     6f8:	2f 90       	pop	r2
+     6fa:	08 95       	ret
+
+000006fc <eeprom_write_word_user>:
+////////////////////////////////////////////////////////////////
+void eeprom_write_word_user(uint16_t *p,unsigned short val)
+{
+     6fc:	0f 93       	push	r16
+     6fe:	1f 93       	push	r17
+     700:	cf 93       	push	r28
+     702:	df 93       	push	r29
+     704:	ec 01       	movw	r28, r24
+     706:	8b 01       	movw	r16, r22
+	eeprom_write_word_2((uint16_t *)p,val);
+     708:	f3 de       	rcall	.-538    	; 0x4f0 <eeprom_write_word_2>
+	eeprom_write_word_2((uint16_t *)(p+EEPROM_DATA_WORD_SIZE),val);
+     70a:	b8 01       	movw	r22, r16
+     70c:	ce 01       	movw	r24, r28
+     70e:	8e 59       	subi	r24, 0x9E	; 158
+     710:	9f 4f       	sbci	r25, 0xFF	; 255
+     712:	ee de       	rcall	.-548    	; 0x4f0 <eeprom_write_word_2>
+	eeprom_write_word_2((uint16_t *)(p+2*EEPROM_DATA_WORD_SIZE),val);
+     714:	b8 01       	movw	r22, r16
+     716:	ce 01       	movw	r24, r28
+     718:	8c 53       	subi	r24, 0x3C	; 60
+     71a:	9f 4f       	sbci	r25, 0xFF	; 255
+     71c:	e9 de       	rcall	.-558    	; 0x4f0 <eeprom_write_word_2>
+	eeprom_write_word_2((uint16_t *)(p+3*EEPROM_DATA_WORD_SIZE),val);
+     71e:	b8 01       	movw	r22, r16
+     720:	ce 01       	movw	r24, r28
+     722:	8a 5d       	subi	r24, 0xDA	; 218
+     724:	9e 4f       	sbci	r25, 0xFE	; 254
+     726:	e4 de       	rcall	.-568    	; 0x4f0 <eeprom_write_word_2>
+	eeprom_write_word_2((uint16_t *)(p+4*EEPROM_DATA_WORD_SIZE),val);
+     728:	b8 01       	movw	r22, r16
+     72a:	ce 01       	movw	r24, r28
+     72c:	88 57       	subi	r24, 0x78	; 120
+     72e:	9e 4f       	sbci	r25, 0xFE	; 254
+}
+     730:	df 91       	pop	r29
+     732:	cf 91       	pop	r28
+     734:	1f 91       	pop	r17
+     736:	0f 91       	pop	r16
+{
+	eeprom_write_word_2((uint16_t *)p,val);
+	eeprom_write_word_2((uint16_t *)(p+EEPROM_DATA_WORD_SIZE),val);
+	eeprom_write_word_2((uint16_t *)(p+2*EEPROM_DATA_WORD_SIZE),val);
+	eeprom_write_word_2((uint16_t *)(p+3*EEPROM_DATA_WORD_SIZE),val);
+	eeprom_write_word_2((uint16_t *)(p+4*EEPROM_DATA_WORD_SIZE),val);
+     738:	db ce       	rjmp	.-586    	; 0x4f0 <eeprom_write_word_2>
+
+0000073a <set_default_para>:
+////////////////////////////////////////////////////////////////
+void set_default_para(void)
+{
+	//执行恢复出厂默认参数操作
+	//
+	cli();
+     73a:	f8 94       	cli
+	//
+	//脉冲
+	eeprom_write_word_user((uint16_t *)&m_para[0].e_mh,PULSE_TOP);
+     73c:	60 e0       	ldi	r22, 0x00	; 0
+     73e:	76 e9       	ldi	r23, 0x96	; 150
+     740:	80 ec       	ldi	r24, 0xC0	; 192
+     742:	90 e0       	ldi	r25, 0x00	; 0
+     744:	db df       	rcall	.-74     	; 0x6fc <eeprom_write_word_user>
+	eeprom_write_word_user((uint16_t *)&m_para[0].e_ml,PULSE_BOTTOM);
+     746:	60 e0       	ldi	r22, 0x00	; 0
+     748:	79 e1       	ldi	r23, 0x19	; 25
+     74a:	82 ec       	ldi	r24, 0xC2	; 194
+     74c:	90 e0       	ldi	r25, 0x00	; 0
+     74e:	d6 df       	rcall	.-84     	; 0x6fc <eeprom_write_word_user>
+
+	eeprom_write_word_user((uint16_t *)&m_para[0].smoothingDate,PARA_SETED_SMOOTHING);
+     750:	60 e0       	ldi	r22, 0x00	; 0
+     752:	70 e0       	ldi	r23, 0x00	; 0
+     754:	86 ec       	ldi	r24, 0xC6	; 198
+     756:	90 e0       	ldi	r25, 0x00	; 0
+     758:	d1 df       	rcall	.-94     	; 0x6fc <eeprom_write_word_user>
+	//
+	//参数设置标志
+	eeprom_write_word_user((uint16_t *)&m_para[0].e_para_seted_flag,PARA_SETED_FLAG);
+     75a:	66 e0       	ldi	r22, 0x06	; 6
+     75c:	79 e1       	ldi	r23, 0x19	; 25
+     75e:	84 ec       	ldi	r24, 0xC4	; 196
+     760:	90 e0       	ldi	r25, 0x00	; 0
+     762:	cc df       	rcall	.-104    	; 0x6fc <eeprom_write_word_user>
+     764:	c5 e0       	ldi	r28, 0x05	; 5
+     766:	d0 e0       	ldi	r29, 0x00	; 0
+     768:	8f e3       	ldi	r24, 0x3F	; 63
+     76a:	9c e9       	ldi	r25, 0x9C	; 156
+     76c:	01 97       	sbiw	r24, 0x01	; 1
+     76e:	f1 f7       	brne	.-4      	; 0x76c <set_default_para+0x32>
+     770:	00 c0       	rjmp	.+0      	; 0x772 <set_default_para+0x38>
+     772:	00 00       	nop
+	{
+		int i;
+		for(i=5; i>0; i--)
+		{
+			_delay_ms(10);
+			if(PARA_SETED_FLAG == eeprom_read_word_user((const uint16_t *)&m_para[0].e_para_seted_flag))
+     774:	84 ec       	ldi	r24, 0xC4	; 196
+     776:	90 e0       	ldi	r25, 0x00	; 0
+     778:	c7 de       	rcall	.-626    	; 0x508 <eeprom_read_word_user>
+     77a:	86 30       	cpi	r24, 0x06	; 6
+     77c:	99 41       	sbci	r25, 0x19	; 25
+     77e:	51 f4       	brne	.+20     	; 0x794 <set_default_para+0x5a>
+     780:	8f ef       	ldi	r24, 0xFF	; 255
+     782:	91 ee       	ldi	r25, 0xE1	; 225
+     784:	24 e0       	ldi	r18, 0x04	; 4
+     786:	81 50       	subi	r24, 0x01	; 1
+     788:	90 40       	sbci	r25, 0x00	; 0
+     78a:	20 40       	sbci	r18, 0x00	; 0
+     78c:	e1 f7       	brne	.-8      	; 0x786 <set_default_para+0x4c>
+     78e:	00 c0       	rjmp	.+0      	; 0x790 <set_default_para+0x56>
+     790:	00 00       	nop
+		}
+	}
+	#endif
+	//
+	_delay_ms(100);
+	wdt_reset_mcu();//重启
+     792:	83 de       	rcall	.-762    	; 0x49a <wdt_reset_mcu>
+     794:	8f ef       	ldi	r24, 0xFF	; 255
+     796:	99 ef       	ldi	r25, 0xF9	; 249
+     798:	20 e0       	ldi	r18, 0x00	; 0
+     79a:	81 50       	subi	r24, 0x01	; 1
+     79c:	90 40       	sbci	r25, 0x00	; 0
+     79e:	20 40       	sbci	r18, 0x00	; 0
+     7a0:	e1 f7       	brne	.-8      	; 0x79a <set_default_para+0x60>
+     7a2:	00 c0       	rjmp	.+0      	; 0x7a4 <set_default_para+0x6a>
+     7a4:	00 00       	nop
+				break;
+			}
+			else
+			{
+				_delay_ms(20);
+				eeprom_write_word_user((uint16_t *)&m_para[0].e_para_seted_flag,PARA_SETED_FLAG);
+     7a6:	66 e0       	ldi	r22, 0x06	; 6
+     7a8:	79 e1       	ldi	r23, 0x19	; 25
+     7aa:	84 ec       	ldi	r24, 0xC4	; 196
+     7ac:	90 e0       	ldi	r25, 0x00	; 0
+     7ae:	a6 df       	rcall	.-180    	; 0x6fc <eeprom_write_word_user>
+     7b0:	21 97       	sbiw	r28, 0x01	; 1
+	//参数设置标志
+	eeprom_write_word_user((uint16_t *)&m_para[0].e_para_seted_flag,PARA_SETED_FLAG);
+	#if 1
+	{
+		int i;
+		for(i=5; i>0; i--)
+     7b2:	20 97       	sbiw	r28, 0x00	; 0
+     7b4:	c9 f6       	brne	.-78     	; 0x768 <set_default_para+0x2e>
+     7b6:	e4 cf       	rjmp	.-56     	; 0x780 <set_default_para+0x46>
+
+000007b8 <read_para>:
+    UDR = uart_tx_buf[0];
+    uart_tx_addr = 1;
+}
+////////////////////////////////////////////////////////////////
+void read_para()
+{
+     7b8:	cf 93       	push	r28
+     7ba:	df 93       	push	r29
+     7bc:	c5 e0       	ldi	r28, 0x05	; 5
+     7be:	d0 e0       	ldi	r29, 0x00	; 0
+	#if 1
+	{
+		int i;
+		for(i=5; i>0; i--)
+		{
+			if(PARA_SETED_FLAG == eeprom_read_word_user((const uint16_t *)&m_para[0].e_para_seted_flag))
+     7c0:	84 ec       	ldi	r24, 0xC4	; 196
+     7c2:	90 e0       	ldi	r25, 0x00	; 0
+     7c4:	a1 de       	rcall	.-702    	; 0x508 <eeprom_read_word_user>
+     7c6:	86 30       	cpi	r24, 0x06	; 6
+     7c8:	99 41       	sbci	r25, 0x19	; 25
+     7ca:	69 f0       	breq	.+26     	; 0x7e6 <read_para+0x2e>
+     7cc:	8f ef       	ldi	r24, 0xFF	; 255
+     7ce:	99 ef       	ldi	r25, 0xF9	; 249
+     7d0:	20 e0       	ldi	r18, 0x00	; 0
+     7d2:	81 50       	subi	r24, 0x01	; 1
+     7d4:	90 40       	sbci	r25, 0x00	; 0
+     7d6:	20 40       	sbci	r18, 0x00	; 0
+     7d8:	e1 f7       	brne	.-8      	; 0x7d2 <read_para+0x1a>
+     7da:	00 c0       	rjmp	.+0      	; 0x7dc <read_para+0x24>
+     7dc:	00 00       	nop
+     7de:	21 97       	sbiw	r28, 0x01	; 1
+void read_para()
+{
+	#if 1
+	{
+		int i;
+		for(i=5; i>0; i--)
+     7e0:	20 97       	sbiw	r28, 0x00	; 0
+     7e2:	71 f7       	brne	.-36     	; 0x7c0 <read_para+0x8>
+			}
+		}
+		if(0 == i)
+		{
+			//如果标志不正常，设置默认参数
+			set_default_para();
+     7e4:	aa df       	rcall	.-172    	; 0x73a <set_default_para>
+		}
+	}
+	#endif
+	//
+	//版本号
+	if(version_h!=eeprom_read_word_user((const uint16_t *)(&m_para[0].e_version_h)))
+     7e6:	8c eb       	ldi	r24, 0xBC	; 188
+     7e8:	90 e0       	ldi	r25, 0x00	; 0
+     7ea:	8e de       	rcall	.-740    	; 0x508 <eeprom_read_word_user>
+     7ec:	89 31       	cpi	r24, 0x19	; 25
+     7ee:	96 40       	sbci	r25, 0x06	; 6
+     7f0:	29 f0       	breq	.+10     	; 0x7fc <read_para+0x44>
+	{
+		eeprom_write_word_user((uint16_t *)(&m_para[0].e_version_h),version_h);
+     7f2:	69 e1       	ldi	r22, 0x19	; 25
+     7f4:	76 e0       	ldi	r23, 0x06	; 6
+     7f6:	8c eb       	ldi	r24, 0xBC	; 188
+     7f8:	90 e0       	ldi	r25, 0x00	; 0
+     7fa:	80 df       	rcall	.-256    	; 0x6fc <eeprom_write_word_user>
+	}
+	if(version_l!=eeprom_read_word_user((const uint16_t *)(&m_para[0].e_version_l)))
+     7fc:	8e eb       	ldi	r24, 0xBE	; 190
+     7fe:	90 e0       	ldi	r25, 0x00	; 0
+     800:	83 de       	rcall	.-762    	; 0x508 <eeprom_read_word_user>
+     802:	85 30       	cpi	r24, 0x05	; 5
+     804:	99 40       	sbci	r25, 0x09	; 9
+     806:	29 f0       	breq	.+10     	; 0x812 <read_para+0x5a>
+	{
+		eeprom_write_word_user((uint16_t *)(&m_para[0].e_version_l),version_l);
+     808:	65 e0       	ldi	r22, 0x05	; 5
+     80a:	79 e0       	ldi	r23, 0x09	; 9
+     80c:	8e eb       	ldi	r24, 0xBE	; 190
+     80e:	90 e0       	ldi	r25, 0x00	; 0
+     810:	75 df       	rcall	.-278    	; 0x6fc <eeprom_write_word_user>
+	}
+	//
+    //读非易失参数,高低料位设置值
+    m_mh_set = eeprom_read_word_user((const uint16_t *)&m_para[0].e_mh);
+     812:	80 ec       	ldi	r24, 0xC0	; 192
+     814:	90 e0       	ldi	r25, 0x00	; 0
+     816:	78 de       	rcall	.-784    	; 0x508 <eeprom_read_word_user>
+     818:	90 93 77 01 	sts	0x0177, r25
+     81c:	80 93 76 01 	sts	0x0176, r24
+    if(m_mh_set > PULSE_TOP)//输出5v
+     820:	80 91 76 01 	lds	r24, 0x0176
+     824:	90 91 77 01 	lds	r25, 0x0177
+     828:	81 30       	cpi	r24, 0x01	; 1
+     82a:	96 49       	sbci	r25, 0x96	; 150
+     82c:	18 f0       	brcs	.+6      	; 0x834 <read_para+0x7c>
+	{
+        m_mh_set = PULSE_TOP;
+     82e:	80 e0       	ldi	r24, 0x00	; 0
+     830:	96 e9       	ldi	r25, 0x96	; 150
+     832:	09 c0       	rjmp	.+18     	; 0x846 <read_para+0x8e>
+	}
+    else if(m_mh_set < PULSE_BOTTOM)
+     834:	80 91 76 01 	lds	r24, 0x0176
+     838:	90 91 77 01 	lds	r25, 0x0177
+     83c:	81 15       	cp	r24, r1
+     83e:	99 41       	sbci	r25, 0x19	; 25
+     840:	30 f4       	brcc	.+12     	; 0x84e <read_para+0x96>
+	{
+        m_mh_set = PULSE_BOTTOM+3000;
+     842:	88 eb       	ldi	r24, 0xB8	; 184
+     844:	94 e2       	ldi	r25, 0x24	; 36
+     846:	90 93 77 01 	sts	0x0177, r25
+     84a:	80 93 76 01 	sts	0x0176, r24
+	}
+
+    smoothingDate = eeprom_read_word_user((const uint16_t *)&m_para[0].smoothingDate);
+     84e:	86 ec       	ldi	r24, 0xC6	; 198
+     850:	90 e0       	ldi	r25, 0x00	; 0
+     852:	5a de       	rcall	.-844    	; 0x508 <eeprom_read_word_user>
+    if(smoothingDate >= 10)//输出5v
+     854:	8a 30       	cpi	r24, 0x0A	; 10
+     856:	91 05       	cpc	r25, r1
+     858:	28 f4       	brcc	.+10     	; 0x864 <read_para+0xac>
+    else if(m_mh_set < PULSE_BOTTOM)
+	{
+        m_mh_set = PULSE_BOTTOM+3000;
+	}
+
+    smoothingDate = eeprom_read_word_user((const uint16_t *)&m_para[0].smoothingDate);
+     85a:	90 93 61 00 	sts	0x0061, r25
+     85e:	80 93 60 00 	sts	0x0060, r24
+     862:	04 c0       	rjmp	.+8      	; 0x86c <read_para+0xb4>
+    if(smoothingDate >= 10)//输出5v
+	{
+        smoothingDate = 0;
+     864:	10 92 61 00 	sts	0x0061, r1
+     868:	10 92 60 00 	sts	0x0060, r1
+	}
+
+  	//
+    m_ml_set = eeprom_read_word_user((const uint16_t *)&m_para[0].e_ml);
+     86c:	82 ec       	ldi	r24, 0xC2	; 194
+     86e:	90 e0       	ldi	r25, 0x00	; 0
+     870:	4b de       	rcall	.-874    	; 0x508 <eeprom_read_word_user>
+     872:	90 93 79 01 	sts	0x0179, r25
+     876:	80 93 78 01 	sts	0x0178, r24
+    if(m_ml_set > m_mh_set)
+     87a:	20 91 78 01 	lds	r18, 0x0178
+     87e:	30 91 79 01 	lds	r19, 0x0179
+     882:	80 91 76 01 	lds	r24, 0x0176
+     886:	90 91 77 01 	lds	r25, 0x0177
+     88a:	82 17       	cp	r24, r18
+     88c:	93 07       	cpc	r25, r19
+     88e:	38 f4       	brcc	.+14     	; 0x89e <read_para+0xe6>
+	{
+        m_ml_set = m_mh_set-3000;
+     890:	80 91 76 01 	lds	r24, 0x0176
+     894:	90 91 77 01 	lds	r25, 0x0177
+     898:	88 5b       	subi	r24, 0xB8	; 184
+     89a:	9b 40       	sbci	r25, 0x0B	; 11
+     89c:	09 c0       	rjmp	.+18     	; 0x8b0 <read_para+0xf8>
+	}
+    else if(m_ml_set < PULSE_BOTTOM)
+     89e:	80 91 78 01 	lds	r24, 0x0178
+     8a2:	90 91 79 01 	lds	r25, 0x0179
+     8a6:	81 15       	cp	r24, r1
+     8a8:	99 41       	sbci	r25, 0x19	; 25
+     8aa:	30 f4       	brcc	.+12     	; 0x8b8 <read_para+0x100>
+	{
+        m_ml_set = PULSE_BOTTOM;
+     8ac:	80 e0       	ldi	r24, 0x00	; 0
+     8ae:	99 e1       	ldi	r25, 0x19	; 25
+     8b0:	90 93 79 01 	sts	0x0179, r25
+     8b4:	80 93 78 01 	sts	0x0178, r24
+	}
+}
+     8b8:	df 91       	pop	r29
+     8ba:	cf 91       	pop	r28
+     8bc:	08 95       	ret
+
+000008be <turn_on_led_ms>:
+#endif
+}
+/////////////////////////////////////////////////////////////////
+void turn_on_led_ms(unsigned short ms)
+{
+	bled = 1;
+     8be:	ac 9a       	sbi	0x15, 4	; 21
+	SetTimer(MT_TURN_OFF_LED, ms, 0);
+     8c0:	ac 01       	movw	r20, r24
+     8c2:	60 e0       	ldi	r22, 0x00	; 0
+     8c4:	70 e0       	ldi	r23, 0x00	; 0
+     8c6:	20 e0       	ldi	r18, 0x00	; 0
+     8c8:	87 eb       	ldi	r24, 0xB7	; 183
+     8ca:	94 e0       	ldi	r25, 0x04	; 4
+     8cc:	c8 cb       	rjmp	.-2160   	; 0x5e <SetTimer>
+
+000008ce <scan_key>:
+////////////////////////////////////////////////////////////////
+void scan_key(void)
+{
+#ifndef __TEST__
+	int i;
+    if(0 == bkmh)
+     8ce:	9a 99       	sbic	0x13, 2	; 19
+     8d0:	0e c0       	rjmp	.+28     	; 0x8ee <scan_key+0x20>
+     8d2:	8c e2       	ldi	r24, 0x2C	; 44
+     8d4:	91 e0       	ldi	r25, 0x01	; 1
+     8d6:	ef e3       	ldi	r30, 0x3F	; 63
+     8d8:	ff e1       	ldi	r31, 0x1F	; 31
+     8da:	31 97       	sbiw	r30, 0x01	; 1
+     8dc:	f1 f7       	brne	.-4      	; 0x8da <scan_key+0xc>
+     8de:	00 c0       	rjmp	.+0      	; 0x8e0 <scan_key+0x12>
+     8e0:	00 00       	nop
+    {
+        //检测到高料位按键操作
+		for(i=300; i>0; i--)
+		{
+        	_delay_ms(2);
+			if(0 != bkmh)
+     8e2:	9a 99       	sbic	0x13, 2	; 19
+     8e4:	bc c0       	rjmp	.+376    	; 0xa5e <scan_key+0x190>
+     8e6:	01 97       	sbiw	r24, 0x01	; 1
+#ifndef __TEST__
+	int i;
+    if(0 == bkmh)
+    {
+        //检测到高料位按键操作
+		for(i=300; i>0; i--)
+     8e8:	00 97       	sbiw	r24, 0x00	; 0
+     8ea:	a9 f7       	brne	.-22     	; 0x8d6 <scan_key+0x8>
+     8ec:	49 c0       	rjmp	.+146    	; 0x980 <scan_key+0xb2>
+				_delay_ms(20);
+	        }
+	        //sei();
+		}
+    }
+    else if(0 == bkml)
+     8ee:	9b 99       	sbic	0x13, 3	; 19
+     8f0:	0e c0       	rjmp	.+28     	; 0x90e <scan_key+0x40>
+     8f2:	8c e2       	ldi	r24, 0x2C	; 44
+     8f4:	91 e0       	ldi	r25, 0x01	; 1
+     8f6:	ef e3       	ldi	r30, 0x3F	; 63
+     8f8:	ff e1       	ldi	r31, 0x1F	; 31
+     8fa:	31 97       	sbiw	r30, 0x01	; 1
+     8fc:	f1 f7       	brne	.-4      	; 0x8fa <scan_key+0x2c>
+     8fe:	00 c0       	rjmp	.+0      	; 0x900 <scan_key+0x32>
+     900:	00 00       	nop
+    {
+        //检测到低料位按键操作
+		for(i=300; i>0; i--)
+		{
+        	_delay_ms(2);
+			if(0 != bkml)
+     902:	9b 99       	sbic	0x13, 3	; 19
+     904:	ac c0       	rjmp	.+344    	; 0xa5e <scan_key+0x190>
+     906:	01 97       	sbiw	r24, 0x01	; 1
+		}
+    }
+    else if(0 == bkml)
+    {
+        //检测到低料位按键操作
+		for(i=300; i>0; i--)
+     908:	00 97       	sbiw	r24, 0x00	; 0
+     90a:	a9 f7       	brne	.-22     	; 0x8f6 <scan_key+0x28>
+     90c:	6c c0       	rjmp	.+216    	; 0x9e6 <scan_key+0x118>
+	            _delay_ms(20);
+	        }
+	        //sei();
+		}
+    }
+    else if(1 == command_gaoliaowei)
+     90e:	80 91 69 01 	lds	r24, 0x0169
+     912:	81 30       	cpi	r24, 0x01	; 1
+     914:	c1 f4       	brne	.+48     	; 0x946 <scan_key+0x78>
+    {
+        command_gaoliaowei = 0;
+     916:	10 92 69 01 	sts	0x0169, r1
+		//
+		#if USED_SMOOTHING == TRUE
+		{
+			turn_on_led_ms(3000);
+     91a:	88 eb       	ldi	r24, 0xB8	; 184
+     91c:	9b e0       	ldi	r25, 0x0B	; 11
+     91e:	cf df       	rcall	.-98     	; 0x8be <turn_on_led_ms>
+		#else
+		{
+			turn_on_led_ms(2000);
+		}
+		#endif
+        m_mh_set = m_mcur.ms;//标定起作用，延时记录
+     920:	80 91 84 01 	lds	r24, 0x0184
+     924:	90 91 85 01 	lds	r25, 0x0185
+     928:	90 93 77 01 	sts	0x0177, r25
+     92c:	80 93 76 01 	sts	0x0176, r24
+        //
+        m_cgq_ack=GAOLIAOWEI;
+     930:	84 e3       	ldi	r24, 0x34	; 52
+     932:	80 93 6b 01 	sts	0x016B, r24
+		//
+		#if USED_SMOOTHING == TRUE
+		{
+			SetTimer(MT_GAOLIAOWEI_SAVE, 2500, 0);
+     936:	20 e0       	ldi	r18, 0x00	; 0
+     938:	44 ec       	ldi	r20, 0xC4	; 196
+     93a:	59 e0       	ldi	r21, 0x09	; 9
+     93c:	60 e0       	ldi	r22, 0x00	; 0
+     93e:	70 e0       	ldi	r23, 0x00	; 0
+     940:	84 eb       	ldi	r24, 0xB4	; 180
+     942:	94 e0       	ldi	r25, 0x04	; 4
+     944:	1c c0       	rjmp	.+56     	; 0x97e <scan_key+0xb0>
+		{
+			SetTimer(MT_GAOLIAOWEI_SAVE, 2000, 0);
+		}
+		#endif
+    }
+    else if(1 == command_diliaowei)
+     946:	80 91 6a 01 	lds	r24, 0x016A
+     94a:	81 30       	cpi	r24, 0x01	; 1
+     94c:	09 f0       	breq	.+2      	; 0x950 <scan_key+0x82>
+     94e:	87 c0       	rjmp	.+270    	; 0xa5e <scan_key+0x190>
+    {
+        command_diliaowei = 0;
+     950:	10 92 6a 01 	sts	0x016A, r1
+		//
+		#if USED_SMOOTHING == TRUE
+		{
+			turn_on_led_ms(2500);
+     954:	84 ec       	ldi	r24, 0xC4	; 196
+     956:	99 e0       	ldi	r25, 0x09	; 9
+     958:	b2 df       	rcall	.-156    	; 0x8be <turn_on_led_ms>
+		#else
+		{
+			turn_on_led_ms(2000);
+		}
+		#endif
+        m_ml_set = m_mcur.ms;//标定起作用，延时记录
+     95a:	80 91 84 01 	lds	r24, 0x0184
+     95e:	90 91 85 01 	lds	r25, 0x0185
+     962:	90 93 79 01 	sts	0x0179, r25
+     966:	80 93 78 01 	sts	0x0178, r24
+        //
+        m_cgq_ack=DILIAOWEI;
+     96a:	85 e3       	ldi	r24, 0x35	; 53
+     96c:	80 93 6b 01 	sts	0x016B, r24
+		//
+		#if USED_SMOOTHING == TRUE
+		{
+			SetTimer(MT_DILIAOWEI_SAVE, 2500, 0);
+     970:	20 e0       	ldi	r18, 0x00	; 0
+     972:	44 ec       	ldi	r20, 0xC4	; 196
+     974:	59 e0       	ldi	r21, 0x09	; 9
+     976:	60 e0       	ldi	r22, 0x00	; 0
+     978:	70 e0       	ldi	r23, 0x00	; 0
+     97a:	85 eb       	ldi	r24, 0xB5	; 181
+     97c:	94 e0       	ldi	r25, 0x04	; 4
+     97e:	6f cb       	rjmp	.-2338   	; 0x5e <SetTimer>
+			}
+		}
+		if(0 == i)
+		{
+	        //cli();
+	        if(0 == bkmh)
+     980:	9a 99       	sbic	0x13, 2	; 19
+     982:	6d c0       	rjmp	.+218    	; 0xa5e <scan_key+0x190>
+	        {
+				#if USED_SMOOTHING == TRUE
+				{
+					turn_on_led_ms(2000);
+     984:	80 ed       	ldi	r24, 0xD0	; 208
+     986:	97 e0       	ldi	r25, 0x07	; 7
+     988:	9a df       	rcall	.-204    	; 0x8be <turn_on_led_ms>
+     98a:	8e e1       	ldi	r24, 0x1E	; 30
+     98c:	90 e0       	ldi	r25, 0x00	; 0
+					turn_on_led_ms(2000);
+				}
+				#endif
+	            for(i=30; i>0; i--)
+	            {
+					if(1==bkmh)
+     98e:	9a 9b       	sbis	0x13, 2	; 19
+     990:	03 c0       	rjmp	.+6      	; 0x998 <scan_key+0xca>
+	        //cli();
+	        if(0 == bkmh)
+	        {
+				#if USED_SMOOTHING == TRUE
+				{
+					turn_on_led_ms(2000);
+     992:	8e e1       	ldi	r24, 0x1E	; 30
+     994:	90 e0       	ldi	r25, 0x00	; 0
+     996:	0b c0       	rjmp	.+22     	; 0x9ae <scan_key+0xe0>
+     998:	ef e3       	ldi	r30, 0x3F	; 63
+     99a:	ff e1       	ldi	r31, 0x1F	; 31
+     99c:	31 97       	sbiw	r30, 0x01	; 1
+     99e:	f1 f7       	brne	.-4      	; 0x99c <scan_key+0xce>
+     9a0:	00 c0       	rjmp	.+0      	; 0x9a2 <scan_key+0xd4>
+     9a2:	00 00       	nop
+					if(1==bkmh)
+					{
+						break;
+					}
+	                _delay_ms(2);
+	                wdt_reset();
+     9a4:	a8 95       	wdr
+     9a6:	01 97       	sbiw	r24, 0x01	; 1
+				#else
+				{
+					turn_on_led_ms(2000);
+				}
+				#endif
+	            for(i=30; i>0; i--)
+     9a8:	00 97       	sbiw	r24, 0x00	; 0
+     9aa:	89 f7       	brne	.-30     	; 0x98e <scan_key+0xc0>
+     9ac:	f2 cf       	rjmp	.-28     	; 0x992 <scan_key+0xc4>
+	            }
+				#if USED_SMOOTHING == TRUE
+				{
+					for(i=30; i>0; i--)
+					{
+						wdt_reset();
+     9ae:	a8 95       	wdr
+     9b0:	ff ef       	ldi	r31, 0xFF	; 255
+     9b2:	20 e7       	ldi	r18, 0x70	; 112
+     9b4:	32 e0       	ldi	r19, 0x02	; 2
+     9b6:	f1 50       	subi	r31, 0x01	; 1
+     9b8:	20 40       	sbci	r18, 0x00	; 0
+     9ba:	30 40       	sbci	r19, 0x00	; 0
+     9bc:	e1 f7       	brne	.-8      	; 0x9b6 <scan_key+0xe8>
+     9be:	00 c0       	rjmp	.+0      	; 0x9c0 <scan_key+0xf2>
+     9c0:	00 00       	nop
+     9c2:	01 97       	sbiw	r24, 0x01	; 1
+	                _delay_ms(2);
+	                wdt_reset();
+	            }
+				#if USED_SMOOTHING == TRUE
+				{
+					for(i=30; i>0; i--)
+     9c4:	00 97       	sbiw	r24, 0x00	; 0
+     9c6:	99 f7       	brne	.-26     	; 0x9ae <scan_key+0xe0>
+						//m_mh_set = m_mcur.ms; //标定起作用，延时记录
+						_delay_ms(50);
+					}
+				}
+				#endif
+				m_mh_set = m_mcur.ms; //如果禁止中断，这个采样值不会更新
+     9c8:	80 91 84 01 	lds	r24, 0x0184
+     9cc:	90 91 85 01 	lds	r25, 0x0185
+     9d0:	90 93 77 01 	sts	0x0177, r25
+     9d4:	80 93 76 01 	sts	0x0176, r24
+	            eeprom_write_word_user((uint16_t *)&m_para[0].e_mh, m_mh_set);
+     9d8:	60 91 76 01 	lds	r22, 0x0176
+     9dc:	70 91 77 01 	lds	r23, 0x0177
+     9e0:	80 ec       	ldi	r24, 0xC0	; 192
+     9e2:	90 e0       	ldi	r25, 0x00	; 0
+     9e4:	26 c0       	rjmp	.+76     	; 0xa32 <scan_key+0x164>
+			}
+		}
+		if(0 == i)
+		{
+	        //cli();
+	        if(0 == bkml)
+     9e6:	9b 99       	sbic	0x13, 3	; 19
+     9e8:	3a c0       	rjmp	.+116    	; 0xa5e <scan_key+0x190>
+	        {
+		        #if USED_SMOOTHING == TRUE
+		        {
+			        turn_on_led_ms(2000);
+     9ea:	80 ed       	ldi	r24, 0xD0	; 208
+     9ec:	97 e0       	ldi	r25, 0x07	; 7
+     9ee:	67 df       	rcall	.-306    	; 0x8be <turn_on_led_ms>
+     9f0:	8e e1       	ldi	r24, 0x1E	; 30
+     9f2:	90 e0       	ldi	r25, 0x00	; 0
+			        turn_on_led_ms(2000);
+		        }
+		        #endif
+	            for(i=30; i>0; i--)
+	            {
+		            if(1==bkml)
+     9f4:	9b 9b       	sbis	0x13, 3	; 19
+     9f6:	28 c0       	rjmp	.+80     	; 0xa48 <scan_key+0x17a>
+	        //cli();
+	        if(0 == bkml)
+	        {
+		        #if USED_SMOOTHING == TRUE
+		        {
+			        turn_on_led_ms(2000);
+     9f8:	8e e1       	ldi	r24, 0x1E	; 30
+     9fa:	90 e0       	ldi	r25, 0x00	; 0
+	            }
+				#if USED_SMOOTHING == TRUE
+				{
+					for(i=30; i>0; i--)
+					{
+						wdt_reset();
+     9fc:	a8 95       	wdr
+     9fe:	ff ef       	ldi	r31, 0xFF	; 255
+     a00:	20 e7       	ldi	r18, 0x70	; 112
+     a02:	32 e0       	ldi	r19, 0x02	; 2
+     a04:	f1 50       	subi	r31, 0x01	; 1
+     a06:	20 40       	sbci	r18, 0x00	; 0
+     a08:	30 40       	sbci	r19, 0x00	; 0
+     a0a:	e1 f7       	brne	.-8      	; 0xa04 <scan_key+0x136>
+     a0c:	00 c0       	rjmp	.+0      	; 0xa0e <scan_key+0x140>
+     a0e:	00 00       	nop
+     a10:	01 97       	sbiw	r24, 0x01	; 1
+		            _delay_ms(2);
+		            wdt_reset();
+	            }
+				#if USED_SMOOTHING == TRUE
+				{
+					for(i=30; i>0; i--)
+     a12:	00 97       	sbiw	r24, 0x00	; 0
+     a14:	99 f7       	brne	.-26     	; 0x9fc <scan_key+0x12e>
+						//m_ml_set = m_mcur.ms;//标定起作用，延时记录
+						_delay_ms(50);
+					}
+				}
+				#endif
+				m_ml_set = m_mcur.ms; //如果禁止中断，这个采样值不会更新
+     a16:	80 91 84 01 	lds	r24, 0x0184
+     a1a:	90 91 85 01 	lds	r25, 0x0185
+     a1e:	90 93 79 01 	sts	0x0179, r25
+     a22:	80 93 78 01 	sts	0x0178, r24
+	            eeprom_write_word_user((uint16_t *)&m_para[0].e_ml, m_ml_set);
+     a26:	60 91 78 01 	lds	r22, 0x0178
+     a2a:	70 91 79 01 	lds	r23, 0x0179
+     a2e:	82 ec       	ldi	r24, 0xC2	; 194
+     a30:	90 e0       	ldi	r25, 0x00	; 0
+     a32:	64 de       	rcall	.-824    	; 0x6fc <eeprom_write_word_user>
+     a34:	4f ef       	ldi	r20, 0xFF	; 255
+     a36:	89 ef       	ldi	r24, 0xF9	; 249
+     a38:	90 e0       	ldi	r25, 0x00	; 0
+     a3a:	41 50       	subi	r20, 0x01	; 1
+     a3c:	80 40       	sbci	r24, 0x00	; 0
+     a3e:	90 40       	sbci	r25, 0x00	; 0
+     a40:	e1 f7       	brne	.-8      	; 0xa3a <scan_key+0x16c>
+     a42:	00 c0       	rjmp	.+0      	; 0xa44 <scan_key+0x176>
+     a44:	00 00       	nop
+     a46:	08 95       	ret
+     a48:	ef e3       	ldi	r30, 0x3F	; 63
+     a4a:	ff e1       	ldi	r31, 0x1F	; 31
+     a4c:	31 97       	sbiw	r30, 0x01	; 1
+     a4e:	f1 f7       	brne	.-4      	; 0xa4c <scan_key+0x17e>
+     a50:	00 c0       	rjmp	.+0      	; 0xa52 <scan_key+0x184>
+     a52:	00 00       	nop
+		            if(1==bkml)
+		            {
+			            break;
+		            }
+		            _delay_ms(2);
+		            wdt_reset();
+     a54:	a8 95       	wdr
+     a56:	01 97       	sbiw	r24, 0x01	; 1
+		        #else
+		        {
+			        turn_on_led_ms(2000);
+		        }
+		        #endif
+	            for(i=30; i>0; i--)
+     a58:	00 97       	sbiw	r24, 0x00	; 0
+     a5a:	61 f6       	brne	.-104    	; 0x9f4 <scan_key+0x126>
+     a5c:	cd cf       	rjmp	.-102    	; 0x9f8 <scan_key+0x12a>
+     a5e:	08 95       	ret
+
+00000a60 <uart_tx>:
+void uart_tx(void)
+{
+    //中断方式发生串口数据
+    //
+	UCHAR2 tmp;
+    uart_tx_buf[0] = 0xaa;
+     a60:	8a ea       	ldi	r24, 0xAA	; 170
+     a62:	80 93 d4 00 	sts	0x00D4, r24
+    uart_tx_buf[1] = ADDR_CGQ;//应答地址
+     a66:	83 e0       	ldi	r24, 0x03	; 3
+     a68:	80 93 d5 00 	sts	0x00D5, r24
+	//
+	tmp.ms = OCR1A;
+     a6c:	8a b5       	in	r24, 0x2a	; 42
+     a6e:	9b b5       	in	r25, 0x2b	; 43
+    uart_tx_buf[2] = tmp.mc[0]; //输出的脉宽比较值
+     a70:	80 93 d6 00 	sts	0x00D6, r24
+    uart_tx_buf[3] = tmp.mc[1];
+     a74:	90 93 d7 00 	sts	0x00D7, r25
+    tmp.ms = PWM_TOP;
+    uart_tx_buf[4] = tmp.mc[0]; //pwm周期
+     a78:	80 e9       	ldi	r24, 0x90	; 144
+     a7a:	80 93 d8 00 	sts	0x00D8, r24
+    uart_tx_buf[5] = tmp.mc[1];
+     a7e:	81 e0       	ldi	r24, 0x01	; 1
+     a80:	80 93 d9 00 	sts	0x00D9, r24
+	//
+    uart_tx_buf[6]= m_cgq_ack;
+     a84:	80 91 6b 01 	lds	r24, 0x016B
+     a88:	80 93 da 00 	sts	0x00DA, r24
+    //
+    #if USART_TEST == FALSE
+	{
+		unsigned char i;
+		//
+		uart_tx_buf[7] = 0;
+     a8c:	10 92 db 00 	sts	0x00DB, r1
+     a90:	e4 ed       	ldi	r30, 0xD4	; 212
+     a92:	f0 e0       	ldi	r31, 0x00	; 0
+		for(i=0; i<7; i++)
+		{
+			uart_tx_buf[7] += uart_tx_buf[i];//sum
+     a94:	81 91       	ld	r24, Z+
+     a96:	90 91 db 00 	lds	r25, 0x00DB
+     a9a:	89 0f       	add	r24, r25
+     a9c:	80 93 db 00 	sts	0x00DB, r24
+    #if USART_TEST == FALSE
+	{
+		unsigned char i;
+		//
+		uart_tx_buf[7] = 0;
+		for(i=0; i<7; i++)
+     aa0:	80 e0       	ldi	r24, 0x00	; 0
+     aa2:	eb 3d       	cpi	r30, 0xDB	; 219
+     aa4:	f8 07       	cpc	r31, r24
+     aa6:	b1 f7       	brne	.-20     	; 0xa94 <uart_tx+0x34>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+     aa8:	8f e3       	ldi	r24, 0x3F	; 63
+     aaa:	96 e0       	ldi	r25, 0x06	; 6
+     aac:	01 97       	sbiw	r24, 0x01	; 1
+     aae:	f1 f7       	brne	.-4      	; 0xaac <uart_tx+0x4c>
+     ab0:	00 c0       	rjmp	.+0      	; 0xab2 <uart_tx+0x52>
+     ab2:	00 00       	nop
+    #endif
+    //
+    //开始发送数据
+    _delay_us(400);
+	//_delay_us(200);
+    b485en = 1;//发送使能
+     ab4:	97 9a       	sbi	0x12, 7	; 18
+     ab6:	8f e8       	ldi	r24, 0x8F	; 143
+     ab8:	91 e0       	ldi	r25, 0x01	; 1
+     aba:	01 97       	sbiw	r24, 0x01	; 1
+     abc:	f1 f7       	brne	.-4      	; 0xaba <uart_tx+0x5a>
+     abe:	00 c0       	rjmp	.+0      	; 0xac0 <uart_tx+0x60>
+     ac0:	00 00       	nop
+    _delay_us(100);
+    UDR = uart_tx_buf[0];
+     ac2:	80 91 d4 00 	lds	r24, 0x00D4
+     ac6:	8c b9       	out	0x0c, r24	; 12
+    uart_tx_addr = 1;
+     ac8:	81 e0       	ldi	r24, 0x01	; 1
+     aca:	80 93 e4 00 	sts	0x00E4, r24
+     ace:	08 95       	ret
+
+00000ad0 <pulse_value_handling>:
+/////////////////////////////////////////////////////////////////
+
+//smoothingDate
+
+unsigned short pulse_value_handling(unsigned short val)
+{
+     ad0:	0f 93       	push	r16
+     ad2:	fc 01       	movw	r30, r24
+	//
+	#if USED_SMOOTHING == TRUE
+	{
+		unsigned short tmp;
+		//
+		m_pulse_value_bak.mll <<= 16;
+     ad4:	20 91 c8 00 	lds	r18, 0x00C8
+     ad8:	30 91 c9 00 	lds	r19, 0x00C9
+     adc:	40 91 ca 00 	lds	r20, 0x00CA
+     ae0:	50 91 cb 00 	lds	r21, 0x00CB
+     ae4:	60 91 cc 00 	lds	r22, 0x00CC
+     ae8:	70 91 cd 00 	lds	r23, 0x00CD
+     aec:	80 91 ce 00 	lds	r24, 0x00CE
+     af0:	90 91 cf 00 	lds	r25, 0x00CF
+     af4:	00 e1       	ldi	r16, 0x10	; 16
+     af6:	bd d3       	rcall	.+1914   	; 0x1272 <__ashldi3>
+     af8:	40 93 ca 00 	sts	0x00CA, r20
+     afc:	50 93 cb 00 	sts	0x00CB, r21
+     b00:	60 93 cc 00 	sts	0x00CC, r22
+     b04:	70 93 cd 00 	sts	0x00CD, r23
+     b08:	80 93 ce 00 	sts	0x00CE, r24
+     b0c:	90 93 cf 00 	sts	0x00CF, r25
+		m_pulse_value_bak.ms[0] = val;
+     b10:	f0 93 c9 00 	sts	0x00C9, r31
+     b14:	e0 93 c8 00 	sts	0x00C8, r30
+		//
+		/*tmp = (unsigned short)(m_pulse_value_bak.ms[0]/8);
+		tmp += (unsigned short)(m_pulse_value_bak.ms[1]/2);
+		tmp += (unsigned short)(m_pulse_value_bak.ms[2]/4);*/
+		if (smoothingDate !=0)
+     b18:	80 91 60 00 	lds	r24, 0x0060
+     b1c:	90 91 61 00 	lds	r25, 0x0061
+     b20:	89 2b       	or	r24, r25
+     b22:	69 f0       	breq	.+26     	; 0xb3e <pulse_value_handling+0x6e>
+		{
+			tmp = ((unsigned short)(m_pulse_value_bak.ms[1])/10*smoothingDate)
+     b24:	80 91 ca 00 	lds	r24, 0x00CA
+     b28:	90 91 cb 00 	lds	r25, 0x00CB
+     b2c:	6a e0       	ldi	r22, 0x0A	; 10
+     b2e:	70 e0       	ldi	r23, 0x00	; 0
+     b30:	5e d3       	rcall	.+1724   	; 0x11ee <__udivmodhi4>
+     b32:	8a e0       	ldi	r24, 0x0A	; 10
+     b34:	86 9f       	mul	r24, r22
+     b36:	f0 01       	movw	r30, r0
+     b38:	87 9f       	mul	r24, r23
+     b3a:	f0 0d       	add	r31, r0
+     b3c:	11 24       	eor	r1, r1
+	#else
+	{
+		return val;
+	}
+	#endif
+}
+     b3e:	cf 01       	movw	r24, r30
+     b40:	0f 91       	pop	r16
+     b42:	08 95       	ret
+
+00000b44 <OnTimer>:
+}
+#endif
+/////////////////////////////////////////////////////////////////
+void OnTimer(unsigned short id)
+{
+	switch(id)
+     b44:	86 3b       	cpi	r24, 0xB6	; 182
+     b46:	24 e0       	ldi	r18, 0x04	; 4
+     b48:	92 07       	cpc	r25, r18
+     b4a:	01 f1       	breq	.+64     	; 0xb8c <OnTimer+0x48>
+     b4c:	40 f4       	brcc	.+16     	; 0xb5e <OnTimer+0x1a>
+     b4e:	84 3b       	cpi	r24, 0xB4	; 180
+     b50:	24 e0       	ldi	r18, 0x04	; 4
+     b52:	92 07       	cpc	r25, r18
+     b54:	e1 f0       	breq	.+56     	; 0xb8e <OnTimer+0x4a>
+     b56:	85 3b       	cpi	r24, 0xB5	; 181
+     b58:	94 40       	sbci	r25, 0x04	; 4
+     b5a:	81 f1       	breq	.+96     	; 0xbbc <OnTimer+0x78>
+     b5c:	08 95       	ret
+     b5e:	87 3b       	cpi	r24, 0xB7	; 183
+     b60:	24 e0       	ldi	r18, 0x04	; 4
+     b62:	92 07       	cpc	r25, r18
+     b64:	21 f0       	breq	.+8      	; 0xb6e <OnTimer+0x2a>
+     b66:	88 3b       	cpi	r24, 0xB8	; 184
+     b68:	94 40       	sbci	r25, 0x04	; 4
+     b6a:	29 f0       	breq	.+10     	; 0xb76 <OnTimer+0x32>
+     b6c:	08 95       	ret
+	{
+		case MT_TEST:
+		break;
+		case MT_TURN_OFF_LED:
+		{
+			bled = 0;
+     b6e:	ac 98       	cbi	0x15, 4	; 21
+			m_cgq_ack=0;//清除应答命令
+     b70:	10 92 6b 01 	sts	0x016B, r1
+		}
+		break;
+     b74:	08 95       	ret
+		case MT_LED_RUN:
+		{
+			//运行灯闪烁
+			bled_run = !bled_run;
+     b76:	85 b3       	in	r24, 0x15	; 21
+     b78:	85 fb       	bst	r24, 5
+     b7a:	88 27       	eor	r24, r24
+     b7c:	80 f9       	bld	r24, 0
+     b7e:	91 e0       	ldi	r25, 0x01	; 1
+     b80:	89 27       	eor	r24, r25
+     b82:	80 fd       	sbrc	r24, 0
+     b84:	ad 9a       	sbi	0x15, 5	; 21
+     b86:	80 ff       	sbrs	r24, 0
+     b88:	ad 98       	cbi	0x15, 5	; 21
+		}
+		break;
+     b8a:	08 95       	ret
+		case MT_SCAN_KEY:
+		{
+			scan_key();
+     b8c:	a0 ce       	rjmp	.-704    	; 0x8ce <scan_key>
+		}
+		break;
+		case MT_GAOLIAOWEI_SAVE:
+		{
+			m_mh_set = m_mcur.ms;
+     b8e:	80 91 84 01 	lds	r24, 0x0184
+     b92:	90 91 85 01 	lds	r25, 0x0185
+     b96:	90 93 77 01 	sts	0x0177, r25
+     b9a:	80 93 76 01 	sts	0x0176, r24
+			eeprom_write_word_user((uint16_t *)&m_para[0].e_mh, m_mh_set);
+     b9e:	60 91 76 01 	lds	r22, 0x0176
+     ba2:	70 91 77 01 	lds	r23, 0x0177
+     ba6:	80 ec       	ldi	r24, 0xC0	; 192
+     ba8:	90 e0       	ldi	r25, 0x00	; 0
+     baa:	a8 dd       	rcall	.-1200   	; 0x6fc <eeprom_write_word_user>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+     bac:	8f e3       	ldi	r24, 0x3F	; 63
+     bae:	9f e1       	ldi	r25, 0x1F	; 31
+     bb0:	01 97       	sbiw	r24, 0x01	; 1
+     bb2:	f1 f7       	brne	.-4      	; 0xbb0 <OnTimer+0x6c>
+     bb4:	00 c0       	rjmp	.+0      	; 0xbb6 <OnTimer+0x72>
+     bb6:	00 00       	nop
+			_delay_ms(2);
+			//
+			m_cgq_ack=GAOLIAOWEI;
+     bb8:	84 e3       	ldi	r24, 0x34	; 52
+     bba:	16 c0       	rjmp	.+44     	; 0xbe8 <OnTimer+0xa4>
+		}
+		break;
+		case MT_DILIAOWEI_SAVE:
+		{
+			m_ml_set = m_mcur.ms;
+     bbc:	80 91 84 01 	lds	r24, 0x0184
+     bc0:	90 91 85 01 	lds	r25, 0x0185
+     bc4:	90 93 79 01 	sts	0x0179, r25
+     bc8:	80 93 78 01 	sts	0x0178, r24
+			eeprom_write_word_user((uint16_t *)&m_para[0].e_ml,m_ml_set);
+     bcc:	60 91 78 01 	lds	r22, 0x0178
+     bd0:	70 91 79 01 	lds	r23, 0x0179
+     bd4:	82 ec       	ldi	r24, 0xC2	; 194
+     bd6:	90 e0       	ldi	r25, 0x00	; 0
+     bd8:	91 dd       	rcall	.-1246   	; 0x6fc <eeprom_write_word_user>
+     bda:	8f e3       	ldi	r24, 0x3F	; 63
+     bdc:	9f e1       	ldi	r25, 0x1F	; 31
+     bde:	01 97       	sbiw	r24, 0x01	; 1
+     be0:	f1 f7       	brne	.-4      	; 0xbde <OnTimer+0x9a>
+     be2:	00 c0       	rjmp	.+0      	; 0xbe4 <OnTimer+0xa0>
+     be4:	00 00       	nop
+			_delay_ms(2);
+			//
+			m_cgq_ack=DILIAOWEI;
+     be6:	85 e3       	ldi	r24, 0x35	; 53
+     be8:	80 93 6b 01 	sts	0x016B, r24
+     bec:	08 95       	ret
+
+00000bee <bootloader_handling>:
+	#define UPDATE_KEY_WORD  0x1324
+	//
+	extern void wdt_reset_mcu(void);
+	//
+	//在链接过程中已经隔离出一部分EEPROM空间给bootloader用
+	eeprom_write_word((uint16_t *)0x10,UPDATE_KEY_WORD);
+     bee:	64 e2       	ldi	r22, 0x24	; 36
+     bf0:	73 e1       	ldi	r23, 0x13	; 19
+     bf2:	80 e1       	ldi	r24, 0x10	; 16
+     bf4:	90 e0       	ldi	r25, 0x00	; 0
+     bf6:	5b d3       	rcall	.+1718   	; 0x12ae <__eewr_word_m8a>
+	eeprom_busy_wait();
+     bf8:	e1 99       	sbic	0x1c, 1	; 28
+     bfa:	fe cf       	rjmp	.-4      	; 0xbf8 <bootloader_handling+0xa>
+	eeprom_write_word((uint16_t *)0x30,UPDATE_KEY_WORD);
+     bfc:	64 e2       	ldi	r22, 0x24	; 36
+     bfe:	73 e1       	ldi	r23, 0x13	; 19
+     c00:	80 e3       	ldi	r24, 0x30	; 48
+     c02:	90 e0       	ldi	r25, 0x00	; 0
+     c04:	54 d3       	rcall	.+1704   	; 0x12ae <__eewr_word_m8a>
+	eeprom_busy_wait();
+     c06:	e1 99       	sbic	0x1c, 1	; 28
+     c08:	fe cf       	rjmp	.-4      	; 0xc06 <bootloader_handling+0x18>
+	eeprom_write_word((uint16_t *)0x50,UPDATE_KEY_WORD);
+     c0a:	64 e2       	ldi	r22, 0x24	; 36
+     c0c:	73 e1       	ldi	r23, 0x13	; 19
+     c0e:	80 e5       	ldi	r24, 0x50	; 80
+     c10:	90 e0       	ldi	r25, 0x00	; 0
+     c12:	4d d3       	rcall	.+1690   	; 0x12ae <__eewr_word_m8a>
+	eeprom_busy_wait();
+     c14:	e1 99       	sbic	0x1c, 1	; 28
+     c16:	fe cf       	rjmp	.-4      	; 0xc14 <bootloader_handling+0x26>
+     c18:	2f ef       	ldi	r18, 0xFF	; 255
+     c1a:	80 e7       	ldi	r24, 0x70	; 112
+     c1c:	92 e0       	ldi	r25, 0x02	; 2
+     c1e:	21 50       	subi	r18, 0x01	; 1
+     c20:	80 40       	sbci	r24, 0x00	; 0
+     c22:	90 40       	sbci	r25, 0x00	; 0
+     c24:	e1 f7       	brne	.-8      	; 0xc1e <bootloader_handling+0x30>
+     c26:	00 c0       	rjmp	.+0      	; 0xc28 <bootloader_handling+0x3a>
+     c28:	00 00       	nop
+	//
+	_delay_ms(50);
+	wdt_reset_mcu();
+     c2a:	37 dc       	rcall	.-1938   	; 0x49a <wdt_reset_mcu>
+
+00000c2c <bootloader_key_word>:
+}
+/////////////////////////////////////////////////////////////////
+void bootloader_key_word(unsigned char val)
+{
+	bootloader_flag.ml <<= 8;
+     c2c:	40 91 e0 00 	lds	r20, 0x00E0
+     c30:	50 91 e1 00 	lds	r21, 0x00E1
+     c34:	60 91 e2 00 	lds	r22, 0x00E2
+     c38:	70 91 e3 00 	lds	r23, 0x00E3
+     c3c:	76 2f       	mov	r23, r22
+     c3e:	65 2f       	mov	r22, r21
+     c40:	54 2f       	mov	r21, r20
+     c42:	44 27       	eor	r20, r20
+     c44:	40 93 e0 00 	sts	0x00E0, r20
+     c48:	50 93 e1 00 	sts	0x00E1, r21
+     c4c:	60 93 e2 00 	sts	0x00E2, r22
+     c50:	70 93 e3 00 	sts	0x00E3, r23
+	bootloader_flag.mc[0] = val;
+     c54:	80 93 e0 00 	sts	0x00E0, r24
+	if(('B'==bootloader_flag.mc[3]) && ('E'==bootloader_flag.mc[2]) &&
+     c58:	80 91 e3 00 	lds	r24, 0x00E3
+     c5c:	82 34       	cpi	r24, 0x42	; 66
+     c5e:	99 f4       	brne	.+38     	; 0xc86 <bootloader_key_word+0x5a>
+     c60:	80 91 e2 00 	lds	r24, 0x00E2
+     c64:	85 34       	cpi	r24, 0x45	; 69
+     c66:	79 f4       	brne	.+30     	; 0xc86 <bootloader_key_word+0x5a>
+	('A'==bootloader_flag.mc[1]) && ('R'==bootloader_flag.mc[0]))
+     c68:	80 91 e1 00 	lds	r24, 0x00E1
+/////////////////////////////////////////////////////////////////
+void bootloader_key_word(unsigned char val)
+{
+	bootloader_flag.ml <<= 8;
+	bootloader_flag.mc[0] = val;
+	if(('B'==bootloader_flag.mc[3]) && ('E'==bootloader_flag.mc[2]) &&
+     c6c:	81 34       	cpi	r24, 0x41	; 65
+     c6e:	59 f4       	brne	.+22     	; 0xc86 <bootloader_key_word+0x5a>
+	('A'==bootloader_flag.mc[1]) && ('R'==bootloader_flag.mc[0]))
+     c70:	80 91 e0 00 	lds	r24, 0x00E0
+     c74:	82 35       	cpi	r24, 0x52	; 82
+     c76:	39 f4       	brne	.+14     	; 0xc86 <bootloader_key_word+0x5a>
+	{
+		bootloader_flay_is_valid = TRUE;
+     c78:	81 e0       	ldi	r24, 0x01	; 1
+     c7a:	90 e0       	ldi	r25, 0x00	; 0
+     c7c:	90 93 63 00 	sts	0x0063, r25
+     c80:	80 93 62 00 	sts	0x0062, r24
+		//
+		bootloader_handling();
+     c84:	b4 df       	rcall	.-152    	; 0xbee <bootloader_handling>
+     c86:	08 95       	ret
+
+00000c88 <liaowei_sample_ok_handling>:
+/////////////////////////////////////////////////////////////////
+void liaowei_sample_ok_handling(void)
+{
+	UCHAR4 m_temp;
+	//
+	m_mcur.ms = pulse_value_handling(m_mcur.ms);//平滑处理
+     c88:	80 91 84 01 	lds	r24, 0x0184
+     c8c:	90 91 85 01 	lds	r25, 0x0185
+     c90:	1f df       	rcall	.-450    	; 0xad0 <pulse_value_handling>
+     c92:	90 93 85 01 	sts	0x0185, r25
+     c96:	80 93 84 01 	sts	0x0184, r24
+	//
+	if(m_mcur.ms > PULSE_TOP)
+     c9a:	80 91 84 01 	lds	r24, 0x0184
+     c9e:	90 91 85 01 	lds	r25, 0x0185
+     ca2:	81 30       	cpi	r24, 0x01	; 1
+     ca4:	96 49       	sbci	r25, 0x96	; 150
+     ca6:	30 f0       	brcs	.+12     	; 0xcb4 <liaowei_sample_ok_handling+0x2c>
+	{
+		m_mcur.ms = PULSE_TOP;
+     ca8:	80 e0       	ldi	r24, 0x00	; 0
+     caa:	96 e9       	ldi	r25, 0x96	; 150
+     cac:	90 93 85 01 	sts	0x0185, r25
+     cb0:	80 93 84 01 	sts	0x0184, r24
+	//OCR1A = PWM_TOP/2; //for test
+	//return;
+	//
+	//计算pwm电压输出
+	#ifndef __TEST__
+	if(m_mcur.ms <= (m_ml_set+3))
+     cb4:	20 91 84 01 	lds	r18, 0x0184
+     cb8:	30 91 85 01 	lds	r19, 0x0185
+     cbc:	80 91 78 01 	lds	r24, 0x0178
+     cc0:	90 91 79 01 	lds	r25, 0x0179
+     cc4:	03 96       	adiw	r24, 0x03	; 3
+     cc6:	82 17       	cp	r24, r18
+     cc8:	93 07       	cpc	r25, r19
+     cca:	18 f0       	brcs	.+6      	; 0xcd2 <liaowei_sample_ok_handling+0x4a>
+	{
+		m_cur_pwm.ms = (PWM_TOP/5)-3;//150//200
+     ccc:	8d e4       	ldi	r24, 0x4D	; 77
+     cce:	90 e0       	ldi	r25, 0x00	; 0
+     cd0:	0e c0       	rjmp	.+28     	; 0xcee <liaowei_sample_ok_handling+0x66>
+		OCR1A = (unsigned short)PWM_TOP-m_cur_pwm.ms;//800,1v
+	}
+	else if(m_mcur.ms >= (m_mh_set-4))
+     cd2:	20 91 84 01 	lds	r18, 0x0184
+     cd6:	30 91 85 01 	lds	r19, 0x0185
+     cda:	80 91 76 01 	lds	r24, 0x0176
+     cde:	90 91 77 01 	lds	r25, 0x0177
+     ce2:	04 97       	sbiw	r24, 0x04	; 4
+     ce4:	28 17       	cp	r18, r24
+     ce6:	39 07       	cpc	r19, r25
+     ce8:	38 f0       	brcs	.+14     	; 0xcf8 <liaowei_sample_ok_handling+0x70>
+	{
+		m_cur_pwm.ms = PWM_TOP-1;
+     cea:	8f e8       	ldi	r24, 0x8F	; 143
+     cec:	91 e0       	ldi	r25, 0x01	; 1
+     cee:	90 93 75 01 	sts	0x0175, r25
+     cf2:	80 93 74 01 	sts	0x0174, r24
+     cf6:	31 c0       	rjmp	.+98     	; 0xd5a <liaowei_sample_ok_handling+0xd2>
+	}
+	else
+	{
+		//1v <= out <= 5v
+		unsigned short m_offset;
+		m_offset = m_mcur.ms-m_ml_set;//当前测得的值减去低位设置值
+     cf8:	20 91 84 01 	lds	r18, 0x0184
+     cfc:	30 91 85 01 	lds	r19, 0x0185
+     d00:	80 91 78 01 	lds	r24, 0x0178
+     d04:	90 91 79 01 	lds	r25, 0x0179
+     d08:	28 1b       	sub	r18, r24
+     d0a:	39 0b       	sbc	r19, r25
+		m_temp.ml = m_offset;
+		m_temp.ml *= (unsigned short)((PWM_TOP/5)*4);//等距的平分1v到5v
+		m_offset = m_mh_set-m_ml_set;//高位设置值减去低位设置值
+     d0c:	40 91 76 01 	lds	r20, 0x0176
+     d10:	50 91 77 01 	lds	r21, 0x0177
+     d14:	80 91 78 01 	lds	r24, 0x0178
+     d18:	90 91 79 01 	lds	r25, 0x0179
+     d1c:	48 1b       	sub	r20, r24
+     d1e:	59 0b       	sbc	r21, r25
+		m_temp.ml += m_offset>>1;//四舍五入
+     d20:	fa 01       	movw	r30, r20
+     d22:	f6 95       	lsr	r31
+     d24:	e7 95       	ror	r30
+	{
+		//1v <= out <= 5v
+		unsigned short m_offset;
+		m_offset = m_mcur.ms-m_ml_set;//当前测得的值减去低位设置值
+		m_temp.ml = m_offset;
+		m_temp.ml *= (unsigned short)((PWM_TOP/5)*4);//等距的平分1v到5v
+     d26:	a0 e4       	ldi	r26, 0x40	; 64
+     d28:	b1 e0       	ldi	r27, 0x01	; 1
+     d2a:	97 d2       	rcall	.+1326   	; 0x125a <__umulhisi3>
+		m_offset = m_mh_set-m_ml_set;//高位设置值减去低位设置值
+		m_temp.ml += m_offset>>1;//四舍五入
+     d2c:	6e 0f       	add	r22, r30
+     d2e:	7f 1f       	adc	r23, r31
+     d30:	81 1d       	adc	r24, r1
+     d32:	91 1d       	adc	r25, r1
+		m_temp.ml /= m_offset;
+     d34:	9a 01       	movw	r18, r20
+     d36:	40 e0       	ldi	r20, 0x00	; 0
+     d38:	50 e0       	ldi	r21, 0x00	; 0
+     d3a:	6d d2       	rcall	.+1242   	; 0x1216 <__udivmodsi4>
+		m_temp.ms[0] += (PWM_TOP/5);//加入最低的1v
+     d3c:	c9 01       	movw	r24, r18
+     d3e:	80 5b       	subi	r24, 0xB0	; 176
+     d40:	9f 4f       	sbci	r25, 0xFF	; 255
+		//
+		if(m_temp.ms[0] >= PWM_TOP)
+     d42:	80 39       	cpi	r24, 0x90	; 144
+     d44:	61 e0       	ldi	r22, 0x01	; 1
+     d46:	96 07       	cpc	r25, r22
+     d48:	10 f4       	brcc	.+4      	; 0xd4e <liaowei_sample_ok_handling+0xc6>
+		m_temp.ml = m_offset;
+		m_temp.ml *= (unsigned short)((PWM_TOP/5)*4);//等距的平分1v到5v
+		m_offset = m_mh_set-m_ml_set;//高位设置值减去低位设置值
+		m_temp.ml += m_offset>>1;//四舍五入
+		m_temp.ml /= m_offset;
+		m_temp.ms[0] += (PWM_TOP/5);//加入最低的1v
+     d4a:	9c 01       	movw	r18, r24
+     d4c:	02 c0       	rjmp	.+4      	; 0xd52 <liaowei_sample_ok_handling+0xca>
+		//
+		if(m_temp.ms[0] >= PWM_TOP)
+		{
+			m_temp.ms[0] = PWM_TOP-1;
+     d4e:	2f e8       	ldi	r18, 0x8F	; 143
+     d50:	31 e0       	ldi	r19, 0x01	; 1
+				OCR1A=(unsigned short)PWM_TOP-m_cur_pwm.ms;
+			}
+		}
+		#else
+		{
+			m_cur_pwm.ms = m_temp.ms[0];
+     d52:	30 93 75 01 	sts	0x0175, r19
+     d56:	20 93 74 01 	sts	0x0174, r18
+			OCR1A=(unsigned short)PWM_TOP-m_cur_pwm.ms;
+     d5a:	20 91 74 01 	lds	r18, 0x0174
+     d5e:	30 91 75 01 	lds	r19, 0x0175
+     d62:	80 e9       	ldi	r24, 0x90	; 144
+     d64:	91 e0       	ldi	r25, 0x01	; 1
+     d66:	82 1b       	sub	r24, r18
+     d68:	93 0b       	sbc	r25, r19
+     d6a:	9b bd       	out	0x2b, r25	; 43
+     d6c:	8a bd       	out	0x2a, r24	; 42
+     d6e:	08 95       	ret
+
+00000d70 <int1_handling>:
+/////////////////////////////////////////////////////////////////
+void int1_handling(unsigned char val)
+{
+	UCHAR4 m_temp;
+	//
+	m_temp.ms[0] = val;
+     d70:	90 e0       	ldi	r25, 0x00	; 0
+		m_pulse_value_rc = ((m_pulse_value_rc*10+5)/11) + ((m_temp.ms[0]+5)/11);
+		m_temp.ms[0] = m_pulse_value_rc;
+	}
+	#else
+	{
+		m_pulse_value_rc = ((m_pulse_value_rc<<5)-(m_pulse_value_rc<<1))>>5;
+     d72:	60 91 c6 00 	lds	r22, 0x00C6
+     d76:	70 91 c7 00 	lds	r23, 0x00C7
+		m_temp.ms[0] = ((m_temp.ms[0]<<1)+m_temp.ms[0])>>5;
+     d7a:	9c 01       	movw	r18, r24
+     d7c:	22 0f       	add	r18, r18
+     d7e:	33 1f       	adc	r19, r19
+     d80:	28 0f       	add	r18, r24
+     d82:	39 1f       	adc	r19, r25
+     d84:	a5 e0       	ldi	r26, 0x05	; 5
+     d86:	36 95       	lsr	r19
+     d88:	27 95       	ror	r18
+     d8a:	aa 95       	dec	r26
+     d8c:	e1 f7       	brne	.-8      	; 0xd86 <int1_handling+0x16>
+		m_pulse_value_rc = ((m_pulse_value_rc*10+5)/11) + ((m_temp.ms[0]+5)/11);
+		m_temp.ms[0] = m_pulse_value_rc;
+	}
+	#else
+	{
+		m_pulse_value_rc = ((m_pulse_value_rc<<5)-(m_pulse_value_rc<<1))>>5;
+     d8e:	4e e1       	ldi	r20, 0x1E	; 30
+     d90:	50 e0       	ldi	r21, 0x00	; 0
+     d92:	64 9f       	mul	r22, r20
+     d94:	c0 01       	movw	r24, r0
+     d96:	65 9f       	mul	r22, r21
+     d98:	90 0d       	add	r25, r0
+     d9a:	74 9f       	mul	r23, r20
+     d9c:	90 0d       	add	r25, r0
+     d9e:	11 24       	eor	r1, r1
+     da0:	b5 e0       	ldi	r27, 0x05	; 5
+     da2:	96 95       	lsr	r25
+     da4:	87 95       	ror	r24
+     da6:	ba 95       	dec	r27
+     da8:	e1 f7       	brne	.-8      	; 0xda2 <int1_handling+0x32>
+		m_temp.ms[0] = ((m_temp.ms[0]<<1)+m_temp.ms[0])>>5;
+		m_pulse_value_rc += m_temp.ms[0];
+     daa:	28 0f       	add	r18, r24
+     dac:	39 1f       	adc	r19, r25
+     dae:	30 93 c7 00 	sts	0x00C7, r19
+     db2:	20 93 c6 00 	sts	0x00C6, r18
+		m_temp.ms[0] = m_pulse_value_rc;
+	}
+	#endif
+	//
+	m_pulse_value.ml += m_temp.ms[0];
+     db6:	80 91 d0 00 	lds	r24, 0x00D0
+     dba:	90 91 d1 00 	lds	r25, 0x00D1
+     dbe:	a0 91 d2 00 	lds	r26, 0x00D2
+     dc2:	b0 91 d3 00 	lds	r27, 0x00D3
+     dc6:	82 0f       	add	r24, r18
+     dc8:	93 1f       	adc	r25, r19
+     dca:	a1 1d       	adc	r26, r1
+     dcc:	b1 1d       	adc	r27, r1
+     dce:	80 93 d0 00 	sts	0x00D0, r24
+     dd2:	90 93 d1 00 	sts	0x00D1, r25
+     dd6:	a0 93 d2 00 	sts	0x00D2, r26
+     dda:	b0 93 d3 00 	sts	0x00D3, r27
+	m_pulse_counter++;
+     dde:	80 91 8f 01 	lds	r24, 0x018F
+     de2:	90 91 90 01 	lds	r25, 0x0190
+     de6:	01 96       	adiw	r24, 0x01	; 1
+     de8:	90 93 90 01 	sts	0x0190, r25
+     dec:	80 93 8f 01 	sts	0x018F, r24
+	//
+	//软件中用的采样率是10KHz
+	if(m_pulse_counter > ((unsigned short)32*1024))//采集刷新时间约2秒      //32 //16 //8        //4096=2^12  //2048=2^11  //1024=2^10  //512=2^9  //256=2^8
+     df0:	80 91 8f 01 	lds	r24, 0x018F
+     df4:	90 91 90 01 	lds	r25, 0x0190
+     df8:	81 30       	cpi	r24, 0x01	; 1
+     dfa:	90 48       	sbci	r25, 0x80	; 128
+     dfc:	08 f4       	brcc	.+2      	; 0xe00 <int1_handling+0x90>
+     dfe:	40 c0       	rjmp	.+128    	; 0xe80 <int1_handling+0x110>
+	{
+		m_pulse_value.ml <<= (6-5);                       //5   //4  //3       //16-12      //16-11      //16-10      //16-9     //16-8
+     e00:	80 91 d0 00 	lds	r24, 0x00D0
+     e04:	90 91 d1 00 	lds	r25, 0x00D1
+     e08:	a0 91 d2 00 	lds	r26, 0x00D2
+     e0c:	b0 91 d3 00 	lds	r27, 0x00D3
+     e10:	88 0f       	add	r24, r24
+     e12:	99 1f       	adc	r25, r25
+     e14:	aa 1f       	adc	r26, r26
+     e16:	bb 1f       	adc	r27, r27
+     e18:	80 93 d0 00 	sts	0x00D0, r24
+     e1c:	90 93 d1 00 	sts	0x00D1, r25
+     e20:	a0 93 d2 00 	sts	0x00D2, r26
+     e24:	b0 93 d3 00 	sts	0x00D3, r27
+		m_pulse_value.ml <<= SAMPLE_SHIFT_BIT_NUM;
+     e28:	80 91 d0 00 	lds	r24, 0x00D0
+     e2c:	90 91 d1 00 	lds	r25, 0x00D1
+     e30:	a0 91 d2 00 	lds	r26, 0x00D2
+     e34:	b0 91 d3 00 	lds	r27, 0x00D3
+     e38:	e7 e0       	ldi	r30, 0x07	; 7
+     e3a:	88 0f       	add	r24, r24
+     e3c:	99 1f       	adc	r25, r25
+     e3e:	aa 1f       	adc	r26, r26
+     e40:	bb 1f       	adc	r27, r27
+     e42:	ea 95       	dec	r30
+     e44:	d1 f7       	brne	.-12     	; 0xe3a <int1_handling+0xca>
+     e46:	80 93 d0 00 	sts	0x00D0, r24
+     e4a:	90 93 d1 00 	sts	0x00D1, r25
+     e4e:	a0 93 d2 00 	sts	0x00D2, r26
+     e52:	b0 93 d3 00 	sts	0x00D3, r27
+		m_mcur.ms = m_pulse_value.ms[1];//丢弃低16位,相当于除以2^16
+     e56:	80 91 d2 00 	lds	r24, 0x00D2
+     e5a:	90 91 d3 00 	lds	r25, 0x00D3
+     e5e:	90 93 85 01 	sts	0x0185, r25
+     e62:	80 93 84 01 	sts	0x0184, r24
+		//
+		m_pulse_counter = 0;
+     e66:	10 92 90 01 	sts	0x0190, r1
+     e6a:	10 92 8f 01 	sts	0x018F, r1
+		m_pulse_value.ml = 0;
+     e6e:	10 92 d0 00 	sts	0x00D0, r1
+     e72:	10 92 d1 00 	sts	0x00D1, r1
+     e76:	10 92 d2 00 	sts	0x00D2, r1
+     e7a:	10 92 d3 00 	sts	0x00D3, r1
+		//
+		liaowei_sample_ok_handling();
+     e7e:	04 cf       	rjmp	.-504    	; 0xc88 <liaowei_sample_ok_handling>
+     e80:	08 95       	ret
+
+00000e82 <main>:
+unsigned int send_time_count = 0;
+unsigned int smoothingDate =0;
+//
+int main()
+{
+    cli();
+     e82:	f8 94       	cli
+     e84:	2f ef       	ldi	r18, 0xFF	; 255
+     e86:	80 e7       	ldi	r24, 0x70	; 112
+     e88:	92 e0       	ldi	r25, 0x02	; 2
+     e8a:	21 50       	subi	r18, 0x01	; 1
+     e8c:	80 40       	sbci	r24, 0x00	; 0
+     e8e:	90 40       	sbci	r25, 0x00	; 0
+     e90:	e1 f7       	brne	.-8      	; 0xe8a <main+0x8>
+     e92:	00 c0       	rjmp	.+0      	; 0xe94 <main+0x12>
+     e94:	00 00       	nop
+    _delay_ms(50);
+    hardward_init();
+     e96:	65 da       	rcall	.-2870   	; 0x362 <hardward_init>
+    softward_init();
+     e98:	aa da       	rcall	.-2732   	; 0x3ee <softward_init>
+     e9a:	2f ef       	ldi	r18, 0xFF	; 255
+     e9c:	81 ee       	ldi	r24, 0xE1	; 225
+     e9e:	94 e0       	ldi	r25, 0x04	; 4
+     ea0:	21 50       	subi	r18, 0x01	; 1
+     ea2:	80 40       	sbci	r24, 0x00	; 0
+     ea4:	90 40       	sbci	r25, 0x00	; 0
+     ea6:	e1 f7       	brne	.-8      	; 0xea0 <main+0x1e>
+     ea8:	00 c0       	rjmp	.+0      	; 0xeaa <main+0x28>
+     eaa:	00 00       	nop
+    _delay_ms(100);
+    read_para();
+     eac:	85 dc       	rcall	.-1782   	; 0x7b8 <read_para>
+    sei();//启动全局中断
+     eae:	78 94       	sei
+    //
+    //如果检测不到bootloader，程序不再往下执行
+    check_bootloader();
+     eb0:	34 da       	rcall	.-2968   	; 0x31a <check_bootloader>
+    //
+    DEBUG_STRING("USART TEST\r\n\0");
+	//
+	turn_on_led_ms(1500);
+     eb2:	8c ed       	ldi	r24, 0xDC	; 220
+     eb4:	95 e0       	ldi	r25, 0x05	; 5
+     eb6:	03 dd       	rcall	.-1530   	; 0x8be <turn_on_led_ms>
+    //
+	SetTimer(MT_SCAN_KEY, 50, -1); //按键扫描
+     eb8:	2f ef       	ldi	r18, 0xFF	; 255
+     eba:	42 e3       	ldi	r20, 0x32	; 50
+     ebc:	50 e0       	ldi	r21, 0x00	; 0
+     ebe:	60 e0       	ldi	r22, 0x00	; 0
+     ec0:	70 e0       	ldi	r23, 0x00	; 0
+     ec2:	86 eb       	ldi	r24, 0xB6	; 182
+     ec4:	94 e0       	ldi	r25, 0x04	; 4
+     ec6:	cb d8       	rcall	.-3690   	; 0x5e <SetTimer>
+	SetTimer(MT_LED_RUN, 1000, -1); //运行灯闪烁
+     ec8:	2f ef       	ldi	r18, 0xFF	; 255
+     eca:	48 ee       	ldi	r20, 0xE8	; 232
+     ecc:	53 e0       	ldi	r21, 0x03	; 3
+     ece:	60 e0       	ldi	r22, 0x00	; 0
+     ed0:	70 e0       	ldi	r23, 0x00	; 0
+     ed2:	88 eb       	ldi	r24, 0xB8	; 184
+     ed4:	94 e0       	ldi	r25, 0x04	; 4
+     ed6:	c3 d8       	rcall	.-3706   	; 0x5e <SetTimer>
+	//
+	wdt_enable(WDTO_2S);//启动看门狗定时器
+     ed8:	2f e0       	ldi	r18, 0x0F	; 15
+     eda:	88 e1       	ldi	r24, 0x18	; 24
+     edc:	90 e0       	ldi	r25, 0x00	; 0
+     ede:	0f b6       	in	r0, 0x3f	; 63
+     ee0:	f8 94       	cli
+     ee2:	a8 95       	wdr
+     ee4:	80 93 41 00 	sts	0x0041, r24
+     ee8:	0f be       	out	0x3f, r0	; 63
+     eea:	20 93 41 00 	sts	0x0041, r18
+		{
+			if(comm_error_delay > 200)//2秒
+			{
+				#if USART_TEST == FALSE
+				{
+					bled = !bled;
+     eee:	c1 e0       	ldi	r28, 0x01	; 1
+	//
+	wdt_enable(WDTO_2S);//启动看门狗定时器
+	//
+    for(;;)
+    {
+        wdt_reset();//喂狗
+     ef0:	a8 95       	wdr
+        //
+        //接收到了正确的数据后,发送应答帧
+        if(1 == uart_send_enable)
+     ef2:	80 91 8b 01 	lds	r24, 0x018B
+     ef6:	81 30       	cpi	r24, 0x01	; 1
+     ef8:	19 f4       	brne	.+6      	; 0xf00 <main+0x7e>
+        {
+            uart_send_enable = 0;
+     efa:	10 92 8b 01 	sts	0x018B, r1
+			//
+#if IS_MMR_USED == FALSE
+            uart_tx();
+     efe:	b0 dd       	rcall	.-1184   	; 0xa60 <uart_tx>
+#endif
+        }
+		//
+		if(pulse_value_counter > 0)
+     f00:	80 91 8e 01 	lds	r24, 0x018E
+     f04:	88 23       	and	r24, r24
+     f06:	c9 f0       	breq	.+50     	; 0xf3a <main+0xb8>
+		{
+			pulse_value_counter--;
+     f08:	80 91 8e 01 	lds	r24, 0x018E
+     f0c:	81 50       	subi	r24, 0x01	; 1
+     f0e:	80 93 8e 01 	sts	0x018E, r24
+			//
+			int1_handling(pulse_value[pulse_value_read_id]);
+     f12:	e0 91 df 00 	lds	r30, 0x00DF
+     f16:	f0 e0       	ldi	r31, 0x00	; 0
+     f18:	ee 0f       	add	r30, r30
+     f1a:	ff 1f       	adc	r31, r31
+     f1c:	eb 51       	subi	r30, 0x1B	; 27
+     f1e:	ff 4f       	sbci	r31, 0xFF	; 255
+     f20:	80 81       	ld	r24, Z
+     f22:	91 81       	ldd	r25, Z+1	; 0x01
+     f24:	25 df       	rcall	.-438    	; 0xd70 <int1_handling>
+			pulse_value_read_id++;
+     f26:	80 91 df 00 	lds	r24, 0x00DF
+     f2a:	8f 5f       	subi	r24, 0xFF	; 255
+     f2c:	80 93 df 00 	sts	0x00DF, r24
+			pulse_value_read_id %= PULSE_VALUE_NUM;
+     f30:	80 91 df 00 	lds	r24, 0x00DF
+     f34:	8f 73       	andi	r24, 0x3F	; 63
+     f36:	80 93 df 00 	sts	0x00DF, r24
+		}
+		//
+		//避免boot_time读取过程中值被中断更新
+		if(boot_time_sub > 0)
+     f3a:	80 91 8d 01 	lds	r24, 0x018D
+     f3e:	88 23       	and	r24, r24
+     f40:	c1 f0       	breq	.+48     	; 0xf72 <main+0xf0>
+		{
+			boot_time += boot_time_sub;
+     f42:	80 91 86 01 	lds	r24, 0x0186
+     f46:	90 91 87 01 	lds	r25, 0x0187
+     f4a:	a0 91 88 01 	lds	r26, 0x0188
+     f4e:	b0 91 89 01 	lds	r27, 0x0189
+     f52:	20 91 8d 01 	lds	r18, 0x018D
+     f56:	82 0f       	add	r24, r18
+     f58:	91 1d       	adc	r25, r1
+     f5a:	a1 1d       	adc	r26, r1
+     f5c:	b1 1d       	adc	r27, r1
+     f5e:	80 93 86 01 	sts	0x0186, r24
+     f62:	90 93 87 01 	sts	0x0187, r25
+     f66:	a0 93 88 01 	sts	0x0188, r26
+     f6a:	b0 93 89 01 	sts	0x0189, r27
+			boot_time_sub = 0;
+     f6e:	10 92 8d 01 	sts	0x018D, r1
+		#if 1
+		{
+			//单位：分钟
+			#define UPDATE_EEPROM_DATA_INTERVAL	60
+			//
+			if(m_minute > UPDATE_EEPROM_DATA_INTERVAL)
+     f72:	80 91 6e 01 	lds	r24, 0x016E
+     f76:	90 91 6f 01 	lds	r25, 0x016F
+     f7a:	cd 97       	sbiw	r24, 0x3d	; 61
+     f7c:	28 f0       	brcs	.+10     	; 0xf88 <main+0x106>
+			{
+				//刷新一下内存里的参数，同时也会更新eeprom里的错误参数（如果出现错误的话）
+				//
+				read_para();
+     f7e:	1c dc       	rcall	.-1992   	; 0x7b8 <read_para>
+				//
+				m_minute = 0;
+     f80:	10 92 6f 01 	sts	0x016F, r1
+     f84:	10 92 6e 01 	sts	0x016E, r1
+		#endif
+		//
+        //485通信中断的时候红灯常亮
+		#if 1
+		{
+			if(comm_error_delay > 200)//2秒
+     f88:	80 91 73 01 	lds	r24, 0x0173
+     f8c:	89 3c       	cpi	r24, 0xC9	; 201
+     f8e:	50 f0       	brcs	.+20     	; 0xfa4 <main+0x122>
+			{
+				#if USART_TEST == FALSE
+				{
+					bled = !bled;
+     f90:	85 b3       	in	r24, 0x15	; 21
+     f92:	82 95       	swap	r24
+     f94:	81 70       	andi	r24, 0x01	; 1
+     f96:	8c 27       	eor	r24, r28
+     f98:	80 fd       	sbrc	r24, 0
+     f9a:	ac 9a       	sbi	0x15, 4	; 21
+     f9c:	80 ff       	sbrs	r24, 0
+     f9e:	ac 98       	cbi	0x15, 4	; 21
+					comm_error_delay = 0;
+     fa0:	10 92 73 01 	sts	0x0173, r1
+		}
+		#endif
+		//
+		#if 1
+		{			
+			if(TRUE == bootloader_flay_is_valid)
+     fa4:	80 91 62 00 	lds	r24, 0x0062
+     fa8:	90 91 63 00 	lds	r25, 0x0063
+     fac:	01 97       	sbiw	r24, 0x01	; 1
+     fae:	29 f4       	brne	.+10     	; 0xfba <main+0x138>
+			{
+				//要进入bootloader
+				bootloader_flay_is_valid = FALSE;
+     fb0:	10 92 63 00 	sts	0x0063, r1
+     fb4:	10 92 62 00 	sts	0x0062, r1
+				bootloader_handling();
+     fb8:	1a de       	rcall	.-972    	; 0xbee <bootloader_handling>
+			}
+		}
+		#endif
+		//
+		timer_run();
+     fba:	c8 d8       	rcall	.-3696   	; 0x14c <timer_run>
+    }
+     fbc:	99 cf       	rjmp	.-206    	; 0xef0 <main+0x6e>
+
+00000fbe <__vector_9>:
+/////////////////////////////////////////////////////////////////
+//
+//定时器0作为全局定时器,用来管理所有任务的调度
+//
+ISR(TIMER0_OVF_vect/*,ISR_NOBLOCK*/)//加入ISR_NOBLOCK属性,在中断服务程序中允许中断套嵌
+{
+     fbe:	1f 92       	push	r1
+     fc0:	0f 92       	push	r0
+     fc2:	0f b6       	in	r0, 0x3f	; 63
+     fc4:	0f 92       	push	r0
+     fc6:	11 24       	eor	r1, r1
+     fc8:	8f 93       	push	r24
+     fca:	9f 93       	push	r25
+	{
+		TCNT0 = 255-62;//4MHz时钟,64分频,计数62次,定时约1毫秒
+	}
+	#elif F_CPU == F_16M
+	{
+		TCNT0 = 255-250;//16MHz时钟,64分频,计数62次,定时约1毫秒
+     fcc:	85 e0       	ldi	r24, 0x05	; 5
+     fce:	82 bf       	out	0x32, r24	; 50
+		adsc = 1;
+	}
+	#endif
+	///////////////
+	//1ms
+	ms1_counter++;
+     fd0:	80 91 65 01 	lds	r24, 0x0165
+     fd4:	8f 5f       	subi	r24, 0xFF	; 255
+     fd6:	80 93 65 01 	sts	0x0165, r24
+    boot_time_sub++;
+     fda:	90 91 8d 01 	lds	r25, 0x018D
+     fde:	9f 5f       	subi	r25, 0xFF	; 255
+     fe0:	90 93 8d 01 	sts	0x018D, r25
+    //
+    if(ms1_counter > 9)
+     fe4:	8a 30       	cpi	r24, 0x0A	; 10
+     fe6:	90 f1       	brcs	.+100    	; 0x104c <__vector_9+0x8e>
+    {
+        ms1_counter = 0;
+     fe8:	10 92 65 01 	sts	0x0165, r1
+		//
+        //10ms
+        comm_error_delay++;
+     fec:	80 91 73 01 	lds	r24, 0x0173
+     ff0:	8f 5f       	subi	r24, 0xFF	; 255
+     ff2:	80 93 73 01 	sts	0x0173, r24
+        if(comm_error_delay > 250)
+     ff6:	80 91 73 01 	lds	r24, 0x0173
+     ffa:	8b 3f       	cpi	r24, 0xFB	; 251
+     ffc:	18 f0       	brcs	.+6      	; 0x1004 <__vector_9+0x46>
+		{
+            comm_error_delay = 250;
+     ffe:	8a ef       	ldi	r24, 0xFA	; 250
+    1000:	80 93 73 01 	sts	0x0173, r24
+		}
+        //
+        ms10_counter++;
+    1004:	80 91 66 01 	lds	r24, 0x0166
+    1008:	8f 5f       	subi	r24, 0xFF	; 255
+    100a:	80 93 66 01 	sts	0x0166, r24
+        if(ms10_counter > 9)
+    100e:	8a 30       	cpi	r24, 0x0A	; 10
+    1010:	e8 f0       	brcs	.+58     	; 0x104c <__vector_9+0x8e>
+        {
+            ms10_counter = 0;
+    1012:	10 92 66 01 	sts	0x0166, r1
+            //100ms
+            ms100_counter++;
+    1016:	80 91 8c 01 	lds	r24, 0x018C
+    101a:	8f 5f       	subi	r24, 0xFF	; 255
+    101c:	80 93 8c 01 	sts	0x018C, r24
+            if(ms100_counter > 9)
+    1020:	8a 30       	cpi	r24, 0x0A	; 10
+    1022:	a0 f0       	brcs	.+40     	; 0x104c <__vector_9+0x8e>
+            {
+                ms100_counter = 0;
+    1024:	10 92 8c 01 	sts	0x018C, r1
+                //1s
+                s1_counter++;
+    1028:	80 91 8a 01 	lds	r24, 0x018A
+    102c:	8f 5f       	subi	r24, 0xFF	; 255
+    102e:	80 93 8a 01 	sts	0x018A, r24
+                if(s1_counter > 59)
+    1032:	8c 33       	cpi	r24, 0x3C	; 60
+    1034:	58 f0       	brcs	.+22     	; 0x104c <__vector_9+0x8e>
+                {
+	                //60s
+	                s1_counter = 0;
+    1036:	10 92 8a 01 	sts	0x018A, r1
+	                //
+	                m_minute++;
+    103a:	80 91 6e 01 	lds	r24, 0x016E
+    103e:	90 91 6f 01 	lds	r25, 0x016F
+    1042:	01 96       	adiw	r24, 0x01	; 1
+    1044:	90 93 6f 01 	sts	0x016F, r25
+    1048:	80 93 6e 01 	sts	0x016E, r24
+                }
+            }
+        }
+
+    }
+}
+    104c:	9f 91       	pop	r25
+    104e:	8f 91       	pop	r24
+    1050:	0f 90       	pop	r0
+    1052:	0f be       	out	0x3f, r0	; 63
+    1054:	0f 90       	pop	r0
+    1056:	1f 90       	pop	r1
+    1058:	18 95       	reti
+
+0000105a <__vector_2>:
+//
+//外中断1,下降沿触发中断,输出正脉冲的结束边沿
+//
+ISR(INT1_vect)
+{
+    105a:	1f 92       	push	r1
+    105c:	0f 92       	push	r0
+    105e:	0f b6       	in	r0, 0x3f	; 63
+    1060:	0f 92       	push	r0
+    1062:	11 24       	eor	r1, r1
+    1064:	8f 93       	push	r24
+    1066:	9f 93       	push	r25
+    1068:	ef 93       	push	r30
+    106a:	ff 93       	push	r31
+    pulse_value[pulse_value_write_id] = TCNT1;
+    106c:	e0 91 6d 01 	lds	r30, 0x016D
+    1070:	f0 e0       	ldi	r31, 0x00	; 0
+    1072:	8c b5       	in	r24, 0x2c	; 44
+    1074:	9d b5       	in	r25, 0x2d	; 45
+    1076:	ee 0f       	add	r30, r30
+    1078:	ff 1f       	adc	r31, r31
+    107a:	eb 51       	subi	r30, 0x1B	; 27
+    107c:	ff 4f       	sbci	r31, 0xFF	; 255
+    107e:	91 83       	std	Z+1, r25	; 0x01
+    1080:	80 83       	st	Z, r24
+	pulse_value_write_id++;
+    1082:	80 91 6d 01 	lds	r24, 0x016D
+    1086:	8f 5f       	subi	r24, 0xFF	; 255
+    1088:	80 93 6d 01 	sts	0x016D, r24
+	pulse_value_write_id %= PULSE_VALUE_NUM;
+    108c:	80 91 6d 01 	lds	r24, 0x016D
+    1090:	8f 73       	andi	r24, 0x3F	; 63
+    1092:	80 93 6d 01 	sts	0x016D, r24
+	//
+	pulse_value_counter++;
+    1096:	80 91 8e 01 	lds	r24, 0x018E
+    109a:	8f 5f       	subi	r24, 0xFF	; 255
+    109c:	80 93 8e 01 	sts	0x018E, r24
+}
+    10a0:	ff 91       	pop	r31
+    10a2:	ef 91       	pop	r30
+    10a4:	9f 91       	pop	r25
+    10a6:	8f 91       	pop	r24
+    10a8:	0f 90       	pop	r0
+    10aa:	0f be       	out	0x3f, r0	; 63
+    10ac:	0f 90       	pop	r0
+    10ae:	1f 90       	pop	r1
+    10b0:	18 95       	reti
+
+000010b2 <__vector_13>:
+//
+//串口发送中断
+//
+#if USART_TEST == FALSE
+ISR(USART_TXC_vect)
+{
+    10b2:	1f 92       	push	r1
+    10b4:	0f 92       	push	r0
+    10b6:	0f b6       	in	r0, 0x3f	; 63
+    10b8:	0f 92       	push	r0
+    10ba:	11 24       	eor	r1, r1
+    10bc:	8f 93       	push	r24
+    10be:	9f 93       	push	r25
+    10c0:	ef 93       	push	r30
+    10c2:	ff 93       	push	r31
+    if(uart_tx_addr < 10)
+    10c4:	80 91 e4 00 	lds	r24, 0x00E4
+    10c8:	8a 30       	cpi	r24, 0x0A	; 10
+    10ca:	60 f4       	brcc	.+24     	; 0x10e4 <__vector_13+0x32>
+    {
+        UDR = uart_tx_buf[uart_tx_addr++];
+    10cc:	e0 91 e4 00 	lds	r30, 0x00E4
+    10d0:	81 e0       	ldi	r24, 0x01	; 1
+    10d2:	8e 0f       	add	r24, r30
+    10d4:	80 93 e4 00 	sts	0x00E4, r24
+    10d8:	f0 e0       	ldi	r31, 0x00	; 0
+    10da:	ec 52       	subi	r30, 0x2C	; 44
+    10dc:	ff 4f       	sbci	r31, 0xFF	; 255
+    10de:	80 81       	ld	r24, Z
+    10e0:	8c b9       	out	0x0c, r24	; 12
+    10e2:	07 c0       	rjmp	.+14     	; 0x10f2 <__vector_13+0x40>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+    10e4:	8f e8       	ldi	r24, 0x8F	; 143
+    10e6:	91 e0       	ldi	r25, 0x01	; 1
+    10e8:	01 97       	sbiw	r24, 0x01	; 1
+    10ea:	f1 f7       	brne	.-4      	; 0x10e8 <__vector_13+0x36>
+    10ec:	00 c0       	rjmp	.+0      	; 0x10ee <__vector_13+0x3c>
+    10ee:	00 00       	nop
+    }
+    else
+    {
+        _delay_us(100);
+        b485en = 0;
+    10f0:	97 98       	cbi	0x12, 7	; 18
+    }
+}
+    10f2:	ff 91       	pop	r31
+    10f4:	ef 91       	pop	r30
+    10f6:	9f 91       	pop	r25
+    10f8:	8f 91       	pop	r24
+    10fa:	0f 90       	pop	r0
+    10fc:	0f be       	out	0x3f, r0	; 63
+    10fe:	0f 90       	pop	r0
+    1100:	1f 90       	pop	r1
+    1102:	18 95       	reti
+
+00001104 <__vector_11>:
+/////////////////////////////////////////////////////////////////
+//
+//串口接收中断
+//
+ISR(USART_RXC_vect)
+{
+    1104:	1f 92       	push	r1
+    1106:	0f 92       	push	r0
+    1108:	0f b6       	in	r0, 0x3f	; 63
+    110a:	0f 92       	push	r0
+    110c:	11 24       	eor	r1, r1
+    110e:	2f 93       	push	r18
+    1110:	3f 93       	push	r19
+    1112:	4f 93       	push	r20
+    1114:	5f 93       	push	r21
+    1116:	6f 93       	push	r22
+    1118:	7f 93       	push	r23
+    111a:	8f 93       	push	r24
+    111c:	9f 93       	push	r25
+    111e:	af 93       	push	r26
+    1120:	bf 93       	push	r27
+    1122:	cf 93       	push	r28
+    1124:	ef 93       	push	r30
+    1126:	ff 93       	push	r31
+	unsigned char uart_value,sum,i,temp;
+    //
+	if((UCSRA&0x1c) != 0)
+    1128:	8b b1       	in	r24, 0x0b	; 11
+    112a:	8c 71       	andi	r24, 0x1C	; 28
+    112c:	41 f0       	breq	.+16     	; 0x113e <__vector_11+0x3a>
+	{
+		//串口接收出现错误
+		uart_rx_counter = 0;
+    112e:	10 92 de 00 	sts	0x00DE, r1
+        uart_frame_head_ok = 0;
+    1132:	10 92 6c 01 	sts	0x016C, r1
+		while ( UCSRA & (1<<RXC) )
+    1136:	5f 9b       	sbis	0x0b, 7	; 11
+    1138:	48 c0       	rjmp	.+144    	; 0x11ca <__vector_11+0xc6>
+		{
+			uart_value = UDR;
+    113a:	8c b1       	in	r24, 0x0c	; 12
+    113c:	fc cf       	rjmp	.-8      	; 0x1136 <__vector_11+0x32>
+		}
+	}
+	else
+	{
+		//串口接收正常
+		uart_value = UDR;
+    113e:	cc b1       	in	r28, 0x0c	; 12
+        //
+        bootloader_key_word(uart_value);
+    1140:	8c 2f       	mov	r24, r28
+    1142:	74 dd       	rcall	.-1304   	; 0xc2c <bootloader_key_word>
+				uart_rx_counter = 0;
+                uart_frame_head_ok = 1;
+            }
+        }
+#else   //IS_MMR_USED
+        if(1 == uart_frame_head_ok)
+    1144:	80 91 6c 01 	lds	r24, 0x016C
+    1148:	81 30       	cpi	r24, 0x01	; 1
+    114a:	c1 f5       	brne	.+112    	; 0x11bc <__vector_11+0xb8>
+        {
+	        uart_rx_buf[uart_rx_counter++] = uart_value;
+    114c:	e0 91 de 00 	lds	r30, 0x00DE
+    1150:	8e 0f       	add	r24, r30
+    1152:	80 93 de 00 	sts	0x00DE, r24
+    1156:	f0 e0       	ldi	r31, 0x00	; 0
+    1158:	e6 58       	subi	r30, 0x86	; 134
+    115a:	fe 4f       	sbci	r31, 0xFE	; 254
+    115c:	c0 83       	st	Z, r28
+	        if(uart_rx_counter > 6)//接收6个字节有效参数和一个字节校验和
+    115e:	87 30       	cpi	r24, 0x07	; 7
+    1160:	a0 f1       	brcs	.+104    	; 0x11ca <__vector_11+0xc6>
+	        {
+		        uart_rx_counter = 0;
+    1162:	10 92 de 00 	sts	0x00DE, r1
+		        uart_frame_head_ok = 0;
+    1166:	10 92 6c 01 	sts	0x016C, r1
+    116a:	ea e7       	ldi	r30, 0x7A	; 122
+    116c:	f1 e0       	ldi	r31, 0x01	; 1
+		        //
+		        sum = 0xaa;
+    116e:	8a ea       	ldi	r24, 0xAA	; 170
+		        for(i=0; i<6; i++)
+		        {
+			        sum += uart_rx_buf[i];
+    1170:	91 91       	ld	r25, Z+
+    1172:	89 0f       	add	r24, r25
+	        {
+		        uart_rx_counter = 0;
+		        uart_frame_head_ok = 0;
+		        //
+		        sum = 0xaa;
+		        for(i=0; i<6; i++)
+    1174:	91 e0       	ldi	r25, 0x01	; 1
+    1176:	e0 38       	cpi	r30, 0x80	; 128
+    1178:	f9 07       	cpc	r31, r25
+    117a:	d1 f7       	brne	.-12     	; 0x1170 <__vector_11+0x6c>
+		        {
+			        sum += uart_rx_buf[i];
+		        }
+		        if(sum == uart_rx_buf[6])
+    117c:	90 91 80 01 	lds	r25, 0x0180
+    1180:	89 13       	cpse	r24, r25
+    1182:	23 c0       	rjmp	.+70     	; 0x11ca <__vector_11+0xc6>
+		        {
+			        if(ADDR_CGQ == uart_rx_buf[0])
+    1184:	80 91 7a 01 	lds	r24, 0x017A
+    1188:	83 30       	cpi	r24, 0x03	; 3
+    118a:	f9 f4       	brne	.+62     	; 0x11ca <__vector_11+0xc6>
+			        {
+				        comm_error_delay = 0;
+    118c:	10 92 73 01 	sts	0x0173, r1
+				        //
+				        if(GAOLIAOWEI == uart_rx_buf[1])
+    1190:	80 91 7b 01 	lds	r24, 0x017B
+    1194:	84 33       	cpi	r24, 0x34	; 52
+    1196:	21 f4       	brne	.+8      	; 0x11a0 <__vector_11+0x9c>
+				        {
+					        command_gaoliaowei = 1;
+    1198:	81 e0       	ldi	r24, 0x01	; 1
+    119a:	80 93 69 01 	sts	0x0169, r24
+    119e:	0a c0       	rjmp	.+20     	; 0x11b4 <__vector_11+0xb0>
+				        }
+				        else if(DILIAOWEI == uart_rx_buf[1])
+    11a0:	85 33       	cpi	r24, 0x35	; 53
+    11a2:	21 f4       	brne	.+8      	; 0x11ac <__vector_11+0xa8>
+				        {
+					        command_diliaowei = 1;
+    11a4:	81 e0       	ldi	r24, 0x01	; 1
+    11a6:	80 93 6a 01 	sts	0x016A, r24
+    11aa:	04 c0       	rjmp	.+8      	; 0x11b4 <__vector_11+0xb0>
+				        }
+				        else
+				        {
+					        command_gaoliaowei = 0;
+    11ac:	10 92 69 01 	sts	0x0169, r1
+					        command_diliaowei = 0;
+    11b0:	10 92 6a 01 	sts	0x016A, r1
+				        }
+				        //
+				        uart_send_enable = 1;//串口发送使能
+    11b4:	81 e0       	ldi	r24, 0x01	; 1
+    11b6:	80 93 8b 01 	sts	0x018B, r24
+    11ba:	07 c0       	rjmp	.+14     	; 0x11ca <__vector_11+0xc6>
+		        }
+	        }
+        }
+        else
+        {
+	        if(0xaa == uart_value)
+    11bc:	ca 3a       	cpi	r28, 0xAA	; 170
+    11be:	29 f4       	brne	.+10     	; 0x11ca <__vector_11+0xc6>
+	        {
+		        uart_rx_counter = 0;
+    11c0:	10 92 de 00 	sts	0x00DE, r1
+		        uart_frame_head_ok = 1;
+    11c4:	81 e0       	ldi	r24, 0x01	; 1
+    11c6:	80 93 6c 01 	sts	0x016C, r24
+	        }
+        }
+#endif //IS_MMR_USED
+	}
+}
+    11ca:	ff 91       	pop	r31
+    11cc:	ef 91       	pop	r30
+    11ce:	cf 91       	pop	r28
+    11d0:	bf 91       	pop	r27
+    11d2:	af 91       	pop	r26
+    11d4:	9f 91       	pop	r25
+    11d6:	8f 91       	pop	r24
+    11d8:	7f 91       	pop	r23
+    11da:	6f 91       	pop	r22
+    11dc:	5f 91       	pop	r21
+    11de:	4f 91       	pop	r20
+    11e0:	3f 91       	pop	r19
+    11e2:	2f 91       	pop	r18
+    11e4:	0f 90       	pop	r0
+    11e6:	0f be       	out	0x3f, r0	; 63
+    11e8:	0f 90       	pop	r0
+    11ea:	1f 90       	pop	r1
+    11ec:	18 95       	reti
+
+000011ee <__udivmodhi4>:
+    11ee:	aa 1b       	sub	r26, r26
+    11f0:	bb 1b       	sub	r27, r27
+    11f2:	51 e1       	ldi	r21, 0x11	; 17
+    11f4:	07 c0       	rjmp	.+14     	; 0x1204 <__udivmodhi4_ep>
+
+000011f6 <__udivmodhi4_loop>:
+    11f6:	aa 1f       	adc	r26, r26
+    11f8:	bb 1f       	adc	r27, r27
+    11fa:	a6 17       	cp	r26, r22
+    11fc:	b7 07       	cpc	r27, r23
+    11fe:	10 f0       	brcs	.+4      	; 0x1204 <__udivmodhi4_ep>
+    1200:	a6 1b       	sub	r26, r22
+    1202:	b7 0b       	sbc	r27, r23
+
+00001204 <__udivmodhi4_ep>:
+    1204:	88 1f       	adc	r24, r24
+    1206:	99 1f       	adc	r25, r25
+    1208:	5a 95       	dec	r21
+    120a:	a9 f7       	brne	.-22     	; 0x11f6 <__udivmodhi4_loop>
+    120c:	80 95       	com	r24
+    120e:	90 95       	com	r25
+    1210:	bc 01       	movw	r22, r24
+    1212:	cd 01       	movw	r24, r26
+    1214:	08 95       	ret
+
+00001216 <__udivmodsi4>:
+    1216:	a1 e2       	ldi	r26, 0x21	; 33
+    1218:	1a 2e       	mov	r1, r26
+    121a:	aa 1b       	sub	r26, r26
+    121c:	bb 1b       	sub	r27, r27
+    121e:	fd 01       	movw	r30, r26
+    1220:	0d c0       	rjmp	.+26     	; 0x123c <__udivmodsi4_ep>
+
+00001222 <__udivmodsi4_loop>:
+    1222:	aa 1f       	adc	r26, r26
+    1224:	bb 1f       	adc	r27, r27
+    1226:	ee 1f       	adc	r30, r30
+    1228:	ff 1f       	adc	r31, r31
+    122a:	a2 17       	cp	r26, r18
+    122c:	b3 07       	cpc	r27, r19
+    122e:	e4 07       	cpc	r30, r20
+    1230:	f5 07       	cpc	r31, r21
+    1232:	20 f0       	brcs	.+8      	; 0x123c <__udivmodsi4_ep>
+    1234:	a2 1b       	sub	r26, r18
+    1236:	b3 0b       	sbc	r27, r19
+    1238:	e4 0b       	sbc	r30, r20
+    123a:	f5 0b       	sbc	r31, r21
+
+0000123c <__udivmodsi4_ep>:
+    123c:	66 1f       	adc	r22, r22
+    123e:	77 1f       	adc	r23, r23
+    1240:	88 1f       	adc	r24, r24
+    1242:	99 1f       	adc	r25, r25
+    1244:	1a 94       	dec	r1
+    1246:	69 f7       	brne	.-38     	; 0x1222 <__udivmodsi4_loop>
+    1248:	60 95       	com	r22
+    124a:	70 95       	com	r23
+    124c:	80 95       	com	r24
+    124e:	90 95       	com	r25
+    1250:	9b 01       	movw	r18, r22
+    1252:	ac 01       	movw	r20, r24
+    1254:	bd 01       	movw	r22, r26
+    1256:	cf 01       	movw	r24, r30
+    1258:	08 95       	ret
+
+0000125a <__umulhisi3>:
+    125a:	a2 9f       	mul	r26, r18
+    125c:	b0 01       	movw	r22, r0
+    125e:	b3 9f       	mul	r27, r19
+    1260:	c0 01       	movw	r24, r0
+    1262:	a3 9f       	mul	r26, r19
+    1264:	01 d0       	rcall	.+2      	; 0x1268 <__umulhisi3+0xe>
+    1266:	b2 9f       	mul	r27, r18
+    1268:	70 0d       	add	r23, r0
+    126a:	81 1d       	adc	r24, r1
+    126c:	11 24       	eor	r1, r1
+    126e:	91 1d       	adc	r25, r1
+    1270:	08 95       	ret
+
+00001272 <__ashldi3>:
+    1272:	0f 93       	push	r16
+    1274:	08 30       	cpi	r16, 0x08	; 8
+    1276:	90 f0       	brcs	.+36     	; 0x129c <__ashldi3+0x2a>
+    1278:	98 2f       	mov	r25, r24
+    127a:	87 2f       	mov	r24, r23
+    127c:	76 2f       	mov	r23, r22
+    127e:	65 2f       	mov	r22, r21
+    1280:	54 2f       	mov	r21, r20
+    1282:	43 2f       	mov	r20, r19
+    1284:	32 2f       	mov	r19, r18
+    1286:	22 27       	eor	r18, r18
+    1288:	08 50       	subi	r16, 0x08	; 8
+    128a:	f4 cf       	rjmp	.-24     	; 0x1274 <__ashldi3+0x2>
+    128c:	22 0f       	add	r18, r18
+    128e:	33 1f       	adc	r19, r19
+    1290:	44 1f       	adc	r20, r20
+    1292:	55 1f       	adc	r21, r21
+    1294:	66 1f       	adc	r22, r22
+    1296:	77 1f       	adc	r23, r23
+    1298:	88 1f       	adc	r24, r24
+    129a:	99 1f       	adc	r25, r25
+    129c:	0a 95       	dec	r16
+    129e:	b2 f7       	brpl	.-20     	; 0x128c <__ashldi3+0x1a>
+    12a0:	0f 91       	pop	r16
+    12a2:	08 95       	ret
+
+000012a4 <__eerd_word_m8a>:
+    12a4:	a8 e1       	ldi	r26, 0x18	; 24
+    12a6:	b0 e0       	ldi	r27, 0x00	; 0
+    12a8:	42 e0       	ldi	r20, 0x02	; 2
+    12aa:	50 e0       	ldi	r21, 0x00	; 0
+    12ac:	05 c0       	rjmp	.+10     	; 0x12b8 <__eerd_blraw_m8a>
+
+000012ae <__eewr_word_m8a>:
+    12ae:	12 d0       	rcall	.+36     	; 0x12d4 <__eewr_byte_m8a>
+    12b0:	27 2f       	mov	r18, r23
+    12b2:	11 c0       	rjmp	.+34     	; 0x12d6 <__eewr_r18_m8a>
+
+000012b4 <__eerd_block_m8a>:
+    12b4:	dc 01       	movw	r26, r24
+    12b6:	cb 01       	movw	r24, r22
+
+000012b8 <__eerd_blraw_m8a>:
+    12b8:	fc 01       	movw	r30, r24
+    12ba:	e1 99       	sbic	0x1c, 1	; 28
+    12bc:	fe cf       	rjmp	.-4      	; 0x12ba <__eerd_blraw_m8a+0x2>
+    12be:	06 c0       	rjmp	.+12     	; 0x12cc <__eerd_blraw_m8a+0x14>
+    12c0:	ff bb       	out	0x1f, r31	; 31
+    12c2:	ee bb       	out	0x1e, r30	; 30
+    12c4:	e0 9a       	sbi	0x1c, 0	; 28
+    12c6:	31 96       	adiw	r30, 0x01	; 1
+    12c8:	0d b2       	in	r0, 0x1d	; 29
+    12ca:	0d 92       	st	X+, r0
+    12cc:	41 50       	subi	r20, 0x01	; 1
+    12ce:	50 40       	sbci	r21, 0x00	; 0
+    12d0:	b8 f7       	brcc	.-18     	; 0x12c0 <__eerd_blraw_m8a+0x8>
+    12d2:	08 95       	ret
+
+000012d4 <__eewr_byte_m8a>:
+    12d4:	26 2f       	mov	r18, r22
+
+000012d6 <__eewr_r18_m8a>:
+    12d6:	e1 99       	sbic	0x1c, 1	; 28
+    12d8:	fe cf       	rjmp	.-4      	; 0x12d6 <__eewr_r18_m8a>
+    12da:	9f bb       	out	0x1f, r25	; 31
+    12dc:	8e bb       	out	0x1e, r24	; 30
+    12de:	2d bb       	out	0x1d, r18	; 29
+    12e0:	0f b6       	in	r0, 0x3f	; 63
+    12e2:	f8 94       	cli
+    12e4:	e2 9a       	sbi	0x1c, 2	; 28
+    12e6:	e1 9a       	sbi	0x1c, 1	; 28
+    12e8:	0f be       	out	0x3f, r0	; 63
+    12ea:	01 96       	adiw	r24, 0x01	; 1
+    12ec:	08 95       	ret
+
+000012ee <_exit>:
+    12ee:	f8 94       	cli
+
+000012f0 <__stop_program>:
+    12f0:	ff cf       	rjmp	.-2      	; 0x12f0 <__stop_program>
