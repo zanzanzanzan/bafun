@@ -1,0 +1,4 @@
+---- pulse_value_handling Matches (3 in 2 files) ----
+main in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\20191103需要修改485通讯堵料程序\20191103需要修改485通讯堵料程序\cmp_cgq_pulse_lmdsz_20191201\sgdkcgq_485_cry4m16m_pulse_ad) : 			m_mcur.ms = pulse_value_handling(m_mcur.ms);//平
+sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\20191103需要修改485通讯堵料程序\20191103需要修改485通讯堵料程序\cmp_cgq_pulse_lmdsz_20191201\sgdkcgq_485_cry4m16m_pulse_ad) line 1021 : unsigned short pulse_value_handling(unsigned short val)
+sgdkcgq_485_cry4m16m_pulse_ad.h (C:\Users\Administrator\Desktop\zan\bafun\20191103需要修改485通讯堵料程序\20191103需要修改485通讯堵料程序\cmp_cgq_pulse_lmdsz_20191201\sgdkcgq_485_cry4m16m_pulse_ad) line 108 : unsigned short pulse_value_handling(unsigned short val);

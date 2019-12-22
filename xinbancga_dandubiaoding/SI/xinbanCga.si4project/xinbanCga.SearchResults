@@ -1,0 +1,21 @@
+---- m_mcur.ms Matches (20 in 1 files) ----
+main in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 			m_mcur.ms = pulse_value_handling(m_mcur_ad.ms);
+uart_tx_zan in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 	//m_mcur.ms
+uart_tx_zan in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) :     uart_tx_buf[7] = m_mcur.ms >> 8;
+uart_tx_zan in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 	uart_tx_buf[8] = m_mcur.ms & 0xff;
+scan_key in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 						//m_mh_set = m_mcur.ms; //标定起作用，延时记录
+scan_key in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 				m_mh_set = m_mcur.ms; //如果禁止中断，这个采样值不会更新
+scan_key in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 						//m_ml_set = m_mcur.ms;//标定起作用，延时记录
+scan_key in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 				m_ml_set = m_mcur.ms; //如果禁止中断，这个采样值不会更新
+scan_key in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) :         m_mh_set = m_mcur.ms;//标定起作用，延时记录
+scan_key in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) :         m_ml_set = m_mcur.ms;//标定起作用，延时记录
+uart_tx in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 		DEBUG_STRING("m_mcur.ms = \0");
+uart_tx in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 		DEBUG_VALUE_TEXT(m_mcur.ms);
+OnTimer in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 			m_mh_set = m_mcur.ms;
+OnTimer in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 			m_ml_set = m_mcur.ms;
+liaowei_sample_ok_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 	/*if(m_mcur.ms > PULSE_TOP)
+liaowei_sample_ok_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 		m_mcur.ms = PULSE_TOP;
+liaowei_sample_ok_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 	if(m_mcur.ms <= (m_ml_set+3))
+liaowei_sample_ok_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 	else if(m_mcur.ms >= (m_mh_set-4))
+liaowei_sample_ok_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 		m_offset = m_mcur.ms-m_ml_set;//当前测得的值减去低位设置值
+int1_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\xinbancga_dandubiaoding\sgdkcgq_485_cry4m16m_pulse_ad) : 		//m_mcur.ms = m_pulse_value.ms[1];//丢弃低16位,相当于除以2^16
