@@ -1205,6 +1205,134 @@ void liaowei_sample_ok_handling(void)
 	}
 	#endif	
 }
+
+
+void liaowei_sample_ok_handling_AD(void)
+{
+	UCHAR4 m_temp;
+	//
+	m_mcur.ms = pulse_value_handling(m_mcur.ms);//平滑处理
+	//
+	/*
+	if(m_mcur.ms > PULSE_TOP)
+	{
+		m_mcur.ms = PULSE_TOP;
+	}*/
+	//
+	//OCR1A = PWM_TOP/2; //for test
+	//return;
+	//
+	//计算pwm电压输出
+	#ifndef __TEST__
+	if(m_mcur.ms <= (m_ml_set+3))
+	{
+		m_cur_pwm.ms = (PWM_TOP/5)-3;//150//200
+		OCR1A = (unsigned short)PWM_TOP-m_cur_pwm.ms;//800,1v
+	}
+	else if(m_mcur.ms >= (m_mh_set-4))
+	{
+		m_cur_pwm.ms = PWM_TOP-1;
+		OCR1A = (unsigned short)PWM_TOP-m_cur_pwm.ms;//1,5v
+	}
+	else
+	{
+		//1v <= out <= 5v
+		unsigned short m_offset;
+		m_offset = m_mcur.ms-m_ml_set;//当前测得的值减去低位设置值
+		m_temp.ml = m_offset;
+		m_temp.ml *= (unsigned short)((PWM_TOP/5)*4);//等距的平分1v到5v
+		m_offset = m_mh_set-m_ml_set;//高位设置值减去低位设置值
+		m_temp.ml += m_offset>>1;//四舍五入
+		m_temp.ml /= m_offset;
+		m_temp.ms[0] += (PWM_TOP/5);//加入最低的1v
+		//
+		if(m_temp.ms[0] >= PWM_TOP)
+		{
+			m_temp.ms[0] = PWM_TOP-1;
+		}
+		//
+		#if 0
+		#if USED_AD == TRUE //大约800ms
+		{
+			m_mcur_ad.ms = ad_value_handling(m_mcur_ad.ms);//平滑处理
+			////////////////////// AD补充 ///////////////////////////////////////////////
+			if(m_cur_pwm.ms == m_temp.ms[0])
+			{
+				//前一次输出的pwm脉冲值跟这次计算的一样，用AD值做微调判断是否需要调整
+				//
+				if(m_mcur_ad.ms != m_cur_per_ad.ms)
+				{
+					//AD值有变化
+					unsigned short m_step;
+					m_step = 65535/PWM_TOP;
+					//
+					if(m_mcur_ad.ms > m_cur_per_ad.ms)
+					{
+						//ad当前值大于前次pwm输出时的值
+						m_offset = m_mcur_ad.ms-m_cur_per_ad.ms;
+						m_offset += m_step;
+						m_offset /= m_step;
+						if(m_offset > 0)
+						{
+							m_offset = 1;
+						}
+					}
+					else
+					{
+						//ad当前值小于前次pwm输出时的值
+						m_offset = m_cur_per_ad.ms-m_mcur_ad.ms;
+						m_offset += m_step;
+						m_offset /= m_step;
+						if(m_offset > 0)
+						{
+							m_offset = 0xffff;
+						}
+					
+					}
+					//
+					m_offset += m_cur_pwm.ms;
+					if(m_offset >= PWM_TOP)
+					{
+						m_offset = PWM_TOP-1;
+					}
+					OCR1A=(unsigned short)PWM_TOP-m_offset;
+				}
+			}
+			else
+			{
+				//本次计算的pwm脉冲值跟前次输出的值不同，暂时不考虑AD值
+				m_cur_pwm.ms = m_temp.ms[0];
+				OCR1A=(unsigned short)PWM_TOP-m_cur_pwm.ms;
+			}
+		}
+		#else
+		{
+			m_cur_pwm.ms = m_temp.ms[0];
+			OCR1A=(unsigned short)PWM_TOP-m_cur_pwm.ms;
+		}
+		#endif //USED_AD
+		#endif
+		////////////////////////////////////////////////////////////////////////////
+		//
+	}
+	//
+	#if 0
+	#if USED_AD == TRUE
+	{
+		m_cur_per_ad.ms = m_mcur_ad.ms;//保留备用
+	}
+	#endif
+	//
+	//#endif
+	//
+	#if USART_TEST == TRUE
+	{
+		uart_send_enable=1;//串口发送使能
+	}
+	#endif	
+	#endif
+}
+
 /////////////////////////////////////////////////////////////////
 void int1_handling(unsigned char val)
 {
@@ -1235,12 +1363,12 @@ void int1_handling(unsigned char val)
 	{
 		m_pulse_value.ml <<= (6-5);                       //5   //4  //3       //16-12      //16-11      //16-10      //16-9     //16-8
 		m_pulse_value.ml <<= SAMPLE_SHIFT_BIT_NUM;
-		m_mcur.ms = m_pulse_value.ms[1];//丢弃低16位,相当于除以2^16
+		//m_mcur.ms = m_pulse_value.ms[1];//丢弃低16位,相当于除以2^16
 		//
 		m_pulse_counter = 0;
 		m_pulse_value.ml = 0;
 		//
-		liaowei_sample_ok_handling();
+		//liaowei_sample_ok_handling();
 	}
 }
 /////////////////////////////////////////////////////////////////
@@ -1342,9 +1470,11 @@ ISR(ADC_vect)
 		m_ad_value.ml >>= (10+7-16);
 		//
 		m_mcur_ad.ms = m_ad_value.ms[0];
+		m_mcur.ms = m_mcur_ad.ms;
 		//
 		m_ad_counter = 0;
 		m_ad_value.ml = 0;
+		liaowei_sample_ok_handling_AD();
 	}
 }
 #endif 

@@ -17,8 +17,8 @@
 //#define F_CPU F_4M 
 #define F_CPU F_16M
 
-//#define USED_AD TRUE
-#define USED_AD FALSE
+#define USED_AD TRUE
+//#define USED_AD FALSE
 
 #define IS_MMR_USED TRUE  //MMR使用
 //#define IS_MMR_USED FALSE  //MMT使用

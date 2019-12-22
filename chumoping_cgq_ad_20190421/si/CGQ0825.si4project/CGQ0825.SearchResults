@@ -1,14 +1,5 @@
----- smoothingDate Matches (15 in 2 files) ----
-sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) line 24 : unsigned int smoothingDate =0;
-set_default_para in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 	eeprom_write_word_user((uint16_t *)&m_para[0].smoothingDate,PARA_SETED_SMOOTHING);
-uart_tx_zan in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 		uart_tx_buf[3] = smoothingDate;
-read_para in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) :     smoothingDate = eeprom_read_word_user((const uint16_t *)&m_para[0].smoothingDate);
-read_para in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) :     if(smoothingDate >= 10)//输出5v
-read_para in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) :         smoothingDate = 0;
-sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) line 981 : //smoothingDate
-pulse_value_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 		if (smoothingDate !=0)
-pulse_value_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 			tmp = ((unsigned short)(m_pulse_value_bak.ms[1])/10*smoothingDate)
-pulse_value_handling in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 					+ ((unsigned short)(m_pulse_value_bak.ms[1])/10*(10 -smoothingDate));
-ISR in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 							    smoothingDate = temp;
-ISR in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 								eeprom_write_word_user((uint16_t *)&m_para[0].smoothingDate, smoothingDate);
-__EEPROM_DATA__ in typedef_user.h (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 	unsigned short smoothingDate;
+---- ADDR_CGQ Matches (4 in 2 files) ----
+uart_tx in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) :     uart_tx_buf[1] = ADDR_CGQ;//应答地址
+ISR in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) :                     if(ADDR_CGQ == uart_rx_buf[0])
+ISR in sgdkcgq_485_cry4m16m_pulse_ad.c (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) : 			        if(ADDR_CGQ == uart_rx_buf[0])
+sgdkcgq_485_cry4m16m_pulse_ad.h (C:\Users\Administrator\Desktop\zan\bafun\chumoping_cgq_ad_20190421\chumoping_cgq_cry4m16m_pulse_ad\sgdkcgq_485_cry4m16m_pulse_ad) line 33 : #define ADDR_CGQ            3
