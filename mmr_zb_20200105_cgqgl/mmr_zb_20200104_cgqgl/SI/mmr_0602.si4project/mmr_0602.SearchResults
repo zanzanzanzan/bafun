@@ -1,0 +1,7 @@
+---- w5500_read_para Matches (6 in 4 files) ----
+main in mmr.c (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src) : 		w5500_read_para();
+deal_key in scan_key.c (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src\module) : 						w5500_read_para();
+w5500_manager.c (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src\module\w5500) line 29 : void w5500_read_para(void);
+w5500_manager.c (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src\module\w5500) line 700 : void w5500_read_para(void)
+w5500_manager.h (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src\module\w5500) line 11 : extern void w5500_read_para(void);
+w5500_manager.h (C:\Users\Administrator\Desktop\zan\bafun\mmr_zb_net_190602\mmr_zb_net\src\module\w5500) line 12 : void w5500_read_para(void);
